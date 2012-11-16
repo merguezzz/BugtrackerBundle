@@ -1,0 +1,3 @@
+webaccess_bugtracker:
+    resource: "@WebaccessBugtrackerBundle/Resources/config/routing.yml"
+    prefix:   /

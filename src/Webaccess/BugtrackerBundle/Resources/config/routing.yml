@@ -1,0 +1,3 @@
+webaccess_bugtracker_homepage:
+    pattern:  /
+    defaults: { _controller: WebaccessBugtrackerBundle:Dashboard:index }
