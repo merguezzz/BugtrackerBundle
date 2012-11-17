@@ -6,9 +6,14 @@
 
 {% block bugtracker_body %}
 
-	<a href="{{ path('webaccess_bugtracker_company') }}">Companies</a>
-	<a href="{{ path('webaccess_bugtracker_project') }}">Projects</a>
+	ADD PROJECT
 
+	<form action="{{ path('webaccess_bugtracker_project_add') }}" method="post" {{ form_enctype(form) }}>
+	    {{ form_widget(form) }}
+
+	    <input type="submit" />
+	</form>
+	
 {% endblock %}
 
 {% block javascripts %}

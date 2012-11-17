@@ -1,0 +1,46 @@
+{% extends "WebaccessBugtrackerBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block description %}{{ parent() }}{% endblock %}
+
+{% block bugtracker_body %}
+
+	PROJECTS
+
+	<a href="{{ path('webaccess_bugtracker_project_add') }}">add project</a>
+	
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Creation date</th>
+				<th>Name</th>
+				<th>Company</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+
+		{% if companies|length > 0 %}
+			{% for project in companies %}
+		        <tr>
+		        	<td>{{ project.createdAt | date('d/m/y H:i') }}</td>
+		        	<td>{{ project.name }}</td>
+		        	<td>{{ project.company.name }}</td>
+		        	<td>
+						<a href="{{ path('webaccess_bugtracker_project_edit', {'project_id':project.id}) }}" title="Editer">Edit.</a>
+						<a href="{{ path('webaccess_bugtracker_project_delete', {'project_id':project.id}) }}" title="Supprimer">Delete.</a>
+					</td>
+		        </tr>
+		    {% endfor %}
+		{% else %}
+			No projects found.
+		{% endif %}
+		</tbody>
+	</table>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

@@ -1,3 +1,35 @@
-webaccess_bugtracker_homepage:
+webaccess_bugtracker_dashboard:
     pattern:  /
     defaults: { _controller: WebaccessBugtrackerBundle:Dashboard:index }
+
+webaccess_bugtracker_company:
+    pattern:  /company/{page_number}
+    defaults: { _controller: WebaccessBugtrackerBundle:Company:index, page_number: 1 }
+
+webaccess_bugtracker_company_add:
+    pattern:  /company_add
+    defaults: { _controller: WebaccessBugtrackerBundle:Company:add }
+
+webaccess_bugtracker_company_edit:
+    pattern:  /company_edit/{company_id}
+    defaults: { _controller: WebaccessBugtrackerBundle:Company:edit, company_id: company_id }
+
+webaccess_bugtracker_company_delete:
+    pattern:  /company_delete/{company_id}
+    defaults: { _controller: WebaccessBugtrackerBundle:Company:delete, company_id: company_id }
+
+webaccess_bugtracker_project:
+    pattern:  /project/{page_number}
+    defaults: { _controller: WebaccessBugtrackerBundle:Project:index, page_number: 1 }
+
+webaccess_bugtracker_project_add:
+    pattern:  /project_add
+    defaults: { _controller: WebaccessBugtrackerBundle:Project:add }
+    
+webaccess_bugtracker_project_edit:
+    pattern:  /project_edit/{project_id}
+    defaults: { _controller: WebaccessBugtrackerBundle:Project:edit, project_id: project_id }
+
+webaccess_bugtracker_project_delete:
+    pattern:  /project_delete/{project_id}
+    defaults: { _controller: WebaccessBugtrackerBundle:Project:delete, project_id: project_id }
