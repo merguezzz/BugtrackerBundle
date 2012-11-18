@@ -2,6 +2,17 @@ webaccess_bugtracker_dashboard:
     pattern:  /
     defaults: { _controller: WebaccessBugtrackerBundle:Dashboard:index }
 
+webaccess_bugtracker_login:
+    pattern: /login
+    defaults: { _controller: WebaccessBugtrackerBundle:Login:index }
+
+webaccess_bugtracker_login_check:
+    pattern: /login_check
+
+webaccess_bugtracker_logout:
+    pattern: /logout
+    defaults: { _controller: WebaccessBugtrackerBundle:Login:index }
+
 webaccess_bugtracker_company:
     pattern:  /company/{page_number}
     defaults: { _controller: WebaccessBugtrackerBundle:Company:index, page_number: 1 }
@@ -25,7 +36,7 @@ webaccess_bugtracker_project:
 webaccess_bugtracker_project_add:
     pattern:  /project_add
     defaults: { _controller: WebaccessBugtrackerBundle:Project:add }
-    
+
 webaccess_bugtracker_project_edit:
     pattern:  /project_edit/{project_id}
     defaults: { _controller: WebaccessBugtrackerBundle:Project:edit, project_id: project_id }
@@ -33,3 +44,19 @@ webaccess_bugtracker_project_edit:
 webaccess_bugtracker_project_delete:
     pattern:  /project_delete/{project_id}
     defaults: { _controller: WebaccessBugtrackerBundle:Project:delete, project_id: project_id }
+
+webaccess_bugtracker_user:
+    pattern:  /user/{page_number}
+    defaults: { _controller: WebaccessBugtrackerBundle:User:index, page_number: 1 }
+
+webaccess_bugtracker_user_add:
+    pattern:  /user_add
+    defaults: { _controller: WebaccessBugtrackerBundle:User:add }
+
+webaccess_bugtracker_user_edit:
+    pattern:  /user_edit/{user_id}
+    defaults: { _controller: WebaccessBugtrackerBundle:User:edit, user_id: user_id }
+
+webaccess_bugtracker_user_delete:
+    pattern:  /user_delete/{user_id}
+    defaults: { _controller: WebaccessBugtrackerBundle:User:delete, user_id: user_id }

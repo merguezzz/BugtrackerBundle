@@ -6,11 +6,14 @@
 
 {% block bugtracker_body %}
 
-	<a href="{{ path('webaccess_bugtracker_company') }}">companies</a>
-	<a href="{{ path('webaccess_bugtracker_project') }}">projects</a>
-	<a href="{{ path('webaccess_bugtracker_user') }}">users</a>
-	<a href="{{ path('webaccess_bugtracker_logout') }}">logout</a>
+	ADD USER
 
+	<form action="{{ path('webaccess_bugtracker_user_add') }}" method="post" {{ form_enctype(form) }}>
+	    {{ form_widget(form) }}
+
+	    <input type="submit" />
+	</form>
+	
 {% endblock %}
 
 {% block javascripts %}

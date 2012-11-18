@@ -9,6 +9,8 @@
 	COMPANIES
 
 	<a href="{{ path('webaccess_bugtracker_company_add') }}">add company</a>
+	<a href="{{ path('webaccess_bugtracker_dashboard') }}">dashboard</a>
+	<a href="{{ path('webaccess_bugtracker_logout') }}">logout</a>
 	
 	<table class="table table-striped table-bordered">
 		<thead>
@@ -20,7 +22,7 @@
 		</thead>
 		<tbody>
 
-		{% if companies|length > 0 %}
+		{% if companies | length > 0 %}
 			{% for company in companies %}
 		        <tr>
 		        	<td>{{ company.createdAt | date('d/m/y H:i') }}</td>

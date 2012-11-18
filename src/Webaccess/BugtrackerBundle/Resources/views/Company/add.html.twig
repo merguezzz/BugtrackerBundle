@@ -6,14 +6,14 @@
 
 {% block bugtracker_body %}
 
-	ADD COMPANY
+    ADD COMPANY
 
-	<form action="{{ path('webaccess_bugtracker_company_add') }}" method="post" {{ form_enctype(form) }}>
-	    {{ form_widget(form) }}
+    <form action="{{ path('webaccess_bugtracker_company_add') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
 
-	    <input type="submit" />
-	</form>
-	
+        <input type="submit" />
+    </form>
+    
 {% endblock %}
 
 {% block javascripts %}

@@ -12,186 +12,186 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Project
 {
-    /**
-     * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+	/**
+	 * @var integer $id
+	 *
+	 * @ORM\Column(name="id", type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	protected $id;
 
-    /**
-     * @var string $name
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
+	/**
+	 * @var string $name
+	 *
+	 * @ORM\Column(name="name", type="string", length=255)
+	 */
+	protected $name;
 
-    /**
-     * @var Company
-     *
-     * @ORM\ManyToOne(targetEntity="Company")
-     * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
-     */
-    private $company;
+	/**
+	 * @var Company
+	 *
+	 * @ORM\ManyToOne(targetEntity="Company")
+	 * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
+	 */
+	protected $company;
 
-    /**
-     * @var \DateTime $createdAt
-     *
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    private $createdAt;
+	/**
+	 * @var integer $status
+	 *
+	 * @ORM\Column(name="status", type="integer")
+	 */
+	protected $status;
 
-    /**
-     * @var \DateTime $updatedAt
-     *
-     * @ORM\Column(name="updated_at", type="datetime")
-     */
-    private $updatedAt;
+	/**
+	 * @var \DateTime $createdAt
+	 *
+	 * @ORM\Column(name="created_at", type="datetime")
+	 */
+	protected $createdAt;
 
-    /**
-     * @var integer $status
-     *
-     * @ORM\Column(name="status", type="integer")
-     */
-    private $status;
+	/**
+	 * @var \DateTime $updatedAt
+	 *
+	 * @ORM\Column(name="updated_at", type="datetime")
+	 */
+	protected $updatedAt;
 
 
-    /**
-     * Constructor
-     *
-     * @return NULL 
-     */
-    public function __construct()
-    {
-        $this->name = '';
-        $this->company = NULL;
-        $this->status = 1;
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-    }
+	/**
+	 * Constructor
+	 *
+	 * @return NULL 
+	 */
+	public function __construct()
+	{
+		$this->name = '';
+		$this->company = NULL;
+		$this->status = 1;
+		$this->createdAt = new \DateTime();
+		$this->updatedAt = new \DateTime();
+	}
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * Get id
+	 *
+	 * @return integer 
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Project
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    
-        return $this;
-    }
+	/**
+	 * Set name
+	 *
+	 * @param string $name
+	 * @return Project
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
+	
+		return $this;
+	}
 
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+	/**
+	 * Get name
+	 *
+	 * @return string 
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
 
-    /**
-     * Set company
-     *
-     * @param \Company $company
-     * @return Project
-     */
-    public function setCompany(\Webaccess\BugtrackerBundle\Entity\Company $company)
-    {
-        $this->company = $company;
-    }
+	/**
+	 * Set company
+	 *
+	 * @param \Company $company
+	 * @return Project
+	 */
+	public function setCompany(\Webaccess\BugtrackerBundle\Entity\Company $company)
+	{
+		$this->company = $company;
+	}
 
-    /**
-     * Set createdAt
-     *
-     * @return Company
-     */
-    public function getCompany()
-    {
-        return $this->company;
-    }
+	/**
+	 * Set createdAt
+	 *
+	 * @return Company
+	 */
+	public function getCompany()
+	{
+		return $this->company;
+	}
 
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return Project
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-    
-        return $this;
-    }
+	/**
+	 * Set status
+	 *
+	 * @param integer $status
+	 * @return Project
+	 */
+	public function setStatus($status)
+	{
+		$this->status = $status;
+	
+		return $this;
+	}
 
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
+	/**
+	 * Get status
+	 *
+	 * @return integer 
+	 */
+	public function getStatus()
+	{
+		return $this->status;
+	}
 
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     * @return Project
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-    
-        return $this;
-    }
+	/**
+	 * Set createdAt
+	 *
+	 * @param \DateTime $createdAt
+	 * @return Project
+	 */
+	public function setCreatedAt($createdAt)
+	{
+		$this->createdAt = $createdAt;
+	
+		return $this;
+	}
 
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime 
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
+	/**
+	 * Get createdAt
+	 *
+	 * @return \DateTime 
+	 */
+	public function getCreatedAt()
+	{
+		return $this->createdAt;
+	}
 
-    /**
-     * Set status
-     *
-     * @param integer $status
-     * @return Project
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    
-        return $this;
-    }
+	/**
+	 * Set updatedAt
+	 *
+	 * @param \DateTime $updatedAt
+	 * @return Project
+	 */
+	public function setUpdatedAt($updatedAt)
+	{
+		$this->updatedAt = $updatedAt;
+	
+		return $this;
+	}
 
-    /**
-     * Get status
-     *
-     * @return integer 
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
+	/**
+	 * Get updatedAt
+	 *
+	 * @return \DateTime 
+	 */
+	public function getUpdatedAt()
+	{
+		return $this->updatedAt;
+	}
 }

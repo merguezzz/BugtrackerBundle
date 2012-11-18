@@ -9,13 +9,13 @@
 	EDIT COMPANY
 
 	<form action="{{ path('webaccess_bugtracker_company_edit', {'company_id':company.id}) }}" method="post" {{ form_enctype(form) }}>
-	    {{ form_widget(form) }}
+		{{ form_widget(form) }}
 
-	    <input type="submit" />
+		<input type="submit" />
 	</form>
 	
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
+	{{ parent() }}
 {% endblock %}
