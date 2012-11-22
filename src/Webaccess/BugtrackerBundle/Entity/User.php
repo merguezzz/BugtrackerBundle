@@ -86,9 +86,20 @@ class User implements UserInterface
      *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
      * )
      *
-     * @var ArrayCollection $userRoles
+     * @var ArrayCollection $roles
      */
-    protected $userRoles;
+    protected $roles;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Project", cascade={"persist"})
+     * @ORM\JoinTable(name="user_project",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="project_id", referencedColumnName="id")}
+     * )
+     *
+     * @var ArrayCollection $projects
+     */
+    protected $projects;
 
     /**
      * @var \DateTime $createdAt
@@ -120,7 +131,8 @@ class User implements UserInterface
         $this->company = NULL;
         $this->status = 1;
         $this->salt = md5(uniqid(null, true));
-        $this->userRoles = new ArrayCollection();
+        $this->roles = new ArrayCollection();
+        $this->projects = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
     }
@@ -144,7 +156,6 @@ class User implements UserInterface
     public function setUsername($username)
     {
         $this->username = $username;
-
         return $this;
     }
 
@@ -167,7 +178,6 @@ class User implements UserInterface
     public function setPassword($password)
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -190,7 +200,6 @@ class User implements UserInterface
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
-
         return $this;
     }
 
@@ -213,7 +222,6 @@ class User implements UserInterface
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
-
         return $this;
     }
 
@@ -236,7 +244,6 @@ class User implements UserInterface
     public function setEmail($email)
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -259,6 +266,7 @@ class User implements UserInterface
     public function setCompany(\Webaccess\BugtrackerBundle\Entity\Company $company)
     {
         $this->company = $company;
+        return $this;
     }
 
     /**
@@ -280,7 +288,6 @@ class User implements UserInterface
     public function setStatus($status)
     {
         $this->status = $status;
-
         return $this;
     }
 
@@ -307,31 +314,44 @@ class User implements UserInterface
     /**
      * Gets the user roles.
      *
-     * @return ArrayCollection A Doctrine ArrayCollection
-     */
-    public function getUserRoles()
-    {
-        return $this->userRoles;
-    }
-
-    /**
-     * Gets an array of roles.
-     *
-     * @return array An array of Role objects
+     * @return ArrayCollection $roles
      */
     public function getRoles()
     {
-        return $this->getUserRoles()->toArray();
+        return $this->roles;
     }
 
     /**
-     * Add userRoles
+     * Add roles
      *
-     * @param Webaccess\BugtrackerBundle\Entity\Role $userRoles
+     * @param Webaccess\BugtrackerBundle\Entity\Role $roles
+     * @return User $user
      */
-    public function addRole(\Webaccess\BugtrackerBundle\Entity\Role $userRoles)
+    public function addRole(\Webaccess\BugtrackerBundle\Entity\Role $roles)
     {
-        $this->userRoles[] = $userRoles;
+        $this->roles[] = $roles;
+        return $this;
+    }
+
+    /**
+     * Gets the user projects.
+     *
+     * @return ArrayCollection A Doctrine ArrayCollection
+     */
+    public function getProjects()
+    {
+        return $this->projects;
+    }
+
+    /**
+     * Add projects
+     *
+     * @param Webaccess\BugtrackerBundle\Entity\Project $project
+     * @return User
+     */
+    public function addProject(\Webaccess\BugtrackerBundle\Entity\Project $project)
+    {
+        $this->projects[] = $project;
     }
 
     /**
@@ -362,7 +382,6 @@ class User implements UserInterface
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -385,7 +404,6 @@ class User implements UserInterface
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
         return $this;
     }
 

@@ -1,0 +1,23 @@
+{% extends "WebaccessBugtrackerBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block description %}{{ parent() }}{% endblock %}
+
+{% block bugtracker_body %}
+
+	{% include 'WebaccessBugtrackerBundle:Includes:menu.html.twig' %}
+
+	EDIT TICKET
+
+	<form action="{{ path('webaccess_bugtracker_ticket_edit', {'ticket_id':ticket.id}) }}" method="post" {{ form_enctype(form) }}>
+	    {{ form_widget(form) }}
+
+	    <input type="submit" />
+	</form>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

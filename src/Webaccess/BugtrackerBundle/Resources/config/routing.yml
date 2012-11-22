@@ -1,6 +1,6 @@
 webaccess_bugtracker_dashboard:
-    pattern:  /
-    defaults: { _controller: WebaccessBugtrackerBundle:Dashboard:index }
+    pattern:  /dashboard/{page_number}
+    defaults: { _controller: WebaccessBugtrackerBundle:Dashboard:index, page_number: 1 }
 
 webaccess_bugtracker_login:
     pattern: /login
@@ -60,3 +60,19 @@ webaccess_bugtracker_user_edit:
 webaccess_bugtracker_user_delete:
     pattern:  /user_delete/{user_id}
     defaults: { _controller: WebaccessBugtrackerBundle:User:delete, user_id: user_id }
+
+webaccess_bugtracker_ticket:
+    pattern:  /ticket/{page_number}
+    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:index, page_number: 1 }
+
+webaccess_bugtracker_ticket_add:
+    pattern:  /ticket_add
+    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:add }
+
+webaccess_bugtracker_ticket_edit:
+    pattern:  /ticket_edit/{ticket_id}
+    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:edit, ticket_id: ticket_id }
+
+webaccess_bugtracker_ticket_delete:
+    pattern:  /ticket_delete/{ticket_id}
+    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:delete, ticket_id: ticket_id }

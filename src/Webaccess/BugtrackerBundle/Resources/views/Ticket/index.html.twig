@@ -10,7 +10,7 @@
 
 	PROJECTS
 
-	<a href="{{ path('webaccess_bugtracker_project_add') }}">add project</a>
+	<a href="{{ path('webaccess_bugtracker_ticket_add') }}">add ticket</a>
 
 	<table class="table table-striped table-bordered">
 		<thead>
@@ -23,20 +23,20 @@
 		</thead>
 		<tbody>
 
-		{% if projects | length > 0 %}
-			{% for project in projects %}
+		{% if tickets | length > 0 %}
+			{% for ticket in tickets %}
 		        <tr>
-		        	<td>{{ project.createdAt | date('d/m/y H:i') }}</td>
-		        	<td>{{ project.name }}</td>
-		        	<td>{{ project.company.name }}</td>
+		        	<td>{{ ticket.createdAt | date('d/m/y H:i') }}</td>
+		        	<td>{{ ticket.name }}</td>
+		        	<td>{{ ticket.company.name }}</td>
 		        	<td>
-						<a href="{{ path('webaccess_bugtracker_project_edit', {'project_id':project.id}) }}" title="Editer">Edit.</a>
-						<a href="{{ path('webaccess_bugtracker_project_delete', {'project_id':project.id}) }}" title="Supprimer">Delete.</a>
+						<a href="{{ path('webaccess_bugtracker_ticket_edit', {'ticket_id':ticket.id}) }}" title="Editer">Edit.</a>
+						<a href="{{ path('webaccess_bugtracker_ticket_delete', {'ticket_id':ticket.id}) }}" title="Supprimer">Delete.</a>
 					</td>
 		        </tr>
 		    {% endfor %}
 		{% else %}
-			No projects found.
+			No tickets found.
 		{% endif %}
 		</tbody>
 	</table>

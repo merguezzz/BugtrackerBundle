@@ -10,6 +10,8 @@ use Webaccess\BugtrackerBundle\Entity\Company;
 use Webaccess\BugtrackerBundle\Entity\Project;
 use Webaccess\BugtrackerBundle\Entity\User;
 use Webaccess\BugtrackerBundle\Entity\Role;
+use Webaccess\BugtrackerBundle\Entity\Ticket;
+use Webaccess\BugtrackerBundle\Entity\TicketState;
 
 class LoadData implements FixtureInterface, ContainerAwareInterface
 {
@@ -28,6 +30,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
 
     public function load(ObjectManager $manager)
     {
+        //ROLES
         $role1 = new Role();
         $role1->setName('ROLE_ADMIN');
 
@@ -38,6 +41,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $manager->persist($role2);
         $manager->flush();
 
+        //COMPANIES
     	$company1 = new Company();
     	$company1->setName('Webaccess');
 
@@ -48,6 +52,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $manager->persist($company2);
         $manager->flush();
 
+        //PROJECTS
     	$project1 = new Project();
     	$project1->setCompany($company1);
     	$project1->setName('First Project');
@@ -65,6 +70,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $manager->persist($project3);
         $manager->flush();
 
+        //USERS
         $user1 = new User();
         $user1->setUsername('lgandelin');
         $factory = $this->container->get('security.encoder_factory');
@@ -91,6 +97,45 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
 
         $manager->persist($user1);
         $manager->persist($user2);
+        $manager->flush();
+
+        //TICKETS
+        $ticket1 = new Ticket();
+        $ticket1->setProject($project1);
+        $ticket1->setTitle('Bug found in contact page');
+
+        $ticket2 = new Ticket();
+        $ticket2->setProject($project2);
+        $ticket2->setTitle('Another bug found in home page');
+
+        $manager->persist($ticket1);
+        $manager->persist($ticket2);
+        $manager->flush();
+
+        //TICKET STATES
+        $ticket_state1 = new TicketState();
+        $ticket_state1->setTicket($ticket1);
+        $ticket_state1->setAuthorUser($user1);
+        $ticket_state1->setAllocatedUser($user1);
+        $ticket_state1->setStatus(1);
+        $ticket_state1->setPriority(1);
+        $ticket_state1->setType(1);
+
+        $manager->persist($ticket_state1);
+        $ticket1->addState($ticket_state1);
+
+        $ticket_state2 = new TicketState();
+        $ticket_state2->setTicket($ticket2);
+        $ticket_state2->setAuthorUser($user1);
+        $ticket_state2->setAllocatedUser($user2);
+        $ticket_state2->setStatus(1);
+        $ticket_state2->setPriority(1);
+        $ticket_state2->setType(1);
+
+        $manager->persist($ticket_state1);
+        $ticket1->addState($ticket_state1);
+        $manager->persist($ticket_state2);
+        $ticket2->addState($ticket_state2);
         $manager->flush();
     }
 }

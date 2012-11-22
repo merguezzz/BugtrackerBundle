@@ -6,3 +6,4 @@ app/logs/*
 build/
 vendor
 .DS_Store
+TODO.md

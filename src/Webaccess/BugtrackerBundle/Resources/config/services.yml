@@ -13,6 +13,10 @@ parameters:
     webaccess_bugtracker.company.form.class: Webaccess\BugtrackerBundle\Form\Type\CompanyFormType
     webaccess_bugtracker.company.form_handler.class: Webaccess\BugtrackerBundle\Form\Handler\CompanyFormHandler
 
+    webaccess_bugtracker.ticket_manager.class: Webaccess\BugtrackerBundle\Library\TicketManager
+    webaccess_bugtracker.ticket.form.class: Webaccess\BugtrackerBundle\Form\Type\TicketFormType
+    webaccess_bugtracker.ticket.form_handler.class: Webaccess\BugtrackerBundle\Form\Handler\TicketFormHandler
+
 services:
     webaccess_bugtracker.user_manager:
         class: %webaccess_bugtracker.user_manager.class%
@@ -92,3 +96,29 @@ services:
             form: "@webaccess_bugtracker.company.form"
             request: "@request"
             companyManager: "@webaccess_bugtracker.company_manager"
+
+    webaccess_bugtracker.ticket_manager:
+        class: %webaccess_bugtracker.ticket_manager.class%
+        arguments:
+            em: "@doctrine.orm.entity_manager"
+
+    webaccess_bugtracker.ticket.form:
+        class: %symfony.form.class%
+        factory_service: form.factory
+        factory_method: createNamed
+        arguments:
+            - webaccess_bugtracker_ticket
+            - webaccess_bugtracker_ticket
+
+    webaccess_bugtracker.ticket.form.type:
+        class: %webaccess_bugtracker.ticket.form.class%
+        tags:
+            - { name: form.type, alias: webaccess_bugtracker_ticket }
+
+    webaccess_bugtracker.ticket.form_handler:
+        class: %webaccess_bugtracker.ticket.form_handler.class%
+        scope: request
+        arguments:
+            form: "@webaccess_bugtracker.ticket.form"
+            request: "@request"
+            ticketManager: "@webaccess_bugtracker.ticket_manager"

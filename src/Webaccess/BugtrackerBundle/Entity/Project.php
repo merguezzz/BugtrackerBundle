@@ -61,7 +61,7 @@ class Project
 	/**
 	 * Constructor
 	 *
-	 * @return NULL 
+	 * @return NULL
 	 */
 	public function __construct()
 	{
@@ -75,7 +75,7 @@ class Project
 	/**
 	 * Get id
 	 *
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getId()
 	{
@@ -91,14 +91,13 @@ class Project
 	public function setName($name)
 	{
 		$this->name = $name;
-	
 		return $this;
 	}
 
 	/**
 	 * Get name
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getName()
 	{
@@ -114,6 +113,7 @@ class Project
 	public function setCompany(\Webaccess\BugtrackerBundle\Entity\Company $company)
 	{
 		$this->company = $company;
+		return $this;
 	}
 
 	/**
@@ -135,14 +135,13 @@ class Project
 	public function setStatus($status)
 	{
 		$this->status = $status;
-	
 		return $this;
 	}
 
 	/**
 	 * Get status
 	 *
-	 * @return integer 
+	 * @return integer
 	 */
 	public function getStatus()
 	{
@@ -158,14 +157,13 @@ class Project
 	public function setCreatedAt($createdAt)
 	{
 		$this->createdAt = $createdAt;
-	
 		return $this;
 	}
 
 	/**
 	 * Get createdAt
 	 *
-	 * @return \DateTime 
+	 * @return \DateTime
 	 */
 	public function getCreatedAt()
 	{
@@ -181,14 +179,13 @@ class Project
 	public function setUpdatedAt($updatedAt)
 	{
 		$this->updatedAt = $updatedAt;
-	
 		return $this;
 	}
 
 	/**
 	 * Get updatedAt
 	 *
-	 * @return \DateTime 
+	 * @return \DateTime
 	 */
 	public function getUpdatedAt()
 	{

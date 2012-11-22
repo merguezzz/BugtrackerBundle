@@ -8,6 +8,43 @@
 
 	{% include 'WebaccessBugtrackerBundle:Includes:menu.html.twig' %}
 
+	TICKETS
+
+	<a href="{{ path('webaccess_bugtracker_ticket_add') }}">add ticket</a>
+
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Creation date</th>
+				<th>Title</th>
+				<th>Project</th>
+				<th>Author</th>
+				<th>Allocated to</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+
+		{% if tickets | length > 0 %}
+			{% for ticket in tickets %}
+		        <tr>
+		        	<td>{% if ticket.states | length > 0 %}{{ ticket.states.0.createdAt | date('d/m/y H:i') }}{% endif %}</td>
+		        	<td>{{ ticket.title }}</td>
+		        	<td>{{ ticket.project.name }}</td>
+		        	<td>{% if ticket.states | length > 0 %}{{ ticket.states.0.authorUser.firstname }} {{ ticket.states.0.authorUser.lastname }}{% endif %}</td>
+		        	<td>{% if ticket.states | length > 0 %}{{ ticket.states.0.allocatedUser.firstname }} {{ ticket.states.0.allocatedUser.lastname }}{% endif %}</td>
+		        	<td>
+						<a href="{{ path('webaccess_bugtracker_ticket_edit', {'ticket_id':ticket.id}) }}" title="Editer">Edit.</a>
+						<a href="{{ path('webaccess_bugtracker_ticket_delete', {'ticket_id':ticket.id}) }}" title="Supprimer">Delete.</a>
+					</td>
+		        </tr>
+		    {% endfor %}
+		{% else %}
+			No tickets found.
+		{% endif %}
+		</tbody>
+	</table>
+
 {% endblock %}
 
 {% block javascripts %}
