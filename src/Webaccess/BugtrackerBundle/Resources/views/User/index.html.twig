@@ -6,12 +6,12 @@
 
 {% block bugtracker_body %}
 
+	{% include 'WebaccessBugtrackerBundle:Includes:menu.html.twig' %}
+
 	PROJECTS
 
 	<a href="{{ path('webaccess_bugtracker_user_add') }}">add user</a>
-	<a href="{{ path('webaccess_bugtracker_dashboard') }}">dashboard</a>
-	<a href="{{ path('webaccess_bugtracker_logout') }}">logout</a>
-	
+
 	<table class="table table-striped table-bordered">
 		<thead>
 			<tr>

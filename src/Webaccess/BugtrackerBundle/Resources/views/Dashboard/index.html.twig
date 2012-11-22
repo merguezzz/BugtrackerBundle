@@ -6,10 +6,7 @@
 
 {% block bugtracker_body %}
 
-	<a href="{{ path('webaccess_bugtracker_company') }}">companies</a>
-	<a href="{{ path('webaccess_bugtracker_project') }}">projects</a>
-	<a href="{{ path('webaccess_bugtracker_user') }}">users</a>
-	<a href="{{ path('webaccess_bugtracker_logout') }}">logout</a>
+	{% include 'WebaccessBugtrackerBundle:Includes:menu.html.twig' %}
 
 {% endblock %}
 

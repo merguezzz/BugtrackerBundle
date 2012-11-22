@@ -1,7 +1,94 @@
 parameters:
-#    webaccess_bugtracker.example.class: Webaccess\BugtrackerBundle\Example
+    symfony.form.class: Symfony\Component\Form\Form
+
+    webaccess_bugtracker.user_manager.class: Webaccess\BugtrackerBundle\Library\UserManager
+    webaccess_bugtracker.user.form.class: Webaccess\BugtrackerBundle\Form\Type\UserFormType
+    webaccess_bugtracker.user.form_handler.class: Webaccess\BugtrackerBundle\Form\Handler\UserFormHandler
+
+    webaccess_bugtracker.project_manager.class: Webaccess\BugtrackerBundle\Library\ProjectManager
+    webaccess_bugtracker.project.form.class: Webaccess\BugtrackerBundle\Form\Type\ProjectFormType
+    webaccess_bugtracker.project.form_handler.class: Webaccess\BugtrackerBundle\Form\Handler\ProjectFormHandler
+
+    webaccess_bugtracker.company_manager.class: Webaccess\BugtrackerBundle\Library\CompanyManager
+    webaccess_bugtracker.company.form.class: Webaccess\BugtrackerBundle\Form\Type\CompanyFormType
+    webaccess_bugtracker.company.form_handler.class: Webaccess\BugtrackerBundle\Form\Handler\CompanyFormHandler
 
 services:
-#    webaccess_bugtracker.example:
-#        class: %webaccess_bugtracker.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    webaccess_bugtracker.user_manager:
+        class: %webaccess_bugtracker.user_manager.class%
+        arguments:
+            em: "@doctrine.orm.entity_manager"
+            encoderFactory: "@security.encoder_factory"
+
+    webaccess_bugtracker.user.form:
+        class: %symfony.form.class%
+        factory_service: form.factory
+        factory_method: createNamed
+        arguments:
+            - webaccess_bugtracker_user
+            - webaccess_bugtracker_user
+
+    webaccess_bugtracker.user.form.type:
+        class: %webaccess_bugtracker.user.form.class%
+        tags:
+            - { name: form.type, alias: webaccess_bugtracker_user }
+
+    webaccess_bugtracker.user.form_handler:
+        class: %webaccess_bugtracker.user.form_handler.class%
+        scope: request
+        arguments:
+            form: "@webaccess_bugtracker.user.form"
+            request: "@request"
+            userManager: "@webaccess_bugtracker.user_manager"
+
+    webaccess_bugtracker.project_manager:
+        class: %webaccess_bugtracker.project_manager.class%
+        arguments:
+            em: "@doctrine.orm.entity_manager"
+
+    webaccess_bugtracker.project.form:
+        class: %symfony.form.class%
+        factory_service: form.factory
+        factory_method: createNamed
+        arguments:
+            - webaccess_bugtracker_project
+            - webaccess_bugtracker_project
+
+    webaccess_bugtracker.project.form.type:
+        class: %webaccess_bugtracker.project.form.class%
+        tags:
+            - { name: form.type, alias: webaccess_bugtracker_project }
+
+    webaccess_bugtracker.project.form_handler:
+        class: %webaccess_bugtracker.project.form_handler.class%
+        scope: request
+        arguments:
+            form: "@webaccess_bugtracker.project.form"
+            request: "@request"
+            projectManager: "@webaccess_bugtracker.project_manager"
+
+    webaccess_bugtracker.company_manager:
+        class: %webaccess_bugtracker.company_manager.class%
+        arguments:
+            em: "@doctrine.orm.entity_manager"
+
+    webaccess_bugtracker.company.form:
+        class: %symfony.form.class%
+        factory_service: form.factory
+        factory_method: createNamed
+        arguments:
+            - webaccess_bugtracker_company
+            - webaccess_bugtracker_company
+
+    webaccess_bugtracker.company.form.type:
+        class: %webaccess_bugtracker.company.form.class%
+        tags:
+            - { name: form.type, alias: webaccess_bugtracker_company }
+
+    webaccess_bugtracker.company.form_handler:
+        class: %webaccess_bugtracker.company.form_handler.class%
+        scope: request
+        arguments:
+            form: "@webaccess_bugtracker.company.form"
+            request: "@request"
+            companyManager: "@webaccess_bugtracker.company_manager"

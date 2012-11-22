@@ -72,7 +72,8 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
 		$password = $encoder->encodePassword('GRVnfc38', $user1->getSalt());
 		$user1->setPassword($password);
 		$user1->setFirstName('Louis');
-		$user1->setLastName('Gandelin');
+        $user1->setLastName('Gandelin');
+		$user1->setEmail('louis.gandelin@gmail.com');
 		$user1->setCompany($company1);
 		$user1->addRole($role1);
 
@@ -84,6 +85,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
 		$user2->setPassword($password);
 		$user2->setFirstName('Damien');
 		$user2->setLastName('Fontaine');
+        $user2->setEmail('louis.gandelin@gmail.com');
 		$user2->setCompany($company1);
 		$user2->addRole($role2);
 

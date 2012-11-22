@@ -52,13 +52,20 @@ class User implements UserInterface
     protected $lastName;
 
     /**
+     * @var string $email
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     */
+    protected $email;
+
+    /**
      * @var Company
      *
      * @ORM\ManyToOne(targetEntity="Company")
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id", nullable=true)
      */
     protected $company;
-    
+
     /**
      * @var integer $status
      *
@@ -101,7 +108,7 @@ class User implements UserInterface
     /**
      * Constructor
      *
-     * @return NULL 
+     * @return NULL
      */
     public function __construct()
     {
@@ -109,6 +116,7 @@ class User implements UserInterface
         $this->password = '';
         $this->firstName = '';
         $this->lastName = '';
+        $this->email = '';
         $this->company = NULL;
         $this->status = 1;
         $this->salt = md5(uniqid(null, true));
@@ -120,7 +128,7 @@ class User implements UserInterface
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -136,14 +144,14 @@ class User implements UserInterface
     public function setUsername($username)
     {
         $this->username = $username;
-    
+
         return $this;
     }
 
     /**
      * Get username
      *
-     * @return string 
+     * @return string
      */
     public function getUsername()
     {
@@ -159,14 +167,14 @@ class User implements UserInterface
     public function setPassword($password)
     {
         $this->password = $password;
-    
+
         return $this;
     }
 
     /**
      * Get password
      *
-     * @return string 
+     * @return string
      */
     public function getPassword()
     {
@@ -182,14 +190,14 @@ class User implements UserInterface
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
-    
+
         return $this;
     }
 
     /**
      * Get firstName
      *
-     * @return string 
+     * @return string
      */
     public function getFirstName()
     {
@@ -205,18 +213,41 @@ class User implements UserInterface
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
-    
+
         return $this;
     }
 
     /**
      * Get lastName
      *
-     * @return string 
+     * @return string
      */
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     /**
@@ -249,14 +280,14 @@ class User implements UserInterface
     public function setStatus($status)
     {
         $this->status = $status;
-    
+
         return $this;
     }
 
     /**
      * Get status
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatus()
     {
@@ -266,7 +297,7 @@ class User implements UserInterface
     /**
      * Get salt
      *
-     * @return string 
+     * @return string
      */
     public function getSalt()
     {
@@ -285,7 +316,7 @@ class User implements UserInterface
 
     /**
      * Gets an array of roles.
-     * 
+     *
      * @return array An array of Role objects
      */
     public function getRoles()
@@ -306,7 +337,7 @@ class User implements UserInterface
     /**
      * Erase credentials
      *
-     * @return void 
+     * @return void
      */
     public function eraseCredentials()
     {
@@ -315,7 +346,7 @@ class User implements UserInterface
     /**
      * Check if the user in parameter equals the user loaded
      *
-     * @return boolean 
+     * @return boolean
      */
     public function equals(UserInterface $user)
     {
@@ -331,14 +362,14 @@ class User implements UserInterface
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-    
+
         return $this;
     }
 
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -354,14 +385,14 @@ class User implements UserInterface
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
-    
+
         return $this;
     }
 
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {

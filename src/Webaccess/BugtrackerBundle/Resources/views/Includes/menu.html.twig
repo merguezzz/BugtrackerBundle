@@ -1,0 +1,11 @@
+<div> Welcome : {{ app.user.username }} </div>
+
+<div>
+	{% if is_granted('ROLE_ADMIN') %}
+		<a href="{{ path('webaccess_bugtracker_company') }}">companies</a>
+		<a href="{{ path('webaccess_bugtracker_project') }}">projects</a>
+		<a href="{{ path('webaccess_bugtracker_user') }}">users</a>
+	{% endif %}
+	<a href="{{ path('webaccess_bugtracker_logout') }}">logout</a>
+</div>
+<br/>

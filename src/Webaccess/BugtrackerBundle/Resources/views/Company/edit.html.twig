@@ -6,6 +6,8 @@
 
 {% block bugtracker_body %}
 
+	{% include 'WebaccessBugtrackerBundle:Includes:menu.html.twig' %}
+
 	EDIT COMPANY
 
 	<form action="{{ path('webaccess_bugtracker_company_edit', {'company_id':company.id}) }}" method="post" {{ form_enctype(form) }}>
@@ -13,7 +15,7 @@
 
 		<input type="submit" />
 	</form>
-	
+
 {% endblock %}
 
 {% block javascripts %}
