@@ -30,6 +30,18 @@
 	    <input type="submit" />
 	</form>
 
+	HISTORY
+
+	{% for state in ticket.states %}
+		<div>
+			Comments : {{ state.content }}
+			Type : {{ state.type }}
+			Status : {{ state.status }}
+			Priority : {{ state.priority }}
+		</div>
+
+	{% endfor %}
+
 {% endblock %}
 
 {% block javascripts %}
