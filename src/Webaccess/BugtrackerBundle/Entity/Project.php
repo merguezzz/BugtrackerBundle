@@ -44,6 +44,11 @@ class Project
 	protected $status;
 
 	/**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="projects")
+     */
+    protected $users;
+
+	/**
 	 * @var \DateTime $createdAt
 	 *
 	 * @ORM\Column(name="created_at", type="datetime")

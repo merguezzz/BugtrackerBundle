@@ -16,6 +16,7 @@
 		<thead>
 			<tr>
 				<th>Creation date</th>
+				<th>Update date</th>
 				<th>Title</th>
 				<th>Project</th>
 				<th>Author</th>
@@ -28,11 +29,12 @@
 		{% if tickets | length > 0 %}
 			{% for ticket in tickets %}
 		        <tr>
-		        	<td>{% if ticket.states | length > 0 %}{{ ticket.states.0.createdAt | date('d/m/y H:i') }}{% endif %}</td>
+		        	<td>{{ ticket.states[0].createdAt | date('d/m/y H:i') }}</td>
+		        	<td>{{ ticket.states[ticket.states | length - 1].createdAt | date('d/m/y H:i') }}</td>
 		        	<td>{{ ticket.title }}</td>
 		        	<td>{{ ticket.project.name }}</td>
-		        	<td>{% if ticket.states | length > 0 %}{{ ticket.states.0.authorUser.firstname }} {{ ticket.states.0.authorUser.lastname }}{% endif %}</td>
-		        	<td>{% if ticket.states | length > 0 %}{{ ticket.states.0.allocatedUser.firstname }} {{ ticket.states.0.allocatedUser.lastname }}{% endif %}</td>
+		        	<td>{{ ticket.states[ticket.states | length - 1].authorUser.firstName }} {{ ticket.states[ticket.states | length - 1].authorUser.lastName }}</td>
+		        	<td>{{ ticket.states[ticket.states | length - 1].allocatedUser.firstName }} {{ ticket.states[ticket.states | length - 1].allocatedUser.lastName }}</td>
 		        	<td>
 						<a href="{{ path('webaccess_bugtracker_ticket_edit', {'ticket_id':ticket.id}) }}" title="Editer">Edit.</a>
 						<a href="{{ path('webaccess_bugtracker_ticket_delete', {'ticket_id':ticket.id}) }}" title="Supprimer">Delete.</a>

@@ -1,11 +1,13 @@
 <?php
 
 namespace Webaccess\BugtrackerBundle\Entity;
- 
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\RoleInterface;
- 
+
 /**
+ * Webaccess\BugtrackerBundle\Entity\Role
+ *
  * @ORM\Entity
  * @ORM\Table(name="role")
  */
@@ -19,34 +21,34 @@ class Role implements RoleInterface
      * @var integer $id
      */
     protected $id;
- 
+
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @var string $name
      */
     protected $name;
- 
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
- 
+
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
- 
+
     /**
      * Set name
      *
@@ -60,7 +62,7 @@ class Role implements RoleInterface
 
     /**
      * Implementation of getRole for the RoleInterface.
-     * 
+     *
      * @return string The role.
      */
     public function getRole()

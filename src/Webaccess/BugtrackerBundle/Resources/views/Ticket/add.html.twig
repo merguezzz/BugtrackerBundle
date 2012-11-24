@@ -11,7 +11,16 @@
 	ADD TICKET
 
 	<form action="{{ path('webaccess_bugtracker_ticket_add') }}" method="post" {{ form_enctype(form) }}>
-	    {{ form_widget(form) }}
+		{{ form_row(form.title) }}
+	    {{ form_row(form.project) }}
+	    {{ form_row(form.states.0.content) }}
+	    {{ form_row(form.states.0.authorUser) }}
+	    {{ form_row(form.states.0.allocatedUser) }}
+	    {{ form_row(form.states.0.type) }}
+	    {{ form_row(form.states.0.status) }}
+	    {{ form_row(form.states.0.priority) }}
+
+	    {{ form_rest(form) }}
 
 	    <input type="submit" />
 	</form>

@@ -19,7 +19,7 @@ class TicketFormHandler {
     }
 
 	public function process($ticket) {
-		$this->form->setData($ticket);
+        $this->form->setData($ticket);
 
         if ('POST' === $this->request->getMethod()) {
             $this->form->bind($this->request);

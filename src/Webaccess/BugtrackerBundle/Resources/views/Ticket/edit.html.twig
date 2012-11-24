@@ -11,7 +11,21 @@
 	EDIT TICKET
 
 	<form action="{{ path('webaccess_bugtracker_ticket_edit', {'ticket_id':ticket.id}) }}" method="post" {{ form_enctype(form) }}>
-	    {{ form_widget(form) }}
+	    {{ form_row(form.title) }}
+	    {{ form_row(form.project) }}
+
+	    {% for state in form.states %}
+	    	{% if not loop.last %}<div style="display:none">{% endif %}
+			    {{ form_row(state.content ) }}
+			    {{ form_row(state.authorUser) }}
+			    {{ form_row(state.allocatedUser) }}
+			    {{ form_row(state.type) }}
+			    {{ form_row(state.status) }}
+			    {{ form_row(state.priority) }}
+			{% if not loop.last %}</div>{% endif %}
+		{% endfor %}
+
+		{{ form_rest(form) }}
 
 	    <input type="submit" />
 	</form>

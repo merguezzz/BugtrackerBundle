@@ -91,7 +91,7 @@ class User implements UserInterface
     protected $roles;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Project", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Project", inversedBy="users", cascade={"persist"})
      * @ORM\JoinTable(name="user_project",
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="project_id", referencedColumnName="id")}
@@ -318,7 +318,7 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return $this->roles;
+        return $this->roles->toArray();
     }
 
     /**
@@ -341,6 +341,18 @@ class User implements UserInterface
     public function getProjects()
     {
         return $this->projects;
+    }
+
+    /**
+     * Sets the user projects.
+     *
+     * @param ArrayCollection $projects
+     * @return User $user
+     */
+    public function setProjects(ArrayCollection $projects)
+    {
+        $this->projects = $projects;
+        return $this;
     }
 
     /**

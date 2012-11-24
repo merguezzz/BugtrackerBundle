@@ -18,4 +18,22 @@ class TicketStateRepository extends EntityRepository
 			->getQuery()
 			->getSingleScalarResult();
 	}
+
+	public function findLastStateOfTicket($ticket_id) {
+		return $this->createQueryBuilder('ts')
+			->join('ts.ticket', 't')
+			->addSelect('t')
+			->join('t.project', 'p')
+			->addSelect('p')
+			->join('ts.authorUser', 'authorUser')
+			->addSelect('authorUser')
+			->join('ts.allocatedUser', 'allocatedUser')
+			->addSelect('allocatedUser')
+			->where('ts.ticket = :ticket_id')
+			->setParameter('ticket_id', $ticket_id)
+			->add('orderBy', 'ts.createdAt DESC')
+			->setMaxResults(1)
+			->getQuery()
+            ->getSingleResult();
+	}
 }

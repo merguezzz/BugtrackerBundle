@@ -94,6 +94,9 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $user2->setEmail('louis.gandelin@gmail.com');
 		$user2->setCompany($company1);
 		$user2->addRole($role2);
+        $user1->addProject($project1);
+        $user1->addProject($project2);
+        $user2->addProject($project1);
 
         $manager->persist($user1);
         $manager->persist($user2);
