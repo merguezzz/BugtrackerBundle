@@ -17,11 +17,13 @@ class UserManager {
      *
      * @param Entity manager $em
      * @param EncoderFactory $encoderFactory
+     * @param Security contect $securityContext
      */
-	public function __construct($em, EncoderFactory $encoderFactory) {
+	public function __construct($em, EncoderFactory $encoderFactory, $securityContext) {
         $this->em = $em;
         $this->repository = $this->em->getRepository('WebaccessBugtrackerBundle:User');
         $this->encoderFactory = $encoderFactory;
+        $this->securityContext = $securityContext;
 	}
 
     public function getUsersPaginatedList($page_number) {
@@ -52,6 +54,10 @@ class UserManager {
         return ($user) ? $user : false;
     }
 
+    public function getUserInSession() {
+        return $this->securityContext->getToken()->getUser();
+    }
+
     public function deleteUser($user_id) {
         $user = $this->getUser($user_id);
         try {
@@ -61,5 +67,12 @@ class UserManager {
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    public function isAdmin() {
+        if($this->securityContext->isGranted('ROLE_ADMIN')) {
+            return true;
+        }
+        return false;
     }
 }

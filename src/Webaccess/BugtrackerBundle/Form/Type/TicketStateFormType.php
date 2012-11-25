@@ -16,7 +16,9 @@ class TicketStateFormType extends AbstractType {
         $builder->add('allocatedUser', 'entity', array(
             'class' => 'WebaccessBugtrackerBundle:User',
             'property' => 'username'));
-        $builder->add('type', 'integer');
+        $builder->add('type', 'choice', array(
+            'choices' => array(0 => 'Bug', 1 => 'Evolution', 2 => 'Question')
+        ));
         $builder->add('status', 'integer');
         $builder->add('priority', 'integer');
     }

@@ -1,11 +1,15 @@
 security:
     firewalls:
+        login_firewall:
+            pattern:    ^/login$
+            anonymous:  ~
         secured_area:
             pattern:    ^/
-            anonymous: ~
+            anonymous: false
             form_login:
                 login_path:  /login
                 check_path:  /login_check
+                default_target_path: /dashboard
             logout:
                 path:   /logout
                 target: /login
@@ -14,9 +18,7 @@ security:
                 lifetime: 3600
                 path: /
                 domain: ~
-
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: user.*, role: ROLE_ADMIN }
         - { path: company.*, role: ROLE_ADMIN }
         - { path: project.*, role: ROLE_ADMIN }

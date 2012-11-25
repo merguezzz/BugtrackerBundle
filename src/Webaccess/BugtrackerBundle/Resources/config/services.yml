@@ -23,6 +23,7 @@ services:
         arguments:
             em: "@doctrine.orm.entity_manager"
             encoderFactory: "@security.encoder_factory"
+            securityContect: "@security.context"
 
     webaccess_bugtracker.user.form:
         class: %symfony.form.class%
@@ -112,6 +113,8 @@ services:
 
     webaccess_bugtracker.ticket.form.type:
         class: %webaccess_bugtracker.ticket.form.class%
+        arguments:
+            userManager: "@webaccess_bugtracker.user_manager"
         tags:
             - { name: form.type, alias: webaccess_bugtracker_ticket }
 
