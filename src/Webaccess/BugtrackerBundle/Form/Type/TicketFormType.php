@@ -15,9 +15,7 @@ class TicketFormType extends AbstractType {
 			'class' => 'WebaccessBugtrackerBundle:Project',
 			'property' => 'name'));
 		$builder->add('states', 'collection', array(
-            'type' => new TicketStateFormType(),
-            'allow_add' => true,
-            'by_reference' => false));
+            'type' => new TicketStateFormType()));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {

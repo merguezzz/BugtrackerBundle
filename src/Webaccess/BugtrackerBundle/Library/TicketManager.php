@@ -51,6 +51,8 @@ class TicketManager {
 
     public function getTicket($ticket_id) {
         $ticket = $this->repository->find($ticket_id);
+        $ticket_state = $this->getLastTicketState($ticket_id);
+        $ticket->addState($ticket_state);
         return ($ticket) ? $ticket : false;
     }
 

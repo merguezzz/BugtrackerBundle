@@ -33,13 +33,15 @@
 	HISTORY
 
 	{% for state in ticket.states %}
+		{% if not loop.last %}
 		<div>
 			Comments : {{ state.content }}
 			Type : {{ state.type }}
 			Status : {{ state.status }}
 			Priority : {{ state.priority }}
+			Allocated user : {{ state.allocatedUser.firstName }} {{ state.allocatedUser.lastName }}
 		</div>
-
+		{% endif %}
 	{% endfor %}
 
 {% endblock %}
