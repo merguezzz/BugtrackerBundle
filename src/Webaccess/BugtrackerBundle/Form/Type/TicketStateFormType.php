@@ -8,6 +8,51 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class TicketStateFormType extends AbstractType {
 
+    const TICKET_STATE_TYPE_0 = 'Bug';
+    const TICKET_STATE_TYPE_1 = 'Evolution';
+    const TICKET_STATE_TYPE_2 = 'Correction orthographique';
+    const TICKET_STATE_TYPE_3 = 'Question';
+
+    const TICKET_STATE_STATUS_0 = 'A prévoir';
+    const TICKET_STATE_STATUS_1 = 'A faire';
+    const TICKET_STATE_STATUS_2 = 'En cours';
+    const TICKET_STATE_STATUS_3 = 'A valider';
+    const TICKET_STATE_STATUS_4 = 'A livrer';
+    const TICKET_STATE_STATUS_5 = 'Livré';
+    const TICKET_STATE_STATUS_6 = 'Archivé';
+
+    const TICKET_STATE_PRIORITY_0 = 'Basse';
+    const TICKET_STATE_PRIORITY_1 = 'Moyenne';
+    const TICKET_STATE_PRIORITY_2 = 'Haute';
+
+    public function getTicketStatesTypes() {
+        return array(
+            0 => self::TICKET_STATE_TYPE_0,
+            1 => self::TICKET_STATE_TYPE_1,
+            2 => self::TICKET_STATE_TYPE_2,
+        );
+    }
+
+    public function getTicketStatesStatus() {
+        return array(
+            0 => self::TICKET_STATE_STATUS_0,
+            1 => self::TICKET_STATE_STATUS_1,
+            2 => self::TICKET_STATE_STATUS_2,
+            3 => self::TICKET_STATE_STATUS_3,
+            4 => self::TICKET_STATE_STATUS_4,
+            5 => self::TICKET_STATE_STATUS_5,
+            6 => self::TICKET_STATE_STATUS_6,
+        );
+    }
+
+    public function getTicketStatesPriorities() {
+        return array(
+            0 => self::TICKET_STATE_PRIORITY_0,
+            1 => self::TICKET_STATE_PRIORITY_1,
+            2 => self::TICKET_STATE_PRIORITY_2,
+        );
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('content', 'textarea', array('required' => false));
 		$builder->add('authorUser', 'entity', array(
@@ -17,10 +62,14 @@ class TicketStateFormType extends AbstractType {
             'class' => 'WebaccessBugtrackerBundle:User',
             'property' => 'username'));
         $builder->add('type', 'choice', array(
-            'choices' => array(0 => 'Bug', 1 => 'Evolution', 2 => 'Question')
+            'choices' => $this->getTicketStatesTypes()
         ));
-        $builder->add('status', 'integer');
-        $builder->add('priority', 'integer');
+        $builder->add('status', 'choice', array(
+            'choices' => $this->getTicketStatesStatus()
+        ));
+        $builder->add('priority', 'choice', array(
+            'choices' => $this->getTicketStatesPriorities()
+        ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {

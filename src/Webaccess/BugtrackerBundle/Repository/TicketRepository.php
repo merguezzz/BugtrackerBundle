@@ -18,4 +18,15 @@ class TicketRepository extends EntityRepository
 			->getQuery()
 			->getSingleScalarResult();
 	}
+
+	public function getTicketsByUserProject($user_id, $limit, $offset) {
+		return $this->createQueryBuilder('t')
+   			->orderBy('t.id', 'DESC')
+        	->leftJoin('t.project', 'p')
+        	->leftJoin('p.users', 'user')
+			->andWhere($this->createQueryBuilder('t')->expr()->eq('user.id', $user_id))
+			->setFirstResult($offset)
+			->setMaxResults($limit)
+        	->getQuery()->getResult();
+	}
 }

@@ -17,7 +17,7 @@
 	    {% for state in form.states %}
 	    	{% if not loop.last %}<div style="display:none">{% endif %}
 			    {{ form_row(state.content ) }}
-			    {{ form_row(state.authorUser) }}
+			    <div style="display:none">{{ form_row(state.authorUser) }}</div>
 			    {{ form_row(state.allocatedUser) }}
 			    {{ form_row(state.type) }}
 			    {{ form_row(state.status) }}
@@ -41,6 +41,7 @@
 				Type : {{ state.type }}
 				Status : {{ state.status }}
 				Priority : {{ state.priority }}
+				Author user : {{ state.authorUser.firstName }} {{ state.authorUser.lastName }}
 				Allocated user : {{ state.allocatedUser.firstName }} {{ state.allocatedUser.lastName }}
 			</div>
 		{% endif %}

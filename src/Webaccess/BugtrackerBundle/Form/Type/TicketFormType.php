@@ -24,11 +24,11 @@ class TicketFormType extends AbstractType {
 			'class' => 'WebaccessBugtrackerBundle:Project',
             'property' => 'name',
             'query_builder' => function($er) use ($userManager) {
-                $qb = $er->createQueryBuilder('project')
-                ->orderBy('project.name', 'ASC');
+                $qb = $er->createQueryBuilder('p')
+                    ->orderBy('p.name', 'ASC');
                 if(!$userManager->isAdmin()) {
-                    $qb->andWhere('project.company = :company_id')
-                    ->setParameter('company_id', $userManager->getUserInSession()->getCompany()->getId());
+                    $qb->leftJoin('p.users', 'user')
+                        ->andWhere($qb->expr()->eq('user.id', $userManager->getUserInSession()->getId()));
                 }
                 return $qb;
             },

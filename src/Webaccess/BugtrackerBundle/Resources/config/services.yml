@@ -102,6 +102,7 @@ services:
         class: %webaccess_bugtracker.ticket_manager.class%
         arguments:
             em: "@doctrine.orm.entity_manager"
+            userManager: "@webaccess_bugtracker.user_manager"
 
     webaccess_bugtracker.ticket.form:
         class: %symfony.form.class%
