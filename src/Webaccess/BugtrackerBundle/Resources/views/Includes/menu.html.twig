@@ -1,12 +1,26 @@
-{% if app.user %}<div> Welcome : {{ app.user.username }} </div>{% endif %}
+<div class="navbar">
+	<div class="navbar-inner">
+		<ul class="nav">
 
-<div>
-	<a href="{{ path('webaccess_bugtracker_dashboard') }}">dashboard</a>
-	{% if is_granted('ROLE_ADMIN') %}
-		<a href="{{ path('webaccess_bugtracker_company') }}">companies</a>
-		<a href="{{ path('webaccess_bugtracker_project') }}">projects</a>
-		<a href="{{ path('webaccess_bugtracker_user') }}">users</a>
-	{% endif %}
-	<a href="{{ path('webaccess_bugtracker_logout') }}">logout</a>
+			<li{% if (route == 'dashboard') %} class="active"{% endif %}><a href="{{ path('webaccess_bugtracker_dashboard') }}">dashboard</a></li>
+			{% if is_granted('ROLE_ADMIN') %}
+				<li{% if (route == 'company') %} class="active"{% endif %}><a href="{{ path('webaccess_bugtracker_company') }}">companies</a></li>
+				<li{% if (route == 'project') %} class="active"{% endif %}><a href="{{ path('webaccess_bugtracker_project') }}">projects</a></li>
+				<li{% if (route == 'user') %} class="active"{% endif %}><a href="{{ path('webaccess_bugtracker_user') }}">users</a></li>
+			{% endif %}
+			<li><a href="{{ path('webaccess_bugtracker_logout') }}">logout</a></li>
+		</ul>
+
+		<div class="project_selector">
+
+			<form action="{{ path('webaccess_bugtracker_dashboard') }}" method="post" {{ form_enctype(formSwitchProject) }}>
+				{{ form_rest(formSwitchProject) }}
+				<input type="submit" class="btn btn-warning" value="OK" />
+			</form>
+		</div>
+
+		<div class="welcome">
+			<div class="greetings">{% if app.user %}Welcome, <span class="user">{{ app.user.firstName }}</span>{% endif %}</div>
+		</div>
+	</div>
 </div>
-<br/>

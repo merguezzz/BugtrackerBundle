@@ -6,15 +6,23 @@
 
 {% block bugtracker_body %}
 
-	{% include 'WebaccessBugtrackerBundle:Includes:menu.html.twig' %}
+	{% render "WebaccessBugtrackerBundle:Dashboard:menu" with {'route' : 'project'} %}
 
-	EDIT PROJECT
+	<div id="dashboard" class="main-wrapper">
+		<div class="header">
+			<div class="title">
+				<h1>Edit a project</h1>
+			</div>
+			<div class="clear"></div>
+		</div>
 
-	<form action="{{ path('webaccess_bugtracker_project_edit', {'project_id':project.id}) }}" method="post" {{ form_enctype(form) }}>
-	    {{ form_widget(form) }}
+		<form action="{{ path('webaccess_bugtracker_project_edit', {'project_id':project.id}) }}" method="post" {{ form_enctype(form) }}>
+		    {{ form_widget(form) }}
 
-	    <input type="submit" />
-	</form>
+	        <a href="{{ path('webaccess_bugtracker_project') }}" class="btn btn-warning">Go back</a>
+	        <input type="submit" class="btn btn-warning" value="Save" />
+		</form>
+	</div>
 
 {% endblock %}
 

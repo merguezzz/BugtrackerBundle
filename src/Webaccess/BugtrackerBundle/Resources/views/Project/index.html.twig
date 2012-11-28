@@ -6,40 +6,48 @@
 
 {% block bugtracker_body %}
 
-	{% include 'WebaccessBugtrackerBundle:Includes:menu.html.twig' %}
+	{% render "WebaccessBugtrackerBundle:Dashboard:menu" with {'route' : 'project'} %}
 
-	PROJECTS
+	<div id="dashboard" class="main-wrapper">
+		<div class="header">
+			<div class="title">
+				<h1>Projects</h1>
+			</div>
+			<div class="button_add">
+				<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_project_add') }}">add a project</a>
+			</div>
+			<div class="clear"></div>
+		</div>
 
-	<a href="{{ path('webaccess_bugtracker_project_add') }}">add project</a>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Creation date</th>
+					<th>Name</th>
+					<th>Company</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
 
-	<table class="table table-striped table-bordered">
-		<thead>
-			<tr>
-				<th>Creation date</th>
-				<th>Name</th>
-				<th>Company</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody>
-
-		{% if projects | length > 0 %}
-			{% for project in projects %}
-		        <tr>
-		        	<td>{{ project.createdAt | date('d/m/y H:i') }}</td>
-		        	<td>{{ project.name }}</td>
-		        	<td>{{ project.company.name }}</td>
-		        	<td>
-						<a href="{{ path('webaccess_bugtracker_project_edit', {'project_id':project.id}) }}" title="Editer">Edit.</a>
-						<a href="{{ path('webaccess_bugtracker_project_delete', {'project_id':project.id}) }}" title="Supprimer">Delete.</a>
-					</td>
-		        </tr>
-		    {% endfor %}
-		{% else %}
-			No projects found.
-		{% endif %}
-		</tbody>
-	</table>
+			{% if projects | length > 0 %}
+				{% for project in projects %}
+			        <tr>
+			        	<td>{{ project.createdAt | date('d/m/y H:i') }}</td>
+			        	<td>{{ project.name }}</td>
+			        	<td>{{ project.company.name }}</td>
+			        	<td>
+							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_project_edit', {'project_id':project.id}) }}" title="Edit.">Edit.</a>
+							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_project_delete', {'project_id':project.id}) }}" title="Delt.">Delt.</a>
+						</td>
+			        </tr>
+			    {% endfor %}
+			{% else %}
+				No projects found.
+			{% endif %}
+			</tbody>
+		</table>
+	</div>
 
 {% endblock %}
 

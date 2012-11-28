@@ -18,8 +18,8 @@ class UserFormType extends AbstractType {
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
 	    $resolver->setDefaults(array(
-	        'data_class' => 'Webaccess\BugtrackerBundle\Entity\User',
-	    ));
+	        'data_class' => 'Webaccess\BugtrackerBundle\Entity\User')
+	    );
 	}
 
     public function getName() {

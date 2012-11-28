@@ -18,4 +18,16 @@ class ProjectRepository extends EntityRepository
 			->getQuery()
 			->getSingleScalarResult();
 	}
+
+	public function getByUser($userId, $isAdmin) {
+		$qb = $this->createQueryBuilder('p')
+            ->orderBy('p.name', 'ASC');
+
+        if(!$isAdmin) {
+            $qb->leftJoin('p.users', 'user')
+            ->where($qb->expr()->eq('user.id', $userId));
+        }
+
+        return $qb;
+	}
 }

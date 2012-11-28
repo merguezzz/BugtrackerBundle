@@ -6,38 +6,47 @@
 
 {% block bugtracker_body %}
 
-	{% include 'WebaccessBugtrackerBundle:Includes:menu.html.twig' %}
+	{% render "WebaccessBugtrackerBundle:Dashboard:menu" with {'route' : 'company'} %}
 
-	COMPANIES
+	<div id="dashboard" class="main-wrapper">
+		<div class="header">
+			<div class="title">
+				<h1>Companies</h1>
+			</div>
+			<div class="button_add">
+				<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_company_add') }}">add a company</a>
+			</div>
+			<div class="clear"></div>
+		</div>
 
-	<a href="{{ path('webaccess_bugtracker_company_add') }}">add company</a>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Creation date</th>
+					<th>Name</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
 
-	<table class="table table-striped table-bordered">
-		<thead>
-			<tr>
-				<th>Creation date</th>
-				<th>Name</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody>
+			{% if companies | length > 0 %}
+				{% for company in companies %}
+			        <tr>
+			        	<td>{{ company.createdAt | date('d/m/y H:i') }}</td>
+			        	<td>{{ company.name }}</td>
+			        	<td>
+							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_company_edit', {'company_id':company.id}) }}" title="Edit.">Edit.</a>
+							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_company_delete', {'company_id':company.id}) }}" title="Delt.">Delt.</a>
+						</td>
+			        </tr>
+			    {% endfor %}
+			{% else %}
+				No companies found.
+			{% endif %}
 
-		{% if companies | length > 0 %}
-			{% for company in companies %}
-		        <tr>
-		        	<td>{{ company.createdAt | date('d/m/y H:i') }}</td>
-		        	<td>{{ company.name }}</td>
-		        	<td>
-						<a href="{{ path('webaccess_bugtracker_company_edit', {'company_id':company.id}) }}" title="Editer">Edit.</a>
-						<a href="{{ path('webaccess_bugtracker_company_delete', {'company_id':company.id}) }}" title="Supprimer">Delete.</a>
-					</td>
-		        </tr>
-		    {% endfor %}
-		{% else %}
-			No companies found.
-		{% endif %}
-		</tbody>
-	</table>
+			</tbody>
+		</table>
+	</div>
 
 {% endblock %}
 

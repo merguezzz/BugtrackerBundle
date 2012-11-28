@@ -19,11 +19,13 @@ class UserManager {
      * @param EncoderFactory $encoderFactory
      * @param Security contect $securityContext
      */
-	public function __construct($em, EncoderFactory $encoderFactory, $securityContext) {
+	public function __construct($em, EncoderFactory $encoderFactory, $securityContext, $session) {
         $this->em = $em;
         $this->repository = $this->em->getRepository('WebaccessBugtrackerBundle:User');
+        $this->repositoryProject = $this->em->getRepository('WebaccessBugtrackerBundle:Project');
         $this->encoderFactory = $encoderFactory;
         $this->securityContext = $securityContext;
+        $this->session = $session;
 	}
 
     public function getUsersPaginatedList($page_number) {
@@ -56,6 +58,14 @@ class UserManager {
 
     public function getUserInSession() {
         return $this->securityContext->getToken()->getUser();
+    }
+
+    public function getProjectInSession() {
+        $projectId = $this->session->get('current_project');
+        if($projectId) {
+            return $this->repositoryProject->find($projectId);
+        }
+        return NULL;
     }
 
     public function deleteUser($user_id) {

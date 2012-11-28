@@ -7,3 +7,5 @@ build/
 vendor
 .DS_Store
 TODO.md
+config.rb
+*.scssc

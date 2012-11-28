@@ -12,13 +12,14 @@ class ProjectFormType extends AbstractType {
         $builder->add('name', 'text');
 		$builder->add('company', 'entity', array(
 			'class' => 'WebaccessBugtrackerBundle:Company',
-			'property' => 'name'));
+			'property' => 'name')
+		);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
 	    $resolver->setDefaults(array(
-	        'data_class' => 'Webaccess\BugtrackerBundle\Entity\Project',
-	    ));
+	        'data_class' => 'Webaccess\BugtrackerBundle\Entity\Project')
+	    );
 	}
 
     public function getName() {

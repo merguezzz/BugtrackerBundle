@@ -6,24 +6,31 @@
 
 {% block bugtracker_body %}
 
-	{% include 'WebaccessBugtrackerBundle:Includes:menu.html.twig' %}
+	{% render "WebaccessBugtrackerBundle:Dashboard:menu" with {'route' : 'dashboard'} %}
 
-	ADD TICKET
+	<div id="dashboard" class="main-wrapper">
+		<div class="header">
+			<div class="title">
+				<h1>Add a ticket</h1>
+			</div>
+			<div class="clear"></div>
+		</div>
 
-	<form action="{{ path('webaccess_bugtracker_ticket_add') }}" method="post" {{ form_enctype(form) }}>
-		{{ form_row(form.title) }}
-	    {{ form_row(form.project) }}
-	    {{ form_row(form.states.0.content) }}
-	    {{ form_row(form.states.0.authorUser) }}
-	    {{ form_row(form.states.0.allocatedUser) }}
-	    {{ form_row(form.states.0.type) }}
-	    {{ form_row(form.states.0.status) }}
-	    {{ form_row(form.states.0.priority) }}
+		<form action="{{ path('webaccess_bugtracker_ticket_add') }}" method="post" {{ form_enctype(form) }}>
+			{{ form_row(form.title) }}
+		    {{ form_row(form.project) }}
+		    {{ form_row(form.states.0.content) }}
+		    <div style="display:none">{{ form_row(form.states.0.authorUser) }}</div>
+		    {{ form_row(form.states.0.allocatedUser) }}
+		    {{ form_row(form.states.0.type) }}
+		    {{ form_row(form.states.0.status) }}
+		    {{ form_row(form.states.0.priority) }}
 
-	    {{ form_rest(form) }}
+		    {{ form_rest(form) }}
 
-	    <input type="submit" />
-	</form>
+		    <input type="submit" />
+		</form>
+	</div>
 
 {% endblock %}
 

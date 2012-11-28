@@ -53,30 +53,47 @@ class TicketStateFormType extends AbstractType {
         );
     }
 
+    public function __construct($project_id) {
+        $this->project_id = $project_id;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options) {
+        $project_id = $this->project_id;
+
         $builder->add('content', 'textarea', array('required' => false));
 		$builder->add('authorUser', 'entity', array(
 			'class' => 'WebaccessBugtrackerBundle:User',
-			'property' => 'username'));
+			'property' => 'username')
+        );
         $builder->add('allocatedUser', 'entity', array(
             'class' => 'WebaccessBugtrackerBundle:User',
-            'property' => 'username'));
+            'property' => 'username',
+            'query_builder' => function($er) use ($project_id) {
+                return $er->findByProject($project_id);
+           })
+        );
         $builder->add('type', 'choice', array(
-            'choices' => $this->getTicketStatesTypes()
-        ));
+            'choices' => $this->getTicketStatesTypes())
+        );
         $builder->add('status', 'choice', array(
-            'choices' => $this->getTicketStatesStatus()
-        ));
+            'choices' => $this->getTicketStatesStatus())
+        );
         $builder->add('priority', 'choice', array(
-            'choices' => $this->getTicketStatesPriorities()
-        ));
+            'choices' => $this->getTicketStatesPriorities())
+        );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
 	    $resolver->setDefaults(array(
-	        'data_class' => 'Webaccess\BugtrackerBundle\Entity\TicketState',
-	    ));
+	        'data_class' => 'Webaccess\BugtrackerBundle\Entity\TicketState')
+        );
 	}
+
+    public function getDefaultOptions(array $options) {
+        return array(
+            'my_option' => false
+        );
+    }
 
     public function getName() {
         return 'webaccess_bugtracker_ticket_state';

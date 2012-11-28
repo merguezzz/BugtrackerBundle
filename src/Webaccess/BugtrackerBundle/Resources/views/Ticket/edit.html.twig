@@ -6,46 +6,73 @@
 
 {% block bugtracker_body %}
 
-	{% include 'WebaccessBugtrackerBundle:Includes:menu.html.twig' %}
+	{% render "WebaccessBugtrackerBundle:Dashboard:menu" with {'route' : 'dashboard'} %}
 
-	EDIT TICKET
-
-	<form action="{{ path('webaccess_bugtracker_ticket_edit', {'ticket_id':ticket.id}) }}" method="post" {{ form_enctype(form) }}>
-	    {{ form_row(form.title) }}
-	    {{ form_row(form.project) }}
-
-	    {% for state in form.states %}
-	    	{% if not loop.last %}<div style="display:none">{% endif %}
-			    {{ form_row(state.content ) }}
-			    <div style="display:none">{{ form_row(state.authorUser) }}</div>
-			    {{ form_row(state.allocatedUser) }}
-			    {{ form_row(state.type) }}
-			    {{ form_row(state.status) }}
-			    {{ form_row(state.priority) }}
-			{% if not loop.last %}</div>{% endif %}
-		{% endfor %}
-
-		{{ form_rest(form) }}
-
-	    <input type="submit" />
-	</form>
-
-	HISTORY
-
-	{% for i in ticket.states | length - 1 .. 0 %}
-		{% if not loop.first %}
-			{% set state = ticket.states[i] %}
-			<div>
-				Date : {{ state.createdAt | date('d/m/Y H:i:s') }}
-				Comments : {{ state.content }}
-				Type : {{ state.type }}
-				Status : {{ state.status }}
-				Priority : {{ state.priority }}
-				Author user : {{ state.authorUser.firstName }} {{ state.authorUser.lastName }}
-				Allocated user : {{ state.allocatedUser.firstName }} {{ state.allocatedUser.lastName }}
+	<div id="dashboard" class="main-wrapper">
+		<div class="header">
+			<div class="title">
+				<h1>Edit a ticket</h1>
 			</div>
-		{% endif %}
-	{% endfor %}
+			<div class="clear"></div>
+		</div>
+
+		<form action="{{ path('webaccess_bugtracker_ticket_edit', {'ticket_id':ticket.id}) }}" method="post" {{ form_enctype(form) }}>
+		    {{ form_row(form.title) }}
+		    {{ form_row(form.project) }}
+
+		    {% for state in form.states %}
+		    	{% if not loop.last %}<div style="display:none">{% endif %}
+				    {{ form_row(state.content ) }}
+				    <div style="display:none">{{ form_row(state.authorUser) }}</div>
+				    {{ form_row(state.allocatedUser) }}
+				    {{ form_row(state.type) }}
+				    {{ form_row(state.status) }}
+				    {{ form_row(state.priority) }}
+				{% if not loop.last %}</div>{% endif %}
+			{% endfor %}
+
+			{{ form_rest(form) }}
+
+	        <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">Go back</a>
+	        <input type="submit" class="btn btn-warning" value="Save" />
+		</form>
+
+		<h2>History</h2>
+
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Creation date</th>
+					<th>Comments</th>
+					<th>Author</th>
+					<th>Allocated to</th>
+					<th>Type</th>
+					<th>Status</th>
+					<th>Priority</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			{% for i in ticket.states | length - 1 .. 0 %}
+				{% if not loop.first %}
+					{% set state = ticket.states[i] %}
+					<tr>
+						<td>{{ state.createdAt | date('d/m/Y H:i:s') }}</td>
+						<td>{{ state.content }}</td>
+						<td>{{ state.authorUser.firstName }} {{ state.authorUser.lastName }}</td>
+						<td>{{ state.allocatedUser.firstName }} {{ state.allocatedUser.lastName }}</td>
+						<td>{{ state.type }}</td>
+						<td>{{ state.status }}</td>
+						<td>{{ state.priority }}</td>
+					</tr>
+				{% endif %}
+			{% endfor %}
+
+			</tbody>
+		</table>
+
+	    <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">Go back</a>
+	</div>
 
 {% endblock %}
 

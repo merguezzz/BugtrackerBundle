@@ -18,4 +18,17 @@ class UserRepository extends EntityRepository
 			->getQuery()
 			->getSingleScalarResult();
 	}
+
+	public function findByProject($project_id) {
+		$qb = $this->createQueryBuilder('u')
+   			->orderBy('u.lastName', 'ASC')
+   			->orderBy('u.firstName', 'ASC')
+        	->leftJoin('u.projects', 'p');
+
+    	if($project_id) {
+			$qb->andWhere($this->createQueryBuilder('u')->expr()->eq('p.id', $project_id));
+		}
+
+		return $qb;
+	}
 }

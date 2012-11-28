@@ -14,8 +14,8 @@ class CompanyFormType extends AbstractType {
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
 	    $resolver->setDefaults(array(
-	        'data_class' => 'Webaccess\BugtrackerBundle\Entity\Company',
-	    ));
+	        'data_class' => 'Webaccess\BugtrackerBundle\Entity\Company')
+        );
 	}
 
     public function getName() {

@@ -19,13 +19,13 @@ class TicketManager {
 	public function __construct($em, $userManager) {
         $this->em = $em;
         $this->repository = $this->em->getRepository('WebaccessBugtrackerBundle:Ticket');
-        $this->repository_state = $this->em->getRepository('WebaccessBugtrackerBundle:TicketState');
+        $this->repositoryState = $this->em->getRepository('WebaccessBugtrackerBundle:TicketState');
         $this->userManager = $userManager;
 	}
 
     public function getTicketsPaginatedList($page_number) {
         $pagination = $this->getTicketsPagination($page_number);
-        return $this->repository->getTicketsByUserProject($this->userManager->getUserInSession()->getId(), $pagination->items_per_page_number, $pagination->items_offset);
+        return $this->repository->getByUser($this->userManager->getUserInSession()->getId(), ($this->userManager->getProjectInSession() ? $this->userManager->getProjectInSession()->getId() : NULL),$pagination->items_per_page_number, $pagination->items_offset);
     }
 
     public function getTicketsPagination($page_number) {
@@ -59,7 +59,7 @@ class TicketManager {
 
     public function getLastTicketState($ticket_id) {
         $ticket = $this->repository->find($ticket_id);
-        $last_ticket_state = $this->repository_state->findLastStateOfTicket($ticket->getId());
+        $last_ticket_state = $this->repositoryState->findLastStateOfTicket($ticket->getId());
         $ticket_state = new TicketState();
         $ticket_state->setAuthorUser($this->userManager->getUserInSession());
         $ticket_state->setAllocatedUser($last_ticket_state->getAllocatedUser());
