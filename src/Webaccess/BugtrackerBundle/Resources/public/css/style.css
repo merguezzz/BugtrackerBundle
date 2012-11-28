@@ -1,0 +1,87 @@
+/* STRUCTURE */
+/* line 3, ../sass/style.scss */
+body {
+  margin: 0 auto;
+  padding: 0;
+  font: 100%/1.4 "lucida sans unicode", "lucida grande", "Trebuchet MS", verdana, arial, helvetica, helve, sans-serif; }
+
+/* line 9, ../sass/style.scss */
+strong {
+  font-weight: bold; }
+
+/* line 13, ../sass/style.scss */
+.container {
+  clear: both;
+  color: #333333;
+  font-size: 0.8125em;
+  line-height: 1.5em;
+  margin: 0 auto;
+  padding: 1em 0;
+  position: relative;
+  width: 80%; }
+
+/* COMMON */
+/* line 26, ../sass/style.scss */
+.clear {
+  clear: both; }
+
+/* line 30, ../sass/style.scss */
+.table td, .table th {
+  vertical-align: middle; }
+
+/* line 34, ../sass/style.scss */
+input[type="submit"] {
+  padding-bottom: 6px;
+  padding-top: 6px; }
+
+/* NAV BAR */
+/* line 44, ../sass/style.scss */
+.navbar .welcome {
+  float: right; }
+  /* line 47, ../sass/style.scss */
+  .navbar .welcome .greetings {
+    float: none;
+    padding: 10px 15px 10px;
+    color: #777;
+    text-decoration: none;
+    text-shadow: 0 1px 0 white; }
+    /* line 54, ../sass/style.scss */
+    .navbar .welcome .greetings .user {
+      font-weight: bold; }
+/* line 60, ../sass/style.scss */
+.navbar .project_selector {
+  float: left;
+  margin-left: 120px; }
+  /* line 64, ../sass/style.scss */
+  .navbar .project_selector select {
+    width: auto;
+    color: #777;
+    text-decoration: none;
+    text-shadow: 0 1px 0 white;
+    margin: 5px; }
+  /* line 72, ../sass/style.scss */
+  .navbar .project_selector input[type="submit"] {
+    margin-top: 0; }
+  /* line 76, ../sass/style.scss */
+  .navbar .project_selector label {
+    display: inline; }
+  /* line 80, ../sass/style.scss */
+  .navbar .project_selector form {
+    margin-bottom: 0; }
+    /* line 83, ../sass/style.scss */
+    .navbar .project_selector form div {
+      display: inline; }
+
+/* INTERFACES */
+/* line 94, ../sass/style.scss */
+.main-wrapper .header {
+  margin-bottom: 20px; }
+  /* line 98, ../sass/style.scss */
+  .main-wrapper .header .title {
+    float: left; }
+  /* line 102, ../sass/style.scss */
+  .main-wrapper .header .button_add {
+    float: right;
+    margin-top: 15px; }
+
+/* DASHBOARD */
