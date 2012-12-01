@@ -8,8 +8,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CompanyFormType extends AbstractType {
 
+    protected $translationManager;
+
+    public function __construct($translationManager) {
+        $this->translationManager = $translationManager;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options) {
-    	$builder->add('name', 'text');
+    	$builder->add('name', 'text', array(
+            'label' => $this->translationManager->trans('company.name'))
+        );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {

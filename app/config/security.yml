@@ -1,15 +1,15 @@
 security:
     firewalls:
         login_firewall:
-            pattern:    ^/login$
+            pattern:    /login$
             anonymous:  ~
         secured_area:
             pattern:    ^/
             anonymous: false
             form_login:
-                login_path:  /login
-                check_path:  /login_check
-                default_target_path: /dashboard
+                login_path:  webaccess_bugtracker_login
+                check_path:  webaccess_bugtracker_login_check
+                default_target_path: webaccess_bugtracker_dashboard
             logout:
                 path:   /logout
                 target: /login

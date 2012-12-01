@@ -1,0 +1,66 @@
+login.username: Identifiant
+login.password: Mot de passe
+login.submit: Valider
+
+menu.dashboard: Tableau de bord
+menu.companies: Entreprises
+menu.projects: Projets
+menu.users: Utilisateurs
+menu.logout: Déconnexion
+menu.welcome: Bienvenue
+menu.all_projects: Tous les projets
+
+switch_project.label: Projet
+
+dashboard.title: Tickets
+dashboard.add: Ajouter un ticket
+dashboard.no_tickets: Aucun ticket trouvé
+
+generic.action: Action
+generic.edit: Editer
+generic.delete: Supprimer
+generic.creation_date: Création
+generic.update_date: Mise à jour
+generic.cancel: Annuler
+generic.save: Enregistrer
+
+ticket.title: Titre
+ticket.project: Projet
+ticket.author: Auteur
+ticket.allocated_to: Assigné à
+ticket.type: Type
+ticket.status: Statut
+ticket.priority: Priorité
+ticket.comments: Commentaires
+ticket.content: Contenu
+
+ticket.edit.title: Editer un ticket
+ticket.edit.history: Historique
+
+company.title: Entreprises
+company.add: Ajouter une entreprise
+company.name: Nom
+company.no_companies: Aucune entreprise trouvée
+
+company_edit.title: Editer une entreprise
+
+project.title: Projets
+project.add: Ajouter un projet
+project.name: Nom
+project.company: Entreprise
+project.no_projects: Aucun projet trouvé
+
+project_edit.title: Editer un projet
+
+user.title: Utilisateurs
+user.add: Ajouter un utilisateur
+user.no_users: Aucun utilisateur trouvé
+
+user.username: Identifiant
+user.password: Mot de passe
+user.first_name: Prénom
+user.last_name: Nom
+user.company: Entreprise
+user.email: Email
+
+user_edit.title: Editer un utilisateur

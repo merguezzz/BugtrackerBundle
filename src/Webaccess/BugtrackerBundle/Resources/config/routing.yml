@@ -1,6 +1,14 @@
+webaccess_bugtracker_landing_page:
+    pattern: /
+    defaults: { _controller: WebaccessBugtrackerBundle:Dashboard:index, page_number: 1 }
+
 webaccess_bugtracker_dashboard:
     pattern:  /dashboard/{page_number}
     defaults: { _controller: WebaccessBugtrackerBundle:Dashboard:index, page_number: 1 }
+
+webaccess_bugtracker_switch_language:
+    pattern:  /dashboard_switch_language/{lang}
+    defaults: { _controller: WebaccessBugtrackerBundle:Dashboard:switchLanguage, lang: lang }
 
 webaccess_bugtracker_login:
     pattern: /login
@@ -8,6 +16,7 @@ webaccess_bugtracker_login:
 
 webaccess_bugtracker_login_check:
     pattern: /login_check
+    defaults: { _controller: WebaccessBugtrackerBundle:Login:check }
 
 webaccess_bugtracker_logout:
     pattern: /logout

@@ -39,6 +39,8 @@ services:
 
     webaccess_bugtracker.user.form.type:
         class: %webaccess_bugtracker.user.form.class%
+        arguments:
+            translationManager: "@translator"
         tags:
             - { name: form.type, alias: webaccess_bugtracker_user }
 
@@ -65,6 +67,8 @@ services:
 
     webaccess_bugtracker.project.form.type:
         class: %webaccess_bugtracker.project.form.class%
+        arguments:
+            translationManager: "@translator"
         tags:
             - { name: form.type, alias: webaccess_bugtracker_project }
 
@@ -91,6 +95,8 @@ services:
 
     webaccess_bugtracker.company.form.type:
         class: %webaccess_bugtracker.company.form.class%
+        arguments:
+            translationManager: "@translator"
         tags:
             - { name: form.type, alias: webaccess_bugtracker_company }
 
@@ -120,6 +126,7 @@ services:
         class: %webaccess_bugtracker.ticket.form.class%
         arguments:
             userManager: "@webaccess_bugtracker.user_manager"
+            translationManager: "@translator"
         tags:
             - { name: form.type, alias: webaccess_bugtracker_ticket }
 
@@ -143,6 +150,7 @@ services:
         class: %webaccess_bugtracker.switch_project.form.class%
         arguments:
             userManager: "@webaccess_bugtracker.user_manager"
+            translationManager: "@translator"
         tags:
             - { name: form.type, alias: webaccess_bugtracker_switch_project }
 

@@ -25,4 +25,11 @@ class DashboardController extends Controller
 		$aParams['route'] = $route;
 		return $this->render('WebaccessBugtrackerBundle:Includes:menu.html.twig', $aParams);
 	}
+
+	public function switchLanguageAction($lang = null) {
+		if($lang != null) {
+		    $this->get('request')->setLocale($lang);
+		}
+	    return $this->redirect($this->generateUrl('webaccess_bugtracker_dashboard', array('_locale'=> $this->get('request')->getLocale())));
+	}
 }

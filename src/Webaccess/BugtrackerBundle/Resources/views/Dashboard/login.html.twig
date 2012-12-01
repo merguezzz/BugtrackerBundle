@@ -6,19 +6,29 @@
 
 {% block bugtracker_body %}
 
-	{% if error %}
-        <div>{{ error.message }}</div>
-    {% endif %}
+    <div id="login">
 
-    <form action="{{ path('webaccess_bugtracker_login_check') }}" method="post" id="login">
-        <input type="text" id="username" name="_username" placeholder="login" value="{{ last_username }}" />
+        <div class="logo">
+           <img src="{{ asset('bundles/webaccessbugtracker/images/logo.png') }}" alt="web@ccess" />
+        </div>
 
-        <input type="password" id="password" name="_password" placeholder="password" />
+        <div class="well">
+            <form action="{{ path('webaccess_bugtracker_login_check') }}" method="post">
 
-        <input type="checkbox" id="remember_me" name="_remember_me"/>remember me</label>
+                <label for="username">{{ 'login.username' | trans }} :</label>
+                <input type="text" id="username" name="_username" placeholder="{{ 'login.username' | trans }}" value="{{ last_username }}" />
 
-        <input type="submit" name="login" />
-    </form>
+                <label for="password">{{ 'login.password' | trans }} :</label>
+                <input type="password" id="password" name="_password" placeholder="{{ 'login.password' | trans }}" />
+
+                <input type="submit" class="btn btn-warning" value="{{ 'login.submit' | trans }}" />
+            </form>
+
+            {% if error %}
+                <div class="error text-error">{{ error.message }}</div>
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
 

@@ -11,7 +11,7 @@
 	<div id="dashboard" class="main-wrapper">
 		<div class="header">
 			<div class="title">
-				<h1>Edit a company</h1>
+				<h1>{{ 'company_edit.title' | trans }}</h1>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -19,8 +19,8 @@
 		<form action="{{ path('webaccess_bugtracker_company_edit', {'company_id':company.id}) }}" method="post" {{ form_enctype(form) }}>
 			{{ form_widget(form) }}
 
-	        <a href="{{ path('webaccess_bugtracker_company') }}" class="btn btn-warning">Go back</a>
-	        <input type="submit" class="btn btn-warning" value="Save" />
+	        <a href="{{ path('webaccess_bugtracker_company') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
+	        <input type="submit" class="btn btn-warning" value="{{ 'generic.save' | trans }}" />
 		</form>
 	</div>
 

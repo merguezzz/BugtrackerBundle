@@ -8,11 +8,20 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProjectFormType extends AbstractType {
 
+	protected $translationManager;
+
+    public function __construct($translationManager) {
+        $this->translationManager = $translationManager;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('name', 'text');
+        $builder->add('name', 'text', array(
+        	'label' => $this->translationManager->trans('project.name'))
+        );
 		$builder->add('company', 'entity', array(
 			'class' => 'WebaccessBugtrackerBundle:Company',
-			'property' => 'name')
+			'property' => 'name',
+        	'label' => $this->translationManager->trans('project.company'))
 		);
     }
 

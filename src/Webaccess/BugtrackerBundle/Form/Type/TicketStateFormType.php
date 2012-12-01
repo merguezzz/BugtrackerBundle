@@ -53,33 +53,42 @@ class TicketStateFormType extends AbstractType {
         );
     }
 
-    public function __construct($project_id) {
+    public function __construct($project_id, $translationManager) {
         $this->project_id = $project_id;
+        $this->translationManager = $translationManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $project_id = $this->project_id;
 
-        $builder->add('content', 'textarea', array('required' => false));
+        $builder->add('content', 'textarea', array(
+            'required' => false,
+            'label' => $this->translationManager->trans('ticket.content'))
+        );
 		$builder->add('authorUser', 'entity', array(
 			'class' => 'WebaccessBugtrackerBundle:User',
-			'property' => 'username')
+			'property' => 'username',
+            'label' => $this->translationManager->trans('ticket.author'))
         );
         $builder->add('allocatedUser', 'entity', array(
             'class' => 'WebaccessBugtrackerBundle:User',
             'property' => 'username',
+            'label' => $this->translationManager->trans('ticket.allocated_to'),
             'query_builder' => function($er) use ($project_id) {
                 return $er->findByProject($project_id);
            })
         );
         $builder->add('type', 'choice', array(
-            'choices' => $this->getTicketStatesTypes())
+            'choices' => $this->getTicketStatesTypes(),
+            'label' => $this->translationManager->trans('ticket.type'))
         );
         $builder->add('status', 'choice', array(
-            'choices' => $this->getTicketStatesStatus())
+            'choices' => $this->getTicketStatesStatus(),
+            'label' => $this->translationManager->trans('ticket.status'))
         );
         $builder->add('priority', 'choice', array(
-            'choices' => $this->getTicketStatesPriorities())
+            'choices' => $this->getTicketStatesPriorities(),
+            'label' => $this->translationManager->trans('ticket.priority'))
         );
     }
 

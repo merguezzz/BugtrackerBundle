@@ -10,24 +10,27 @@ use Webaccess\BugtrackerBundle\Form\Type\TicketStateFormType;
 class TicketFormType extends AbstractType {
 
     protected $userManager;
+    protected $translationManager;
 
-    public function __construct($userManager) {
+    public function __construct($userManager, $translationManager) {
         $this->userManager = $userManager;
+        $this->translationManager = $translationManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $userManager = $this->userManager;
 
-        $builder->add('title', 'text');
+        $builder->add('title', 'text', array('label' => $this->translationManager->trans('ticket.title')));
 		$builder->add('project', 'entity', array(
 			'class' => 'WebaccessBugtrackerBundle:Project',
             'property' => 'name',
+            'label' => $this->translationManager->trans('ticket.project'),
             'query_builder' => function($er) use ($userManager) {
                 return $er->getByUser($userManager->getUserInSession()->getId(), $userManager->isAdmin());
             })
         );
 		$builder->add('states', 'collection', array(
-            'type' => new TicketStateFormType(($userManager->getProjectInSession()) ? $userManager->getProjectInSession()->getId() : NULL))
+            'type' => new TicketStateFormType(($userManager->getProjectInSession()) ? $userManager->getProjectInSession()->getId() : NULL, $this->translationManager))
         );
     }
 

@@ -6,12 +6,12 @@
 
 {% block bugtracker_body %}
 
-	{% render "WebaccessBugtrackerBundle:Dashboard:menu" with {'route' : 'dashboard'} %}
+	{% render "WebaccessBugtrackerBundle:Dashboard:menu" with { 'route' : app.request.get('_route') } %}
 
 	<div id="dashboard" class="main-wrapper">
 		<div class="header">
 			<div class="title">
-				<h1>Edit a ticket</h1>
+				<h1>{{ 'ticket.edit.title' | trans }}</h1>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -33,22 +33,22 @@
 
 			{{ form_rest(form) }}
 
-	        <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">Go back</a>
-	        <input type="submit" class="btn btn-warning" value="Save" />
+	        <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
+	        <input type="submit" class="btn btn-warning" value="{{ 'generic.save' | trans }}" />
 		</form>
 
-		<h2>History</h2>
+		<h2>{{ 'ticket.edit.history' | trans }}</h2>
 
 		<table class="table table-striped table-bordered">
 			<thead>
 				<tr>
-					<th>Creation date</th>
-					<th>Comments</th>
-					<th>Author</th>
-					<th>Allocated to</th>
-					<th>Type</th>
-					<th>Status</th>
-					<th>Priority</th>
+					<th>{{ 'generic.creation_date' | trans }}</th>
+					<th>{{ 'ticket.comments' | trans }}</th>
+					<th>{{ 'ticket.author' | trans }}</th>
+					<th>{{ 'ticket.allocated_to' | trans }}</th>
+					<th>{{ 'ticket.type' | trans }}</th>
+					<th>{{ 'ticket.status' | trans }}</th>
+					<th>{{ 'ticket.priority' | trans }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -57,7 +57,7 @@
 				{% if not loop.first %}
 					{% set state = ticket.states[i] %}
 					<tr>
-						<td>{{ state.createdAt | date('d/m/Y H:i:s') }}</td>
+						<td>{{ state.createdAt | date('d/m/y H:i') }}</td>
 						<td>{{ state.content }}</td>
 						<td>{{ state.authorUser.firstName }} {{ state.authorUser.lastName }}</td>
 						<td>{{ state.allocatedUser.firstName }} {{ state.allocatedUser.lastName }}</td>
@@ -71,7 +71,7 @@
 			</tbody>
 		</table>
 
-	    <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">Go back</a>
+	    <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
 	</div>
 
 {% endblock %}

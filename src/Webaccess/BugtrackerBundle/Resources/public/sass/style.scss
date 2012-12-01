@@ -18,7 +18,7 @@ strong {
     margin: 0 auto;
     padding: 1em 0;
     position: relative;
-    width: 80%;
+    width: 95%;
 }
 
 /* COMMON */
@@ -31,15 +31,32 @@ strong {
     vertical-align: middle;
 }
 
-input[type="submit"] {
-    padding-bottom: 6px;
-    padding-top: 6px;
+h1 {
+
 }
 
+/*input[type="submit"] {
+    padding-bottom: 6px;
+    padding-top: 6px;
+}*/
+
+/* TABLE */
+.table td.action {
+    text-align: center;
+}
 
 /* NAV BAR */
 
 .navbar {
+
+    .navbar-inner {
+        margin: 0;
+        padding: 0;
+
+        .nav {
+            width: 45%;
+        }
+    }
 
     .welcome {
         float: right;
@@ -59,14 +76,15 @@ input[type="submit"] {
 
     .project_selector {
         float: left;
-        margin-left: 120px;
+        width: 20%;
+        margin-left: 5%;
 
         select {
             width: auto;
             color: #777;
             text-decoration: none;
             text-shadow: 0 1px 0 white;
-            margin: 5px;
+            margin: 3px 5px 5px 5px;
         }
 
         input[type="submit"] {
@@ -81,8 +99,34 @@ input[type="submit"] {
             margin-bottom: 0;
 
             div {
-                display: inline;
+                display: block;
+                float: left;
+                height: 40px;
+                line-height: 40px;
+                vertical-align: middle;
             }
+
+            input[type="submit"] {
+                float: left;
+                margin-top: 8px;
+            }
+        }
+    }
+
+    .language_selector {
+        float: left;
+        height: 40px;
+        line-height: 40px;
+        margin-left: 5%;
+        width: 10%;
+        vertical-align: middle;
+
+        a {
+            color: #777777;
+        }
+
+        a.selected {
+            color: #0088CC;
         }
     }
 }
@@ -103,6 +147,28 @@ input[type="submit"] {
             float: right;
             margin-top: 15px;
         }
+    }
+}
+
+/* LOGIN */
+
+#login {
+
+    width: 245px;
+    margin: 180px auto 0 auto;
+
+    input[type="submit"] {
+        display: block;
+        margin-top: 10px;
+        margin-left: 80px;
+    }
+
+    .error {
+        text-align: center;
+    }
+
+    .logo {
+        margin-bottom: 20px;
     }
 }
 

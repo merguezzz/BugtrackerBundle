@@ -1,26 +1,31 @@
 <div class="navbar">
 	<div class="navbar-inner">
-		<ul class="nav">
 
-			<li{% if (route == 'dashboard') %} class="active"{% endif %}><a href="{{ path('webaccess_bugtracker_dashboard') }}">dashboard</a></li>
+		<ul class="nav">
+			<li{% if (route == 'dashboard') %} class="active"{% endif %}><a href="{{ path('webaccess_bugtracker_dashboard') }}">{{ 'menu.dashboard' | trans }}</a></li>
 			{% if is_granted('ROLE_ADMIN') %}
-				<li{% if (route == 'company') %} class="active"{% endif %}><a href="{{ path('webaccess_bugtracker_company') }}">companies</a></li>
-				<li{% if (route == 'project') %} class="active"{% endif %}><a href="{{ path('webaccess_bugtracker_project') }}">projects</a></li>
-				<li{% if (route == 'user') %} class="active"{% endif %}><a href="{{ path('webaccess_bugtracker_user') }}">users</a></li>
+				<li{% if (route == 'company') %} class="active"{% endif %}><a href="{{ path('webaccess_bugtracker_company') }}">{{ 'menu.companies' | trans }}</a></li>
+				<li{% if (route == 'project') %} class="active"{% endif %}><a href="{{ path('webaccess_bugtracker_project') }}">{{ 'menu.projects' | trans }}</a></li>
+				<li{% if (route == 'user') %} class="active"{% endif %}><a href="{{ path('webaccess_bugtracker_user') }}">{{ 'menu.users' | trans }}</a></li>
 			{% endif %}
-			<li><a href="{{ path('webaccess_bugtracker_logout') }}">logout</a></li>
+			<li><a href="{{ path('webaccess_bugtracker_logout') }}">{{ 'menu.logout' | trans }}</a></li>
 		</ul>
 
 		<div class="project_selector">
-
-			<form action="{{ path('webaccess_bugtracker_dashboard') }}" method="post" {{ form_enctype(formSwitchProject) }}>
+			<form id="switch-project" action="{{ path('webaccess_bugtracker_dashboard') }}" method="post" {{ form_enctype(formSwitchProject) }}>
+				<div>{{ form_widget(formSwitchProject.project) }}</div>
 				{{ form_rest(formSwitchProject) }}
 				<input type="submit" class="btn btn-warning" value="OK" />
 			</form>
 		</div>
 
+		<div class="language_selector">
+		    <a href="{{ path('webaccess_bugtracker_switch_language', {'lang' : 'fr'}) }}" {% if app.request.locale == 'fr' %}class="selected"{% endif %}>FR</a>
+		    <a href="{{ path('webaccess_bugtracker_switch_language', {'lang' : 'en'}) }}" {% if app.request.locale == 'en' %}class="selected"{% endif %}>EN</a>
+		</div>
+
 		<div class="welcome">
-			<div class="greetings">{% if app.user %}Welcome, <span class="user">{{ app.user.firstName }}</span>{% endif %}</div>
+			<div class="greetings">{% if app.user %}{{ 'menu.welcome' | trans }}, <span class="user">{{ app.user.firstName }}</span>{% endif %}</div>
 		</div>
 	</div>
 </div>

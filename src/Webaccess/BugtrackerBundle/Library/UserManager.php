@@ -57,7 +57,9 @@ class UserManager {
     }
 
     public function getUserInSession() {
-        return $this->securityContext->getToken()->getUser();
+        if($this->securityContext->getToken()) {
+            return $this->securityContext->getToken()->getUser();
+        }
     }
 
     public function getProjectInSession() {

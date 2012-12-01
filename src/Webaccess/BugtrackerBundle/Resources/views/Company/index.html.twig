@@ -6,15 +6,15 @@
 
 {% block bugtracker_body %}
 
-	{% render "WebaccessBugtrackerBundle:Dashboard:menu" with {'route' : 'company'} %}
+	{% render "WebaccessBugtrackerBundle:Dashboard:menu" with { 'route' : 'company' } %}
 
 	<div id="dashboard" class="main-wrapper">
 		<div class="header">
 			<div class="title">
-				<h1>Companies</h1>
+				<h1>{{ 'company.title' | trans }}</h1>
 			</div>
 			<div class="button_add">
-				<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_company_add') }}">add a company</a>
+				<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_company_add') }}">{{ 'company.add' | trans }}</a>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -22,9 +22,9 @@
 		<table class="table table-striped table-bordered">
 			<thead>
 				<tr>
-					<th>Creation date</th>
-					<th>Name</th>
-					<th>Action</th>
+					<th>{{ 'generic.creation_date' | trans }}</th>
+					<th>{{ 'company.name' | trans }}</th>
+					<th>{{ 'generic.action' | trans }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,14 +34,14 @@
 			        <tr>
 			        	<td>{{ company.createdAt | date('d/m/y H:i') }}</td>
 			        	<td>{{ company.name }}</td>
-			        	<td>
-							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_company_edit', {'company_id':company.id}) }}" title="Edit.">Edit.</a>
-							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_company_delete', {'company_id':company.id}) }}" title="Delt.">Delt.</a>
+			        	<td class="action" width="10%">
+							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_company_edit', {'company_id':company.id}) }}" title="{{ 'generic.edit' | trans }}">{{ 'generic.edit' | trans }}</a>
+							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_company_delete', {'company_id':company.id}) }}" title="{{ 'generic.delete' | trans }}">{{ 'generic.delete' | trans }}</a>
 						</td>
 			        </tr>
 			    {% endfor %}
 			{% else %}
-				No companies found.
+				{{ 'company.no_companies' | trans }}
 			{% endif %}
 
 			</tbody>
@@ -52,4 +52,14 @@
 
 {% block javascripts %}
     {{ parent() }}
+
+    <script type="text/javascript">
+	    {% if(app.session.getFlash('company_added')) %}
+	    	notification('Company added !');
+	    {% elseif(app.session.getFlash('company_updated')) %}
+	    	notification('Company updated !');
+	    {% elseif(app.session.getFlash('company_deleted')) %}
+	    	notification('Company deleted !');
+	    {% endif %}
+    </script>
 {% endblock %}

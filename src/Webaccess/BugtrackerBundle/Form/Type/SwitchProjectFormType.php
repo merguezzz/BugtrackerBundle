@@ -8,18 +8,20 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SwitchProjectFormType extends AbstractType {
 
-	protected $userManager;
+    protected $userManager;
+	protected $translationManager;
 
-    public function __construct($userManager) {
+    public function __construct($userManager, $translationManager) {
         $this->userManager = $userManager;
+        $this->translationManager = $translationManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-    	$userManager = $this->userManager;
+        $userManager = $this->userManager;
 
 		$builder->add('project', 'entity', array(
 			'class' => 'WebaccessBugtrackerBundle:Project',
-			'empty_value' => 'All projects',
+			'empty_value' => $this->translationManager->trans('menu.all_projects'),
 			'data' => $userManager->getProjectInSession(),
             'property' => 'name',
             'required' => false,

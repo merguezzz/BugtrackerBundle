@@ -7,6 +7,7 @@
 {% block stylesheets %}
 	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/webaccessbugtracker/css/grid.css') }}" />
 	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/webaccessbugtracker/css/bootstrap.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/webaccessbugtracker/css/jquery.sticky.css') }}" />
 	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/webaccessbugtracker/css/style.css') }}" />
 {% endblock %}
 
@@ -18,4 +19,7 @@
 {% endblock %}
 
 {% block javascripts %}
+	<script type="text/javascript" src="{{ asset('bundles/webaccessbugtracker/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/webaccessbugtracker/js/jquery.sticky.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/webaccessbugtracker/js/notification.js') }}"></script>
 {% endblock %}
