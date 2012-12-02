@@ -17,8 +17,13 @@
 		</div>
 
 		<form action="{{ path('webaccess_bugtracker_user_add') }}" method="post" {{ form_enctype(form) }}>
-		    {{ form_widget(form) }}
-
+		    {{ form_row(form.username, { 'label' : 'user.username', 'attr': {'class': 'span6'} }) }}
+		    {{ form_row(form.password, { 'label' : 'user.password', 'attr': {'class': 'span6'} }) }}
+		    {{ form_row(form.firstName, { 'label' : 'user.first_name', 'attr': {'class': 'span6'} }) }}
+		    {{ form_row(form.lastName, { 'label' : 'user.last_name', 'attr': {'class': 'span6'} }) }}
+	        {{ form_row(form.company, { 'label' : 'user.company', 'attr': {'class': 'span6'} }) }}
+	        {{ form_row(form.email, { 'label' : 'user.email', 'attr': {'class': 'span6'} }) }}
+	        {{ form_rest(form) }}
 	        <a href="{{ path('webaccess_bugtracker_user') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
 	        <input type="submit" class="btn btn-warning" value="{{ 'generic.save' | trans }}" />
 		</form>

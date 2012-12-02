@@ -70,12 +70,11 @@
 
     <script type="text/javascript">
 	    {% if(app.session.getFlash('ticket_added')) %}
-	    	notification('Ticket added !');
+	    	notification("{{ 'ticket.added' | trans }}");
 	    {% elseif(app.session.getFlash('ticket_updated')) %}
-	    	notification('Ticket updated !');
+	    	notification("{{ 'ticket.updated' | trans }}");
 	    {% elseif(app.session.getFlash('ticket_deleted')) %}
-	    	notification('Ticket deleted !');
+	    	notification("{{ 'ticket.deleted' | trans }}");
 	    {% endif %}
-
     </script>
 {% endblock %}

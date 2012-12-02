@@ -17,8 +17,8 @@
 		</div>
 
 	    <form action="{{ path('webaccess_bugtracker_company_add') }}" method="post" {{ form_enctype(form) }}>
-	        {{ form_widget(form) }}
-
+	        {{ form_row(form.name, { 'label' : 'company.name', 'attr': {'class': 'span6'} }) }}
+	        {{ form_rest(form) }}
 	        <a href="{{ path('webaccess_bugtracker_company') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
 	        <input type="submit" class="btn btn-warning" value="{{ 'generic.save' | trans }}" />
 	    </form>

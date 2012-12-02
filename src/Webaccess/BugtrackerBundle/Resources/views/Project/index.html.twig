@@ -56,11 +56,11 @@
 
     <script type="text/javascript">
 	    {% if(app.session.getFlash('project_added')) %}
-	    	notification('Project added !');
+	    	notification("{{ 'project.added' | trans }}");
 	    {% elseif(app.session.getFlash('project_updated')) %}
-	    	notification('Project updated !');
+	    	notification("{{ 'project.updated' | trans }}");
 	    {% elseif(app.session.getFlash('project_deleted')) %}
-	    	notification('Project deleted !');
+	    	notification("{{ 'project.deleted' | trans }}");
 	    {% endif %}
     </script>
 {% endblock %}

@@ -17,18 +17,15 @@ class TicketStateFormType extends AbstractType {
         $project_id = $this->project_id;
 
         $builder->add('content', 'textarea', array(
-            'required' => false,
-            'label' => $this->translationManager->trans('ticket.content'))
+            'required' => false)
         );
 		$builder->add('authorUser', 'entity', array(
 			'class' => 'WebaccessBugtrackerBundle:User',
-			'property' => 'username',
-            'label' => $this->translationManager->trans('ticket.author'))
+			'property' => 'username')
         );
         $builder->add('allocatedUser', 'entity', array(
             'class' => 'WebaccessBugtrackerBundle:User',
             'property' => 'username',
-            'label' => $this->translationManager->trans('ticket.allocated_to'),
             'query_builder' => function($er) use ($project_id) {
                 return $er->findByProject($project_id);
            })
@@ -38,8 +35,7 @@ class TicketStateFormType extends AbstractType {
                 0 => $this->translationManager->trans('ticket_state.type.0'),
                 1 => $this->translationManager->trans('ticket_state.type.1'),
                 2 => $this->translationManager->trans('ticket_state.type.2'),
-                3 => $this->translationManager->trans('ticket_state.type.3')),
-            'label' => $this->translationManager->trans('ticket.type'))
+                3 => $this->translationManager->trans('ticket_state.type.3')))
         );
         $builder->add('status', 'choice', array(
             'choices' => array(
@@ -49,15 +45,13 @@ class TicketStateFormType extends AbstractType {
                 3 => $this->translationManager->trans('ticket_state.status.3'),
                 4 => $this->translationManager->trans('ticket_state.status.4'),
                 5 => $this->translationManager->trans('ticket_state.status.5'),
-                6 => $this->translationManager->trans('ticket_state.status.6')),
-            'label' => $this->translationManager->trans('ticket.status'))
+                6 => $this->translationManager->trans('ticket_state.status.6')))
         );
         $builder->add('priority', 'choice', array(
             'choices' => array(
                 0 => $this->translationManager->trans('ticket_state.priority.0'),
                 1 => $this->translationManager->trans('ticket_state.priority.1'),
-                2 => $this->translationManager->trans('ticket_state.priority.2')),
-            'label' => $this->translationManager->trans('ticket.priority'))
+                2 => $this->translationManager->trans('ticket_state.priority.2')))
         );
     }
 

@@ -38,12 +38,20 @@ ticket.content: Content
 ticket.edit.title: Edit a ticket
 ticket.edit.history: History
 
+ticket.added: Ticket added
+ticket.updated: Ticket updated
+ticket.deleted: Ticket deleted
+
 company.title: Companies
 company.add: Add a company
 company.no_companies: No company found
 company.name: Name
 
 company_edit.title: Edit a company
+
+company.added: Company added
+company.updated: Company updated
+company.deleted: Company deleted
 
 project.title: Projects
 project.add: Add a project
@@ -52,6 +60,10 @@ project.company: Company
 project.no_projects: No project found
 
 project_edit.title: Edit a project
+
+project.added: Project added
+project.updated: Project updated
+project.deleted: Project deleted
 
 user.title: Users
 user.add: Add a user
@@ -65,6 +77,10 @@ user.company: Company
 user.email: Email
 
 user_edit.title: Editer a user
+
+user.added: User added
+user.updated: User updated
+user.deleted: User deleted
 
 ticket_state.type.0: Bug
 ticket_state.type.1: Evolution

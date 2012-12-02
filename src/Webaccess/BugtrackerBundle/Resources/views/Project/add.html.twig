@@ -17,8 +17,9 @@
 		</div>
 
 		<form action="{{ path('webaccess_bugtracker_project_add') }}" method="post" {{ form_enctype(form) }}>
-		    {{ form_widget(form) }}
-
+		    {{ form_row(form.name, { 'label' : 'project.name', 'attr': {'class': 'span6'} }) }}
+	        {{ form_row(form.company, { 'label' : 'project.company', 'attr': {'class': 'span6'} }) }}
+	        {{ form_rest(form) }}
 	        <a href="{{ path('webaccess_bugtracker_project') }}" class="btn btn-warning">Go back</a>
 	        <input type="submit" class="btn btn-warning" value="Save" />
 		</form>

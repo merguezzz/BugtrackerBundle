@@ -20,11 +20,10 @@ class TicketFormType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $userManager = $this->userManager;
 
-        $builder->add('title', 'text', array('label' => $this->translationManager->trans('ticket.title')));
+        $builder->add('title', 'text');
 		$builder->add('project', 'entity', array(
 			'class' => 'WebaccessBugtrackerBundle:Project',
             'property' => 'name',
-            'label' => $this->translationManager->trans('ticket.project'),
             'query_builder' => function($er) use ($userManager) {
                 return $er->getByUser($userManager->getUserInSession()->getId(), $userManager->isAdmin());
             })

@@ -17,19 +17,17 @@
 		</div>
 
 		<form action="{{ path('webaccess_bugtracker_ticket_add') }}" method="post" {{ form_enctype(form) }}>
-			{{ form_row(form.title) }}
-		    {{ form_row(form.project) }}
-		    {{ form_row(form.states.0.content) }}
+			{{ form_row(form.title, { 'label' : 'ticket.title', 'attr': {'class': 'span6'} }) }}
+		    {{ form_row(form.project, { 'label' : 'ticket.project', 'attr': {'class': 'span6'} }) }}
+		    {{ form_row(form.states.0.content, { 'label' : 'ticket.content', 'attr': {'class': 'span6'} }) }}
 		    <div style="display:none">{{ form_row(form.states.0.authorUser) }}</div>
-		    {{ form_row(form.states.0.allocatedUser) }}
-		    {{ form_row(form.states.0.type) }}
-		    {{ form_row(form.states.0.status) }}
-		    {{ form_row(form.states.0.priority) }}
-
+		    {{ form_row(form.states.0.allocatedUser, { 'label' : 'ticket.allocated_to', 'attr': {'class': 'span6'} }) }}
+		    {{ form_row(form.states.0.type, { 'label' : 'ticket.type', 'attr': {'class': 'span6'} }) }}
+		    {{ form_row(form.states.0.status, { 'label' : 'ticket.status', 'attr': {'class': 'span6'} }) }}
+		    {{ form_row(form.states.0.priority, { 'label' : 'ticket.priority', 'attr': {'class': 'span6'} }) }}
 		    {{ form_rest(form) }}
-
-	        <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">Go back</a>
-	        <input type="submit" class="btn btn-warning" value="Save" />
+	        <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
+	        <input type="submit" class="btn btn-warning" value="{{ 'generic.save' | trans }}" />
 		</form>
 	</div>
 

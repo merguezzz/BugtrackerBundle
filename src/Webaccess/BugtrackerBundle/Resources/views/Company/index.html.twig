@@ -55,11 +55,11 @@
 
     <script type="text/javascript">
 	    {% if(app.session.getFlash('company_added')) %}
-	    	notification('Company added !');
+	    	notification("{{ 'company.added' | trans }}");
 	    {% elseif(app.session.getFlash('company_updated')) %}
-	    	notification('Company updated !');
+	    	notification("{{ 'company.updated' | trans }}");
 	    {% elseif(app.session.getFlash('company_deleted')) %}
-	    	notification('Company deleted !');
+	    	notification("{{ 'company.deleted' | trans }}");
 	    {% endif %}
     </script>
 {% endblock %}

@@ -60,11 +60,11 @@
 
     <script type="text/javascript">
 	    {% if(app.session.getFlash('user_added')) %}
-	    	notification('User added !');
+	    	notification("{{ 'user.added' | trans }}");
 	    {% elseif(app.session.getFlash('user_updated')) %}
-	    	notification('User updated !');
+	    	notification("{{ 'user.updated' | trans }}");
 	    {% elseif(app.session.getFlash('user_deleted')) %}
-	    	notification('User deleted !');
+	    	notification("{{ 'user.deleted' | trans }}");
 	    {% endif %}
     </script>
 {% endblock %}

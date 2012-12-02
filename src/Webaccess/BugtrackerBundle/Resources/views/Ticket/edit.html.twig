@@ -17,22 +17,21 @@
 		</div>
 
 		<form action="{{ path('webaccess_bugtracker_ticket_edit', {'ticket_id':ticket.id}) }}" method="post" {{ form_enctype(form) }}>
-		    {{ form_row(form.title) }}
-		    {{ form_row(form.project) }}
+		    {{ form_row(form.title, { 'label' : 'ticket.title', 'attr': {'class': 'span6'} }) }}
+		    {{ form_row(form.project, { 'label' : 'ticket.project', 'attr': {'class': 'span6'} }) }}
 
 		    {% for state in form.states %}
 		    	{% if not loop.last %}<div style="display:none">{% endif %}
-				    {{ form_row(state.content ) }}
+				    {{ form_row(state.content, { 'label' : 'ticket.content', 'attr': {'class': 'span6'} }) }}
 				    <div style="display:none">{{ form_row(state.authorUser) }}</div>
-				    {{ form_row(state.allocatedUser) }}
-				    {{ form_row(state.type) }}
-				    {{ form_row(state.status) }}
-				    {{ form_row(state.priority) }}
+				    {{ form_row(state.allocatedUser, { 'label' : 'ticket.allocated_to', 'attr': {'class': 'span6'} }) }}
+				    {{ form_row(state.type, { 'label' : 'ticket.type', 'attr': {'class': 'span6'} }) }}
+				    {{ form_row(state.status, { 'label' : 'ticket.status', 'attr': {'class': 'span6'} }) }}
+				    {{ form_row(state.priority, { 'label' : 'ticket.priority', 'attr': {'class': 'span6'} }) }}
 				{% if not loop.last %}</div>{% endif %}
 			{% endfor %}
 
 			{{ form_rest(form) }}
-
 	        <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
 	        <input type="submit" class="btn btn-warning" value="{{ 'generic.save' | trans }}" />
 		</form>
@@ -61,9 +60,9 @@
 						<td>{{ state.content }}</td>
 						<td>{{ state.authorUser.firstName }} {{ state.authorUser.lastName }}</td>
 						<td>{{ state.allocatedUser.firstName }} {{ state.allocatedUser.lastName }}</td>
-						<td>{{ state.type }}</td>
-						<td>{{ state.status }}</td>
-						<td>{{ state.priority }}</td>
+						<td>{{ ('ticket_state.type.' ~ state.type) | trans }}</td>
+						<td>{{ ('ticket_state.status.' ~ state.status) | trans }}</td>
+						<td>{{ ('ticket_state.priority.' ~ state.priority) | trans }}</td>
 					</tr>
 				{% endif %}
 			{% endfor %}

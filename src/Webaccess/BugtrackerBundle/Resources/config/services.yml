@@ -39,8 +39,6 @@ services:
 
     webaccess_bugtracker.user.form.type:
         class: %webaccess_bugtracker.user.form.class%
-        arguments:
-            translationManager: "@translator"
         tags:
             - { name: form.type, alias: webaccess_bugtracker_user }
 
@@ -67,8 +65,6 @@ services:
 
     webaccess_bugtracker.project.form.type:
         class: %webaccess_bugtracker.project.form.class%
-        arguments:
-            translationManager: "@translator"
         tags:
             - { name: form.type, alias: webaccess_bugtracker_project }
 
@@ -95,8 +91,6 @@ services:
 
     webaccess_bugtracker.company.form.type:
         class: %webaccess_bugtracker.company.form.class%
-        arguments:
-            translationManager: "@translator"
         tags:
             - { name: form.type, alias: webaccess_bugtracker_company }
 
