@@ -25,6 +25,7 @@ generic.cancel: Cancel
 generic.save: Save
 
 ticket.title: Title
+ticket.add: Add a ticket
 ticket.project: Project
 ticket.author: Author
 ticket.allocated_to: Allocated to
@@ -64,3 +65,20 @@ user.company: Company
 user.email: Email
 
 user_edit.title: Editer a user
+
+ticket_state.type.0: Bug
+ticket_state.type.1: Evolution
+ticket_state.type.2: Spelling
+ticket_state.type.3: Question
+
+ticket_state.status.0: To plan
+ticket_state.status.1: To do
+ticket_state.status.2: In progress
+ticket_state.status.3: To validate
+ticket_state.status.4: To deliver
+ticket_state.status.5: Delivered
+ticket_state.status.6: Archived
+
+ticket_state.priority.0: Low
+ticket_state.priority.1: Average
+ticket_state.priority.2: High

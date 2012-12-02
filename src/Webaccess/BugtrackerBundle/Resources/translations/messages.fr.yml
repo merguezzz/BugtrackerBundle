@@ -17,14 +17,15 @@ dashboard.add: Ajouter un ticket
 dashboard.no_tickets: Aucun ticket trouvé
 
 generic.action: Action
-generic.edit: Editer
-generic.delete: Supprimer
+generic.edit: Edit.
+generic.delete: Supp.
 generic.creation_date: Création
 generic.update_date: Mise à jour
 generic.cancel: Annuler
 generic.save: Enregistrer
 
 ticket.title: Titre
+ticket.add: Ajouter un ticket
 ticket.project: Projet
 ticket.author: Auteur
 ticket.allocated_to: Assigné à
@@ -64,3 +65,20 @@ user.company: Entreprise
 user.email: Email
 
 user_edit.title: Editer un utilisateur
+
+ticket_state.type.0: Bug
+ticket_state.type.1: Evolution
+ticket_state.type.2: Orthographe
+ticket_state.type.3: Question
+
+ticket_state.status.0: A prévoir
+ticket_state.status.1: A faire
+ticket_state.status.2: En cours
+ticket_state.status.3: A valider
+ticket_state.status.4: A livrer
+ticket_state.status.5: Livré
+ticket_state.status.6: Archivé
+
+ticket_state.priority.0: Basse
+ticket_state.priority.1: Moyenne
+ticket_state.priority.2: Haute

@@ -8,51 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class TicketStateFormType extends AbstractType {
 
-    const TICKET_STATE_TYPE_0 = 'Bug';
-    const TICKET_STATE_TYPE_1 = 'Evolution';
-    const TICKET_STATE_TYPE_2 = 'Correction orthographique';
-    const TICKET_STATE_TYPE_3 = 'Question';
-
-    const TICKET_STATE_STATUS_0 = 'A prévoir';
-    const TICKET_STATE_STATUS_1 = 'A faire';
-    const TICKET_STATE_STATUS_2 = 'En cours';
-    const TICKET_STATE_STATUS_3 = 'A valider';
-    const TICKET_STATE_STATUS_4 = 'A livrer';
-    const TICKET_STATE_STATUS_5 = 'Livré';
-    const TICKET_STATE_STATUS_6 = 'Archivé';
-
-    const TICKET_STATE_PRIORITY_0 = 'Basse';
-    const TICKET_STATE_PRIORITY_1 = 'Moyenne';
-    const TICKET_STATE_PRIORITY_2 = 'Haute';
-
-    public function getTicketStatesTypes() {
-        return array(
-            0 => self::TICKET_STATE_TYPE_0,
-            1 => self::TICKET_STATE_TYPE_1,
-            2 => self::TICKET_STATE_TYPE_2,
-        );
-    }
-
-    public function getTicketStatesStatus() {
-        return array(
-            0 => self::TICKET_STATE_STATUS_0,
-            1 => self::TICKET_STATE_STATUS_1,
-            2 => self::TICKET_STATE_STATUS_2,
-            3 => self::TICKET_STATE_STATUS_3,
-            4 => self::TICKET_STATE_STATUS_4,
-            5 => self::TICKET_STATE_STATUS_5,
-            6 => self::TICKET_STATE_STATUS_6,
-        );
-    }
-
-    public function getTicketStatesPriorities() {
-        return array(
-            0 => self::TICKET_STATE_PRIORITY_0,
-            1 => self::TICKET_STATE_PRIORITY_1,
-            2 => self::TICKET_STATE_PRIORITY_2,
-        );
-    }
-
     public function __construct($project_id, $translationManager) {
         $this->project_id = $project_id;
         $this->translationManager = $translationManager;
@@ -79,15 +34,29 @@ class TicketStateFormType extends AbstractType {
            })
         );
         $builder->add('type', 'choice', array(
-            'choices' => $this->getTicketStatesTypes(),
+            'choices' => array(
+                0 => $this->translationManager->trans('ticket_state.type.0'),
+                1 => $this->translationManager->trans('ticket_state.type.1'),
+                2 => $this->translationManager->trans('ticket_state.type.2'),
+                3 => $this->translationManager->trans('ticket_state.type.3')),
             'label' => $this->translationManager->trans('ticket.type'))
         );
         $builder->add('status', 'choice', array(
-            'choices' => $this->getTicketStatesStatus(),
+            'choices' => array(
+                0 => $this->translationManager->trans('ticket_state.status.0'),
+                1 => $this->translationManager->trans('ticket_state.status.1'),
+                2 => $this->translationManager->trans('ticket_state.status.2'),
+                3 => $this->translationManager->trans('ticket_state.status.3'),
+                4 => $this->translationManager->trans('ticket_state.status.4'),
+                5 => $this->translationManager->trans('ticket_state.status.5'),
+                6 => $this->translationManager->trans('ticket_state.status.6')),
             'label' => $this->translationManager->trans('ticket.status'))
         );
         $builder->add('priority', 'choice', array(
-            'choices' => $this->getTicketStatesPriorities(),
+            'choices' => array(
+                0 => $this->translationManager->trans('ticket_state.priority.0'),
+                1 => $this->translationManager->trans('ticket_state.priority.1'),
+                2 => $this->translationManager->trans('ticket_state.priority.2')),
             'label' => $this->translationManager->trans('ticket.priority'))
         );
     }
