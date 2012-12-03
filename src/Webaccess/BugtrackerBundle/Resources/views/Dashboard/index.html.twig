@@ -39,16 +39,16 @@
 			{% if tickets | length > 0 %}
 				{% for ticket in tickets %}
 			        <tr>
-			        	<td width="9%">{{ ticket.states[0].createdAt | date('d/m/y H:i') }}</td>
-			        	<td width="9%">{{ ticket.states[ticket.states | length - 1].createdAt | date('d/m/y H:i') }}</td>
+			        	<td width="10%">{{ ticket.states[0].createdAt | date('d/m/y H:i') }}</td>
+			        	<td width="10%">{{ ticket.states[ticket.states | length - 1].createdAt | date('d/m/y H:i') }}</td>
 			        	<td>{{ ticket.title }}</td>
 			        	<td>{{ ticket.project.name }}</td>
-			        	<td>{{ ticket.states[ticket.states | length - 1].authorUser.firstName }} {{ ticket.states[ticket.states | length - 1].authorUser.lastName }}</td>
-			        	<td>{{ ticket.states[ticket.states | length - 1].allocatedUser.firstName }} {{ ticket.states[ticket.states | length - 1].allocatedUser.lastName }}</td>
+			        	<td>{{ ticket.states[ticket.states | length - 1].authorUser.firstName }} {{ ticket.states[ticket.states | length - 1].authorUser.lastName | truncate(1, false, '.') }}</td>
+			        	<td>{{ ticket.states[ticket.states | length - 1].allocatedUser.firstName }} {{ ticket.states[ticket.states | length - 1].allocatedUser.lastName | truncate(1, false, '.') }}</td>
 			        	<td>{{ ('ticket_state.type.' ~ ticket.states[ticket.states | length - 1].type) | trans }}</td>
 			        	<td>{{ ('ticket_state.type.' ~ ticket.states[ticket.states | length - 1].status) | trans }}</td>
 			        	<td>{{ ('ticket_state.type.' ~ ticket.states[ticket.states | length - 1].priority) | trans }}</td>
-			        	<td class="action" width="11%">
+			        	<td class="action" width="12%">
 							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_ticket_edit', {'ticket_id':ticket.id}) }}" title="{{ 'generic.edit' | trans }}">{{ 'generic.edit' | trans }}</a>
 							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_ticket_delete', {'ticket_id':ticket.id}) }}" title="{{ 'generic.delete' | trans }}">{{ 'generic.delete' | trans }}</a>
 						</td>

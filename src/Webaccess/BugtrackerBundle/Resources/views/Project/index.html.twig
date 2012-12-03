@@ -33,10 +33,10 @@
 			{% if projects | length > 0 %}
 				{% for project in projects %}
 			        <tr>
-			        	<td>{{ project.createdAt | date('d/m/y H:i') }}</td>
+			        	<td width="10%">{{ project.createdAt | date('d/m/y H:i') }}</td>
 			        	<td>{{ project.name }}</td>
 			        	<td>{{ project.company.name }}</td>
-			        	<td class="action" width="11%">
+			        	<td class="action" width="12%">
 							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_project_edit', {'project_id':project.id}) }}" title="{{ 'generic.edit' | trans }}">{{ 'generic.edit' | trans }}</a>
 							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_project_delete', {'project_id':project.id}) }}" title="{{ 'generic.delete' | trans }}">{{ 'generic.delete' | trans }}</a>
 						</td>

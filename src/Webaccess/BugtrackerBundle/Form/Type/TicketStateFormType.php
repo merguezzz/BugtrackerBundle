@@ -21,11 +21,11 @@ class TicketStateFormType extends AbstractType {
         );
 		$builder->add('authorUser', 'entity', array(
 			'class' => 'WebaccessBugtrackerBundle:User',
-			'property' => 'username')
+			'property' => 'completeName')
         );
         $builder->add('allocatedUser', 'entity', array(
             'class' => 'WebaccessBugtrackerBundle:User',
-            'property' => 'username',
+            'property' => 'completeName',
             'query_builder' => function($er) use ($project_id) {
                 return $er->findByProject($project_id);
            })

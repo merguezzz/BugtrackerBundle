@@ -154,3 +154,8 @@ services:
         arguments:
             form: "@webaccess_bugtracker.switch_project.form"
             request: "@request"
+
+    twig.extension.text:
+       class: Twig_Extensions_Extension_Text
+       tags:
+           - { name: twig.extension }

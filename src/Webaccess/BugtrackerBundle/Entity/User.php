@@ -236,6 +236,16 @@ class User implements UserInterface
     }
 
     /**
+     * Get lastName
+     *
+     * @return string
+     */
+    public function getCompleteName()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+
+    /**
      * Set email
      *
      * @param string $email

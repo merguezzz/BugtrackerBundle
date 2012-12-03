@@ -56,10 +56,10 @@
 				{% if not loop.first %}
 					{% set state = ticket.states[i] %}
 					<tr>
-						<td>{{ state.createdAt | date('d/m/y H:i') }}</td>
+						<td width="11%">{{ state.createdAt | date('d/m/y H:i') }}</td>
 						<td>{{ state.content }}</td>
-						<td>{{ state.authorUser.firstName }} {{ state.authorUser.lastName }}</td>
-						<td>{{ state.allocatedUser.firstName }} {{ state.allocatedUser.lastName }}</td>
+						<td>{{ state.authorUser.completeName }}</td>
+						<td>{{ state.allocatedUser.completeName }}</td>
 						<td>{{ ('ticket_state.type.' ~ state.type) | trans }}</td>
 						<td>{{ ('ticket_state.status.' ~ state.status) | trans }}</td>
 						<td>{{ ('ticket_state.priority.' ~ state.priority) | trans }}</td>
