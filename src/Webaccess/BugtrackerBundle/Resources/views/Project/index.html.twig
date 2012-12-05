@@ -43,7 +43,11 @@
 			        </tr>
 			    {% endfor %}
 			{% else %}
-				{{ 'project.no_projects' | trans }}
+				<tr>
+					<td colspan="4">
+						{{ 'project.no_projects' | trans }}
+					</td>
+				</tr>
 			{% endif %}
 			</tbody>
 		</table>

@@ -35,11 +35,6 @@ h1 {
 
 }
 
-/*input[type="submit"] {
-    padding-bottom: 6px;
-    padding-top: 6px;
-}*/
-
 /* TABLE */
 .table td.action {
     text-align: center;
@@ -159,8 +154,8 @@ h1 {
 
     input[type="submit"] {
         display: block;
-        margin-top: 10px;
-        margin-left: 80px;
+        width: 100px;
+        margin: 20px auto 0 auto;
     }
 
     .error {

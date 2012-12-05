@@ -47,7 +47,11 @@
 			        </tr>
 			    {% endfor %}
 			{% else %}
-				{{ 'user.no_users' | trans }}
+				<tr>
+					<td colspan="6">
+						{{ 'user.no_users' | trans }}
+					</td>
+				</tr>
 			{% endif %}
 			</tbody>
 		</table>

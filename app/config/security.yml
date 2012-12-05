@@ -1,17 +1,26 @@
+jms_security_extra:
+    secure_all_services: false
+    expressions: true
+
 security:
     firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
         login_firewall:
-            pattern:    /login$
-            anonymous:  ~
+            pattern: /login$
+            security: false
+
         secured_area:
-            pattern:    ^/
+            pattern: ^/
             anonymous: false
             form_login:
                 login_path:  webaccess_bugtracker_login
                 check_path:  webaccess_bugtracker_login_check
                 default_target_path: webaccess_bugtracker_dashboard
             logout:
-                path:   /logout
+                path: /logout
                 target: /login
             remember_me:
                 key: %secret%
@@ -32,3 +41,7 @@ security:
             algorithm: sha512
             encode-as-base64: true
             iterations: 10
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN]

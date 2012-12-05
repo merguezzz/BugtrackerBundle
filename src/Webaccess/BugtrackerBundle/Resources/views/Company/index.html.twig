@@ -41,7 +41,11 @@
 			        </tr>
 			    {% endfor %}
 			{% else %}
-				{{ 'company.no_companies' | trans }}
+				<tr>
+					<td colspan="3">
+						{{ 'company.no_companies' | trans }}
+					</td>
+				</tr>
 			{% endif %}
 
 			</tbody>
