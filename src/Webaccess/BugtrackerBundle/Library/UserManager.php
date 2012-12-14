@@ -51,27 +51,60 @@ class UserManager {
         $this->em->flush();
     }
 
-    public function getUser($user_id) {
+    public function getUserById($user_id) {
         $user = $this->repository->find($user_id);
-        return ($user) ? $user : false;
+        return ($user) ? $user : NULL;
     }
 
-    public function getUserInSession() {
+    public function getUser() {
         if($this->securityContext->getToken()) {
             return $this->securityContext->getToken()->getUser();
         }
     }
 
+    public function getUserInSession() {
+        $user_id = $this->session->get('current_user');
+        if($user_id) {
+            return $this->getUserById($user_id);
+        }
+        return NULL;
+    }
+
     public function getProjectInSession() {
-        $projectId = $this->session->get('current_project');
-        if($projectId) {
-            return $this->repositoryProject->find($projectId);
+        $project_id = $this->session->get('current_project');
+        if($project_id) {
+            $project = $this->repositoryProject->find($project_id);
+            return ($project) ? $project : NULL;
+        }
+        return NULL;
+    }
+
+    public function getTypeInSession() {
+        $type_id = $this->session->get('current_type');
+        if($type_id) {
+            return $type_id;
+        }
+        return NULL;
+    }
+
+    public function getStatusInSession() {
+        $status_id = $this->session->get('current_status');
+        if($status_id) {
+            return $status_id;
+        }
+        return NULL;
+    }
+
+    public function getPriorityInSession() {
+        $priority_id = $this->session->get('current_priority');
+        if($priority_id) {
+            return $priority_id;
         }
         return NULL;
     }
 
     public function deleteUser($user_id) {
-        $user = $this->getUser($user_id);
+        $user = $this->getUserById($user_id);
         try {
             $this->em->remove($user);
             $this->em->flush();

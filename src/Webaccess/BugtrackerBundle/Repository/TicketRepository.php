@@ -19,20 +19,41 @@ class TicketRepository extends EntityRepository
 			->getSingleScalarResult();
 	}
 
-	public function getByUser($userId, $projectId = NULL, $limit, $offset) {
+	public function getByUser($user_id, $project_id = NULL, $allocated_user_id = NULL, $type_id = NULL, $status_id = NULL, $priority_id = NULL, $limit, $offset) {
 		$qb = $this->createQueryBuilder('t');
 
-   		$qb->orderBy('t.id', 'DESC')
-        	->leftJoin('t.project', 'p')
-        	->leftJoin('p.users', 'user')
-			->andWhere($this->createQueryBuilder('t')->expr()->eq('user.id', $userId));
+   		$qb->leftJoin('t.project', 'p')
+        	->leftJoin('p.users', 'u')
+			->leftJoin('t.states', 'ts')
+			->andWhere($this->createQueryBuilder('t')->expr()->eq('u.id', $user_id));
 
-			if($projectId) {
+			if($allocated_user_id) {
+				$qb->andWhere($this->createQueryBuilder('t')->expr()->eq('ts.allocatedUser', $allocated_user_id))
+				->andWhere('ts.id = t.currentState');
+			}
+
+			if($project_id) {
 	        	$qb->andWhere('p.id = :project_id')
-	            ->setParameter('project_id', $projectId);
+	            ->setParameter('project_id', $project_id);
 	        }
 
-			$qb->setFirstResult($offset)
+			if($type_id) {
+				$qb->andWhere($this->createQueryBuilder('t')->expr()->eq('ts.type', $type_id))
+				->andWhere('ts.id = t.currentState');
+			}
+
+			if($status_id) {
+				$qb->andWhere($this->createQueryBuilder('t')->expr()->eq('ts.status', $status_id))
+				->andWhere('ts.id = t.currentState');
+			}
+
+			if($priority_id) {
+				$qb->andWhere($this->createQueryBuilder('t')->expr()->eq('ts.priority', $priority_id))
+				->andWhere('ts.id = t.currentState');
+			}
+
+			$qb->orderBy('ts.createdAt', 'desc')
+			->setFirstResult($offset)
 			->setMaxResults($limit);
 
         	return $qb->getQuery()->getResult();

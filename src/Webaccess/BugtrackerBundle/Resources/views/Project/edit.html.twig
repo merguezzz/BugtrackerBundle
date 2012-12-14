@@ -20,7 +20,7 @@
 		    {{ form_row(form.name, { 'label' : 'project.name', 'attr': {'class': 'span6'} }) }}
 	        {{ form_row(form.company, { 'label' : 'project.company', 'attr': {'class': 'span6'} }) }}
 	        {{ form_rest(form) }}
-	        <a href="{{ path('webaccess_bugtracker_project') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
+	        <a href="{{ path('webaccess_bugtracker_project') }}">{{ 'generic.cancel' | trans }}</a>
 	        <input type="submit" class="btn btn-warning" value="{{ 'generic.save' | trans }}" />
 		</form>
 	</div>

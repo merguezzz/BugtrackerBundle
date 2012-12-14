@@ -9,6 +9,10 @@ menu.users: Utilisateurs
 menu.logout: Déconnexion
 menu.welcome: Bienvenue
 menu.all_projects: Tous les projets
+menu.all_users: Tous les utilisateurs
+menu.all_statuses: Tous les statuts
+menu.all_types: Tous les types
+menu.all_priorities: Toutes les priorités
 
 switch_project.label: Projet
 
@@ -82,19 +86,20 @@ user.added: Utilisateur ajouté
 user.updated: Utilisateur mis à jour
 user.deleted: Utilisateur supprimé
 
-ticket_state.type.0: Bug
-ticket_state.type.1: Evolution
-ticket_state.type.2: Orthographe
-ticket_state.type.3: Question
+ticket_state.type.1: Bug
+ticket_state.type.2: Evolution
+ticket_state.type.3: Orthographe
+ticket_state.type.4: Question
 
-ticket_state.status.0: A prévoir
-ticket_state.status.1: A faire
-ticket_state.status.2: En cours
-ticket_state.status.3: A valider
-ticket_state.status.4: A livrer
-ticket_state.status.5: Livré
-ticket_state.status.6: Archivé
+ticket_state.status.1: A prévoir
+ticket_state.status.2: A chiffrer
+ticket_state.status.3: A faire
+ticket_state.status.4: En cours
+ticket_state.status.5: A valider
+ticket_state.status.6: A livrer
+ticket_state.status.7: En production
+ticket_state.status.8: Archivé
 
-ticket_state.priority.0: Basse
-ticket_state.priority.1: Moyenne
-ticket_state.priority.2: Haute
+ticket_state.priority.1: Basse
+ticket_state.priority.2: Moyenne
+ticket_state.priority.3: Haute

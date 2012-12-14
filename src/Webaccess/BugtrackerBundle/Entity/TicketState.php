@@ -37,7 +37,7 @@ class TicketState
 
     /**
      * @ORM\ManyToOne(targetEntity="Webaccess\BugtrackerBundle\Entity\Ticket"), inversedBy="states")
-     * @ORM\JoinColumn(name="ticket_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="ticket_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $ticket;
 

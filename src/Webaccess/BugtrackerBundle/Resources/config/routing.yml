@@ -2,13 +2,9 @@ webaccess_bugtracker_landing_page:
     pattern: /
     defaults: { _controller: WebaccessBugtrackerBundle:Login:index, _locale: "%locale%" }
 
-webaccess_bugtracker_dashboard:
-    pattern: /{_locale}/dashboard/{page_number}
-    defaults: { _controller: WebaccessBugtrackerBundle:Dashboard:index, page_number: 1, _locale: "%locale%" }
-
 webaccess_bugtracker_switch_language:
-    pattern: /{_locale}/dashboard_switch_language/{lang}
-    defaults: { _controller: WebaccessBugtrackerBundle:Dashboard:switchLanguage, lang: lang, _locale: "%locale%" }
+    pattern: /{_locale}/ticket_switch_language/{lang}
+    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:switchLanguage, lang: lang, _locale: "%locale%" }
 
 webaccess_bugtracker_login:
     pattern: /{_locale}/login
@@ -85,3 +81,7 @@ webaccess_bugtracker_ticket_edit:
 webaccess_bugtracker_ticket_delete:
     pattern: /{_locale}/ticket_delete/{ticket_id}
     defaults: { _controller: WebaccessBugtrackerBundle:Ticket:delete, ticket_id: ticket_id, _locale: "%locale%" }
+
+webaccess_bugtracker_ticket_test_mail:
+    pattern: /{_locale}/ticket_test_mail
+    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:testMail, _locale: "%locale%" }

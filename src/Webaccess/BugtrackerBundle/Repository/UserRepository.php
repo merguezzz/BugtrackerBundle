@@ -31,4 +31,17 @@ class UserRepository extends EntityRepository
 
 		return $qb;
 	}
+
+	public function getByCompany($company_id, $is_admin) {
+		$qb = $this->createQueryBuilder('u')
+   			->orderBy('u.lastName', 'ASC')
+   			->orderBy('u.firstName', 'ASC');
+
+        if(!$is_admin) {
+            $qb->leftJoin('u.company', 'company')
+            ->where($qb->expr()->eq('company.id', $company_id));
+        }
+
+        return $qb;
+	}
 }

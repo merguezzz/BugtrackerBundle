@@ -16,7 +16,7 @@ class LoginController extends Controller
 
         $aParams['last_username'] = $this->get('request')->getSession()->get(SecurityContext::LAST_USERNAME);
         $aParams['error'] = $error;
-        return $this->render('WebaccessBugtrackerBundle:Dashboard:login.html.twig', $aParams);
+        return $this->render('WebaccessBugtrackerBundle:Ticket:login.html.twig', $aParams);
     }
 
     public function checkAction() {

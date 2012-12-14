@@ -35,8 +35,18 @@ h1 {
 
 }
 
+textarea {
+    font-size: 13px;
+    font-family: inherit;
+}
+
 /* TABLE */
 .table td.action {
+
+    a {
+        color: #333333;
+        text-decoration: underline;
+    }
     text-align: center;
 }
 
@@ -69,45 +79,6 @@ h1 {
         }
     }
 
-    .project_selector {
-        float: left;
-        width: 20%;
-        margin-left: 5%;
-
-        select {
-            width: auto;
-            color: #777;
-            text-decoration: none;
-            text-shadow: 0 1px 0 white;
-            margin: 3px 5px 5px 5px;
-        }
-
-        input[type="submit"] {
-            margin-top: 0;
-        }
-
-        label {
-            display: inline;
-        }
-
-        form {
-            margin-bottom: 0;
-
-            div {
-                display: block;
-                float: left;
-                height: 40px;
-                line-height: 40px;
-                vertical-align: middle;
-            }
-
-            input[type="submit"] {
-                float: left;
-                margin-top: 8px;
-            }
-        }
-    }
-
     .language_selector {
         float: left;
         height: 40px;
@@ -133,12 +104,19 @@ h1 {
     .header {
 
         margin-bottom: 20px;
+        background-color: rgba(255, 235, 175, 0.5);
+        border: 1px solid #f9d06e;
+        padding: 0px 20px;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+
 
         .title {
             float: left;
         }
 
-        .button_add {
+        .button-add {
             float: right;
             margin-top: 15px;
         }
@@ -169,6 +147,105 @@ h1 {
 
 /* DASHBOARD */
 
-#dashboard {
+.ticket-filter-selector {
+    float: left;
+    margin-left: 5%;
+    margin-top: 10px;
 
+    select {
+        width: auto;
+        color: #777;
+        text-decoration: none;
+        text-shadow: 0 1px 0 white;
+        margin: 0;
+    }
+
+    label {
+        display: inline;
+    }
+
+    form {
+        margin-bottom: 0;
+
+        div {
+            display: block;
+            float: left;
+            margin-top: 6px;
+        }
+
+        div:first-child {
+            margin-right: 10px;
+        }
+
+        input[type="submit"] {
+            float: left;
+            margin: 0;
+            height: 30px;
+            line-height: 30px;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+}
+
+.priority-1 {
+    background: #468847;
+}
+
+.priority-2 {
+    background: #F89406;
+}
+
+.priority-3 {
+    background: #B94A48;
+}
+
+.status-1 {
+}
+
+.status-2 {
+    background: #f9f3c8;
+}
+
+.status-3 {
+    background: #d9f4f7;
+}
+
+.status-4 {
+    background: #D9EDF7;
+}
+
+.status-5 {
+    background: #ffebaf;
+}
+
+.status-6 {
+    background: #e6f9de;
+}
+
+.status-7 {
+    background: #DFF0D8;
+}
+
+.status-8 {
+    background: #e5e5e5;
+}
+
+td.center {
+    text-align: center;
+}
+
+
+.table tr:hover td {
+    a {
+        font-weight: bold;
+    }
+}
+
+
+/* FOOTER */
+.footer {
+    width: 230px;
+    height: 53px;
+    margin: 40px auto 0 auto;
 }

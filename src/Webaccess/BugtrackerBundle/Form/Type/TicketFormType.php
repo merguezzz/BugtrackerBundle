@@ -21,13 +21,15 @@ class TicketFormType extends AbstractType {
         $userManager = $this->userManager;
 
         $builder->add('title', 'text');
+
 		$builder->add('project', 'entity', array(
 			'class' => 'WebaccessBugtrackerBundle:Project',
             'property' => 'name',
             'query_builder' => function($er) use ($userManager) {
-                return $er->getByUser($userManager->getUserInSession()->getId(), $userManager->isAdmin());
+                return $er->getByUser($userManager->getUser()->getId(), $userManager->isAdmin());
             })
         );
+
 		$builder->add('states', 'collection', array(
             'type' => new TicketStateFormType(($userManager->getProjectInSession()) ? $userManager->getProjectInSession()->getId() : NULL, $this->translationManager))
         );

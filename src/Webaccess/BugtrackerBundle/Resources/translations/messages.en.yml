@@ -9,12 +9,16 @@ menu.users: Users
 menu.logout: Logout
 menu.welcome: Welcome
 menu.all_projects: All projects
+menu.all_users: All users
+menu.all_types: All types
+menu.all_statuses: All statuses
+menu.all_priorities: All priorities
 
 switch_project.label: Project
 
-dashboard.title: Tickets
-dashboard.add: Add a ticket
-dashboard.no_tickets: No ticket found
+ticket.title: Tickets
+ticket.add: Add a ticket
+ticket.no_tickets: No ticket found
 
 generic.action: Action
 generic.edit: Edit
@@ -82,19 +86,20 @@ user.added: User added
 user.updated: User updated
 user.deleted: User deleted
 
-ticket_state.type.0: Bug
-ticket_state.type.1: Evolution
-ticket_state.type.2: Spelling
-ticket_state.type.3: Question
+ticket_state.type.1: Bug
+ticket_state.type.2: Evolution
+ticket_state.type.3: Spelling
+ticket_state.type.4: Question
 
-ticket_state.status.0: To plan
-ticket_state.status.1: To do
-ticket_state.status.2: In progress
-ticket_state.status.3: To validate
-ticket_state.status.4: To deliver
-ticket_state.status.5: Delivered
-ticket_state.status.6: Archived
+ticket_state.status.1: To plan
+ticket_state.status.1: To evaluate
+ticket_state.status.2: To do
+ticket_state.status.3: In progress
+ticket_state.status.4: To validate
+ticket_state.status.5: To deliver
+ticket_state.status.7: In production
+ticket_state.status.8: Archived
 
-ticket_state.priority.0: Low
-ticket_state.priority.1: Average
-ticket_state.priority.2: High
+ticket_state.priority.1: Low
+ticket_state.priority.2: Average
+ticket_state.priority.3: High

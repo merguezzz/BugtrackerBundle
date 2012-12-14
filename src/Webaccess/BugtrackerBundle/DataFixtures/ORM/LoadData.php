@@ -127,6 +127,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
 
         $manager->persist($ticket_state1);
         $ticket1->addState($ticket_state1);
+        $ticket1->setCurrentState($ticket_state1);
 
         $ticket_state2 = new TicketState();
         $ticket_state2->setTicket($ticket2);
@@ -140,6 +141,8 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $ticket1->addState($ticket_state1);
         $manager->persist($ticket_state2);
         $ticket2->addState($ticket_state2);
+        $ticket2->setCurrentState($ticket_state2);
+
         $manager->flush();
     }
 }

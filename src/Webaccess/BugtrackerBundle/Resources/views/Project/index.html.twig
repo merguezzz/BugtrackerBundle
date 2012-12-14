@@ -13,13 +13,13 @@
 			<div class="title">
 				<h1>{{ 'project.title' | trans }}</h1>
 			</div>
-			<div class="button_add">
+			<div class="button-add">
 				<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_project_add') }}">{{ 'project.add' | trans }}</a>
 			</div>
 			<div class="clear"></div>
 		</div>
 
-		<table class="table table-striped table-bordered">
+		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<th>{{ 'generic.creation_date' | trans }}</th>
@@ -36,9 +36,9 @@
 			        	<td width="10%">{{ project.createdAt | date('d/m/y H:i') }}</td>
 			        	<td>{{ project.name }}</td>
 			        	<td>{{ project.company.name }}</td>
-			        	<td class="action" width="12%">
-							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_project_edit', {'project_id':project.id}) }}" title="{{ 'generic.edit' | trans }}">{{ 'generic.edit' | trans }}</a>
-							<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_project_delete', {'project_id':project.id}) }}" title="{{ 'generic.delete' | trans }}">{{ 'generic.delete' | trans }}</a>
+			        	<td class="action" width="6%">
+							<a href="{{ path('webaccess_bugtracker_project_edit', {'project_id':project.id}) }}" title="{{ 'generic.edit' | trans }}">{{ 'generic.edit' | trans }}</a>
+							<a href="{{ path('webaccess_bugtracker_project_delete', {'project_id':project.id}) }}" title="{{ 'generic.delete' | trans }}">{{ 'generic.delete' | trans }}</a>
 						</td>
 			        </tr>
 			    {% endfor %}

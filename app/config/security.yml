@@ -18,7 +18,7 @@ security:
             form_login:
                 login_path:  webaccess_bugtracker_login
                 check_path:  webaccess_bugtracker_login_check
-                default_target_path: webaccess_bugtracker_dashboard
+                default_target_path: webaccess_bugtracker_ticket
             logout:
                 path: /logout
                 target: /login
@@ -31,6 +31,7 @@ security:
         - { path: user.*, role: ROLE_ADMIN }
         - { path: company.*, role: ROLE_ADMIN }
         - { path: project.*, role: ROLE_ADMIN }
+        - { path: ticket.*, role: ROLE_USER }
 
     providers:
         main:

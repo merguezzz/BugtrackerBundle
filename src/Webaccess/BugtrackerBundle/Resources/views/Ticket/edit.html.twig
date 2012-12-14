@@ -38,7 +38,7 @@
 
 		<h2>{{ 'ticket.edit.history' | trans }}</h2>
 
-		<table class="table table-striped table-bordered">
+		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<th>{{ 'generic.creation_date' | trans }}</th>
@@ -55,14 +55,14 @@
 			{% for i in ticket.states | length - 1 .. 0 %}
 				{% if not loop.first %}
 					{% set state = ticket.states[i] %}
-					<tr>
+					<tr class="status-{{ state.status }}">
 						<td width="11%">{{ state.createdAt | date('d/m/y H:i') }}</td>
 						<td>{{ state.content }}</td>
 						<td>{{ state.authorUser.completeName }}</td>
 						<td>{{ state.allocatedUser.completeName }}</td>
 						<td>{{ ('ticket_state.type.' ~ state.type) | trans }}</td>
 						<td>{{ ('ticket_state.status.' ~ state.status) | trans }}</td>
-						<td>{{ ('ticket_state.priority.' ~ state.priority) | trans }}</td>
+						<td width="6%" class="center"><span class="label priority-{{ state.priority }}">{{ ('ticket_state.priority.' ~ state.priority) | trans }}</span></td>
 					</tr>
 				{% endif %}
 			{% endfor %}

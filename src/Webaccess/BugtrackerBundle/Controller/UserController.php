@@ -26,7 +26,7 @@ class UserController extends Controller
 	}
 
 	public function editAction($user_id) {
-		$user = $this->container->get('webaccess_bugtracker.user_manager')->getUser($user_id);
+		$user = $this->container->get('webaccess_bugtracker.user_manager')->getUserById($user_id);
 		$form = $this->container->get('webaccess_bugtracker.user.form');
 		$formHandler = $this->container->get('webaccess_bugtracker.user.form_handler');
 

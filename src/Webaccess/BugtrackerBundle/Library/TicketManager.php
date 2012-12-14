@@ -25,7 +25,7 @@ class TicketManager {
 
     public function getTicketsPaginatedList($page_number) {
         $pagination = $this->getTicketsPagination($page_number);
-        return $this->repository->getByUser($this->userManager->getUserInSession()->getId(), ($this->userManager->getProjectInSession() ? $this->userManager->getProjectInSession()->getId() : NULL),$pagination->items_per_page_number, $pagination->items_offset);
+        return $this->repository->getByUser($this->userManager->getUser()->getId(), ($this->userManager->getProjectInSession() ? $this->userManager->getProjectInSession()->getId() : NULL), ($this->userManager->getUserInSession() ? $this->userManager->getUserInSession()->getId() : NULL), ($this->userManager->getTypeInSession() ? $this->userManager->getTypeInSession() : NULL), ($this->userManager->getStatusInSession() ? $this->userManager->getStatusInSession() : NULL), ($this->userManager->getPriorityInSession() ? $this->userManager->getPriorityInSession() : NULL), $pagination->items_per_page_number, $pagination->items_offset);
     }
 
     public function getTicketsPagination($page_number) {
@@ -37,6 +37,7 @@ class TicketManager {
         $ticket_state = new TicketState();
         $ticket_state->setTicket($ticket);
         $ticket->addState($ticket_state);
+        $ticket->setCurrentState($ticket_state);
         return $ticket;
     }
 
@@ -44,6 +45,7 @@ class TicketManager {
         $aStates = $ticket->getStates();
         $ticket_state = $aStates[sizeof($aStates) - 1];
         $ticket->addState($ticket_state);
+        $ticket->setCurrentState($ticket_state);
         $ticket_state->setTicket($ticket);
         $this->em->persist($ticket_state);
         $this->em->persist($ticket);
@@ -52,20 +54,22 @@ class TicketManager {
 
     public function getTicket($ticket_id) {
         $ticket = $this->repository->find($ticket_id);
-        $ticket_state = $this->getLastTicketState($ticket_id);
+        $ticket_state = $this->getLastTicketStateCopy($ticket_id);
         $ticket->addState($ticket_state);
         return ($ticket) ? $ticket : false;
     }
 
-    public function getLastTicketState($ticket_id) {
+    public function getLastTicketStateCopy($ticket_id) {
         $ticket = $this->repository->find($ticket_id);
-        $last_ticket_state = $this->repositoryState->findLastStateOfTicket($ticket->getId());
         $ticket_state = new TicketState();
-        $ticket_state->setAuthorUser($this->userManager->getUserInSession());
-        $ticket_state->setAllocatedUser($last_ticket_state->getAllocatedUser());
-        $ticket_state->setType($last_ticket_state->getType());
-        $ticket_state->setStatus($last_ticket_state->getStatus());
-        $ticket_state->setPriority($last_ticket_state->getPriority());
+        if($ticket->getCurrentState()) {
+            $last_ticket_state = $this->repositoryState->find($ticket->getCurrentState()->getId());
+            $ticket_state->setAuthorUser($this->userManager->getUser());
+            $ticket_state->setAllocatedUser($last_ticket_state->getAllocatedUser());
+            $ticket_state->setType($last_ticket_state->getType());
+            $ticket_state->setStatus($last_ticket_state->getStatus());
+            $ticket_state->setPriority($last_ticket_state->getPriority());
+        }
         $ticket_state->setTicket($ticket);
         return ($ticket_state) ? $ticket_state : false;
     }

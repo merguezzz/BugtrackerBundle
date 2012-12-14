@@ -29,65 +29,42 @@ strong {
 .table td, .table th {
   vertical-align: middle; }
 
+/* line 38, ../sass/style.scss */
+textarea {
+  font-size: 13px;
+  font-family: inherit; }
+
 /* TABLE */
-/* line 39, ../sass/style.scss */
+/* line 44, ../sass/style.scss */
 .table td.action {
   text-align: center; }
+  /* line 46, ../sass/style.scss */
+  .table td.action a {
+    color: #333333;
+    text-decoration: underline; }
 
 /* NAV BAR */
-/* line 47, ../sass/style.scss */
+/* line 57, ../sass/style.scss */
 .navbar .navbar-inner {
   margin: 0;
   padding: 0; }
-  /* line 51, ../sass/style.scss */
+  /* line 61, ../sass/style.scss */
   .navbar .navbar-inner .nav {
     width: 45%; }
-/* line 56, ../sass/style.scss */
+/* line 66, ../sass/style.scss */
 .navbar .welcome {
   float: right; }
-  /* line 59, ../sass/style.scss */
+  /* line 69, ../sass/style.scss */
   .navbar .welcome .greetings {
     float: none;
     padding: 10px 15px 10px;
     color: #777;
     text-decoration: none;
     text-shadow: 0 1px 0 white; }
-    /* line 66, ../sass/style.scss */
+    /* line 76, ../sass/style.scss */
     .navbar .welcome .greetings .user {
       font-weight: bold; }
-/* line 72, ../sass/style.scss */
-.navbar .project_selector {
-  float: left;
-  width: 20%;
-  margin-left: 5%; }
-  /* line 77, ../sass/style.scss */
-  .navbar .project_selector select {
-    width: auto;
-    color: #777;
-    text-decoration: none;
-    text-shadow: 0 1px 0 white;
-    margin: 3px 5px 5px 5px; }
-  /* line 85, ../sass/style.scss */
-  .navbar .project_selector input[type="submit"] {
-    margin-top: 0; }
-  /* line 89, ../sass/style.scss */
-  .navbar .project_selector label {
-    display: inline; }
-  /* line 93, ../sass/style.scss */
-  .navbar .project_selector form {
-    margin-bottom: 0; }
-    /* line 96, ../sass/style.scss */
-    .navbar .project_selector form div {
-      display: block;
-      float: left;
-      height: 40px;
-      line-height: 40px;
-      vertical-align: middle; }
-    /* line 104, ../sass/style.scss */
-    .navbar .project_selector form input[type="submit"] {
-      float: left;
-      margin-top: 8px; }
-/* line 111, ../sass/style.scss */
+/* line 82, ../sass/style.scss */
 .navbar .language_selector {
   float: left;
   height: 40px;
@@ -95,40 +72,135 @@ strong {
   margin-left: 5%;
   width: 10%;
   vertical-align: middle; }
-  /* line 119, ../sass/style.scss */
+  /* line 90, ../sass/style.scss */
   .navbar .language_selector a {
     color: #777777; }
-  /* line 123, ../sass/style.scss */
+  /* line 94, ../sass/style.scss */
   .navbar .language_selector a.selected {
     color: #0088CC; }
 
 /* INTERFACES */
-/* line 133, ../sass/style.scss */
+/* line 104, ../sass/style.scss */
 .main-wrapper .header {
-  margin-bottom: 20px; }
-  /* line 137, ../sass/style.scss */
+  margin-bottom: 20px;
+  background-color: rgba(255, 235, 175, 0.5);
+  border: 1px solid #f9d06e;
+  padding: 0px 20px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px; }
+  /* line 115, ../sass/style.scss */
   .main-wrapper .header .title {
     float: left; }
-  /* line 141, ../sass/style.scss */
-  .main-wrapper .header .button_add {
+  /* line 119, ../sass/style.scss */
+  .main-wrapper .header .button-add {
     float: right;
     margin-top: 15px; }
 
 /* LOGIN */
-/* line 150, ../sass/style.scss */
+/* line 128, ../sass/style.scss */
 #login {
   width: 245px;
   margin: 180px auto 0 auto; }
-  /* line 155, ../sass/style.scss */
+  /* line 133, ../sass/style.scss */
   #login input[type="submit"] {
     display: block;
     width: 100px;
     margin: 20px auto 0 auto; }
-  /* line 161, ../sass/style.scss */
+  /* line 139, ../sass/style.scss */
   #login .error {
     text-align: center; }
-  /* line 165, ../sass/style.scss */
+  /* line 143, ../sass/style.scss */
   #login .logo {
     margin-bottom: 20px; }
 
 /* DASHBOARD */
+/* line 150, ../sass/style.scss */
+.ticket-filter-selector {
+  float: left;
+  margin-left: 5%;
+  margin-top: 10px; }
+  /* line 155, ../sass/style.scss */
+  .ticket-filter-selector select {
+    width: auto;
+    color: #777;
+    text-decoration: none;
+    text-shadow: 0 1px 0 white;
+    margin: 0; }
+  /* line 163, ../sass/style.scss */
+  .ticket-filter-selector label {
+    display: inline; }
+  /* line 167, ../sass/style.scss */
+  .ticket-filter-selector form {
+    margin-bottom: 0; }
+    /* line 170, ../sass/style.scss */
+    .ticket-filter-selector form div {
+      display: block;
+      float: left;
+      margin-top: 6px; }
+    /* line 176, ../sass/style.scss */
+    .ticket-filter-selector form div:first-child {
+      margin-right: 10px; }
+    /* line 180, ../sass/style.scss */
+    .ticket-filter-selector form input[type="submit"] {
+      float: left;
+      margin: 0;
+      height: 30px;
+      line-height: 30px;
+      padding-top: 0;
+      padding-bottom: 0; }
+
+/* line 191, ../sass/style.scss */
+.priority-1 {
+  background: #468847; }
+
+/* line 195, ../sass/style.scss */
+.priority-2 {
+  background: #F89406; }
+
+/* line 199, ../sass/style.scss */
+.priority-3 {
+  background: #B94A48; }
+
+/* line 206, ../sass/style.scss */
+.status-2 {
+  background: #f9f3c8; }
+
+/* line 210, ../sass/style.scss */
+.status-3 {
+  background: #d9f4f7; }
+
+/* line 214, ../sass/style.scss */
+.status-4 {
+  background: #D9EDF7; }
+
+/* line 218, ../sass/style.scss */
+.status-5 {
+  background: #ffebaf; }
+
+/* line 222, ../sass/style.scss */
+.status-6 {
+  background: #e6f9de; }
+
+/* line 226, ../sass/style.scss */
+.status-7 {
+  background: #DFF0D8; }
+
+/* line 230, ../sass/style.scss */
+.status-8 {
+  background: #e5e5e5; }
+
+/* line 234, ../sass/style.scss */
+td.center {
+  text-align: center; }
+
+/* line 240, ../sass/style.scss */
+.table tr:hover td a {
+  font-weight: bold; }
+
+/* FOOTER */
+/* line 247, ../sass/style.scss */
+.footer {
+  width: 230px;
+  height: 53px;
+  margin: 40px auto 0 auto; }

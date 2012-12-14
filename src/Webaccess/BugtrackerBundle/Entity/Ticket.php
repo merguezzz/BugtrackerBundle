@@ -40,9 +40,17 @@ class Ticket
     /**
      * @var States
      *
-     * @ORM\OneToMany(targetEntity="Webaccess\BugtrackerBundle\Entity\TicketState", mappedBy="ticket", cascade={"persist", "remove", "merge"})
+     * @ORM\OneToMany(targetEntity="Webaccess\BugtrackerBundle\Entity\TicketState", mappedBy="ticket", cascade={"remove"})
      */
     protected $states;
+
+    /**
+     * @var Project $project
+     *
+     * @ORM\ManyToOne(targetEntity="TicketState", cascade={"remove"})
+     * @ORM\JoinColumn(name="current_state_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $currentState;
 
     /**
      * Constructor
@@ -155,5 +163,27 @@ class Ticket
         if ($this->states->contains($state)) {
             $this->states->delete($state);
         }
+    }
+
+    /**
+     * Get currentState
+     *
+     * @return TicketState
+     */
+    public function getCurrentState()
+    {
+        return $this->currentState;
+    }
+
+    /**
+     * Set current_state
+     *
+     * @param TicketState $currentState
+     * @return Ticket
+     */
+    public function setCurrentState(\Webaccess\BugtrackerBundle\Entity\TicketState $currentState)
+    {
+        $this->currentState = $currentState;
+        return $this;
     }
 }
