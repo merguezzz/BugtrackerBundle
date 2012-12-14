@@ -1,6 +1,6 @@
 webaccess_bugtracker_landing_page:
     pattern: /
-    defaults: { _controller: WebaccessBugtrackerBundle:Login:index, _locale: "%locale%" }
+    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:index, page_number: 1, _locale: "%locale%" }
 
 webaccess_bugtracker_switch_language:
     pattern: /{_locale}/ticket_switch_language/{lang}

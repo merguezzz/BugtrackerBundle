@@ -194,12 +194,8 @@ textarea {
 td.center {
   text-align: center; }
 
-/* line 240, ../sass/style.scss */
-.table tr:hover td a {
-  font-weight: bold; }
-
 /* FOOTER */
-/* line 247, ../sass/style.scss */
+/* line 239, ../sass/style.scss */
 .footer {
   width: 230px;
   height: 53px;
