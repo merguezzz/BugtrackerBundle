@@ -22,7 +22,9 @@ class TicketRepository extends EntityRepository
 	public function getByUser($user_id, $project_id = NULL, $allocated_user_id = NULL, $type_id = NULL, $status_id = NULL, $priority_id = NULL, $limit, $offset) {
 		$qb = $this->createQueryBuilder('t');
 
-   		$qb->leftJoin('t.project', 'p')
+   		$qb->addSelect('ts')
+   			->addSelect('p')
+   			->leftJoin('t.project', 'p')
         	->leftJoin('p.users', 'u')
 			->leftJoin('t.states', 'ts')
 			->andWhere($this->createQueryBuilder('t')->expr()->eq('u.id', $user_id));

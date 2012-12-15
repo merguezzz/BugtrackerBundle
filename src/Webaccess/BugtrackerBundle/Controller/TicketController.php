@@ -19,16 +19,16 @@ class TicketController extends Controller
 	}
 
 	public function indexAction($page_number) {
-		$formTicketFilter = $this->container->get('webaccess_bugtracker.ticket_filter.form');
-		$formHandlerTicketFilter = $this->container->get('webaccess_bugtracker.ticket_filter.form_handler');
+		$form = $this->container->get('webaccess_bugtracker.ticket_filter.form');
+		$formHandler = $this->container->get('webaccess_bugtracker.ticket_filter.form_handler');
 
-		if ($formHandlerTicketFilter->process()) {
+		if ($formHandler->process()) {
 			return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket'));
 		}
 
 		$aParams['tickets'] = $this->container->get('webaccess_bugtracker.ticket_manager')->getTicketsPaginatedList($page_number);
 		$aParams['pagination'] = $this->container->get('webaccess_bugtracker.ticket_manager')->getTicketsPagination($page_number);
-		$aParams['formTicketFilter'] = $formTicketFilter->createView();
+		$aParams['form'] = $form->createView();
 		return $this->render('WebaccessBugtrackerBundle:Ticket:index.html.twig', $aParams);
 	}
 

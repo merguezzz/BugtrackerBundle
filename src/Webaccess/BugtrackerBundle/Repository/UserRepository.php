@@ -21,9 +21,11 @@ class UserRepository extends EntityRepository
 
 	public function findByProject($project_id) {
 		$qb = $this->createQueryBuilder('u')
+			->addSelect('c')
    			->orderBy('u.lastName', 'ASC')
    			->orderBy('u.firstName', 'ASC')
-        	->leftJoin('u.projects', 'p');
+        	->leftJoin('u.projects', 'p')
+        	->leftJoin('u.company', 'c');
 
     	if($project_id) {
 			$qb->andWhere($this->createQueryBuilder('u')->expr()->eq('p.id', $project_id));

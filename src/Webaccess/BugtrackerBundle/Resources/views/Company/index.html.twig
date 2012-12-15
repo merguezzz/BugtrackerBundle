@@ -19,7 +19,7 @@
 			<div class="clear"></div>
 		</div>
 
-		<table class="table table-bordered">
+		<table class="table table-striped table-bordered">
 			<thead>
 				<tr>
 					<th>{{ 'generic.creation_date' | trans }}</th>
@@ -28,26 +28,24 @@
 				</tr>
 			</thead>
 			<tbody>
-
-			{% if companies | length > 0 %}
-				{% for company in companies %}
-			        <tr>
-			        	<td width="10%">{{ company.createdAt | date('d/m/y H:i') }}</td>
-			        	<td>{{ company.name }}</td>
-			        	<td class="action" width="6%">
-							<a href="{{ path('webaccess_bugtracker_company_edit', {'company_id':company.id}) }}" title="{{ 'generic.edit' | trans }}">{{ 'generic.edit' | trans }}</a>
-							<a href="{{ path('webaccess_bugtracker_company_delete', {'company_id':company.id}) }}" title="{{ 'generic.delete' | trans }}">{{ 'generic.delete' | trans }}</a>
+				{% if companies | length > 0 %}
+					{% for company in companies %}
+				        <tr>
+				        	<td width="10%">{{ company.createdAt | date('d/m/y H:i') }}</td>
+				        	<td>{{ company.name }}</td>
+				        	<td class="action" width="4%">
+								<a class="icon-pencil" href="{{ path('webaccess_bugtracker_company_edit', {'company_id':company.id}) }}" title="{{ 'generic.edit' | trans }}"></a>
+								<a class="icon-remove" href="{{ path('webaccess_bugtracker_company_delete', {'company_id':company.id}) }}" title="{{ 'generic.delete' | trans }}"></a>
+							</td>
+				        </tr>
+				    {% endfor %}
+				{% else %}
+					<tr>
+						<td colspan="3">
+							{{ 'company.no_companies' | trans }}
 						</td>
-			        </tr>
-			    {% endfor %}
-			{% else %}
-				<tr>
-					<td colspan="3">
-						{{ 'company.no_companies' | trans }}
-					</td>
-				</tr>
-			{% endif %}
-
+					</tr>
+				{% endif %}
 			</tbody>
 		</table>
 	</div>

@@ -21,7 +21,9 @@ class ProjectRepository extends EntityRepository
 
 	public function getByUser($user_id, $is_admin) {
 		$qb = $this->createQueryBuilder('p')
-            ->orderBy('p.name', 'ASC');
+			->addSelect('c')
+            ->orderBy('p.name', 'ASC')
+            ->leftJoin('p.company', 'c');
 
         if(!$is_admin) {
             $qb->leftJoin('p.users', 'user')

@@ -15,15 +15,15 @@
 			</div>
 
 			<div class="ticket-filter-selector">
-				<form id="ticket-filter" action="{{ path('webaccess_bugtracker_ticket') }}" method="post" {{ form_enctype(formTicketFilter) }}>
+				<form id="ticket-filter" action="{{ path('webaccess_bugtracker_ticket') }}" method="post" {{ form_enctype(form) }}>
 					<div>
-						{{ form_widget(formTicketFilter.project) }}
-						{{ form_widget(formTicketFilter.user) }}
-						{{ form_widget(formTicketFilter.type) }}
-						{{ form_widget(formTicketFilter.status) }}
-						{{ form_widget(formTicketFilter.priority) }}
+						{{ form_widget(form.project) }}
+						{{ form_widget(form.user) }}
+						{{ form_widget(form.type) }}
+						{{ form_widget(form.status) }}
+						{{ form_widget(form.priority) }}
 					</div>
-					{{ form_rest(formTicketFilter) }}
+					{{ form_rest(form) }}
 					<div>
 						<input type="submit" class="btn btn-warning" value="OK" />
 					</div>
@@ -65,9 +65,9 @@
 			        	<td>{{ ('ticket_state.type.' ~ ticket.currentState.type) | trans }}</td>
 			        	<td>{{ ('ticket_state.status.' ~ ticket.currentState.status) | trans }}</td>
 			        	<td class="center" width="6%"><span class="label priority-{{ ticket.currentState.priority }}">{{ ('ticket_state.priority.' ~ ticket.currentState.priority) | trans }}</span></td>
-			        	<td class="action" width="6%">
-							<a href="{{ path('webaccess_bugtracker_ticket_edit', {'ticket_id':ticket.id}) }}" title="{{ 'generic.edit' | trans }}">{{ 'generic.edit' | trans }}</a>
-							<a href="{{ path('webaccess_bugtracker_ticket_delete', {'ticket_id':ticket.id}) }}" title="{{ 'generic.delete' | trans }}">{{ 'generic.delete' | trans }}</a>
+			        	<td class="action" width="4%">
+							<a class="icon-pencil" href="{{ path('webaccess_bugtracker_ticket_edit', {'ticket_id':ticket.id}) }}" title="{{ 'generic.edit' | trans }}"></a>
+							<a class="icon-remove" href="{{ path('webaccess_bugtracker_ticket_delete', {'ticket_id':ticket.id}) }}" title="{{ 'generic.delete' | trans }}"></a>
 						</td>
 			        </tr>
 			    {% endfor %}
