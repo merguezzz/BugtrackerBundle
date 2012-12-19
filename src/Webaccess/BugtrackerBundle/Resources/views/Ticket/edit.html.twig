@@ -6,7 +6,7 @@
 
 {% block bugtracker_body %}
 
-	{% render "WebaccessBugtrackerBundle:Ticket:menu" with { 'route' : app.request.get('_route') } %}
+	{% render "WebaccessBugtrackerBundle:Ticket:menu" with {'route' : 'ticket'} %}
 
 	<div id="dashboard" class="main-wrapper">
 		<div class="header">
@@ -16,7 +16,7 @@
 			<div class="clear"></div>
 		</div>
 
-		<form action="{{ path('webaccess_bugtracker_ticket_edit', {'ticket_id':ticket.id}) }}" method="post" {{ form_enctype(form) }}>
+		<form action="{{ path('webaccess_bugtracker_ticket_edit', {'ticketId':ticket.id}) }}" method="post" {{ form_enctype(form) }}>
 		    {{ form_row(form.title, { 'label' : 'ticket.title', 'attr': {'class': 'span6'} }) }}
 		    {{ form_row(form.project, { 'label' : 'ticket.project', 'attr': {'class': 'span6'} }) }}
 

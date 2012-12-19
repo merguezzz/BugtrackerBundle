@@ -1,6 +1,6 @@
 webaccess_bugtracker_landing_page:
     pattern: /
-    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:index, page_number: 1, _locale: "%locale%" }
+    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:index, pageNumber: 1, _locale: "%locale%" }
 
 webaccess_bugtracker_switch_language:
     pattern: /{_locale}/ticket_switch_language/{lang}
@@ -19,68 +19,68 @@ webaccess_bugtracker_logout:
     defaults: { _controller: WebaccessBugtrackerBundle:Login:index, _locale: "%locale%" }
 
 webaccess_bugtracker_company:
-    pattern: /{_locale}/company/{page_number}
-    defaults: { _controller: WebaccessBugtrackerBundle:Company:index, page_number: 1, _locale: "%locale%" }
+    pattern: /{_locale}/company/{pageNumber}
+    defaults: { _controller: WebaccessBugtrackerBundle:Company:index, pageNumber: 1, _locale: "%locale%" }
 
 webaccess_bugtracker_company_add:
     pattern: /{_locale}/company_add
     defaults: { _controller: WebaccessBugtrackerBundle:Company:add, _locale: "%locale%" }
 
 webaccess_bugtracker_company_edit:
-    pattern: /{_locale}/company_edit/{company_id}
-    defaults: { _controller: WebaccessBugtrackerBundle:Company:edit, company_id: company_id, _locale: "%locale%" }
+    pattern: /{_locale}/company_edit/{companyId}
+    defaults: { _controller: WebaccessBugtrackerBundle:Company:edit, companyId: companyId, _locale: "%locale%" }
 
 webaccess_bugtracker_company_delete:
-    pattern: /{_locale}/company_delete/{company_id}
-    defaults: { _controller: WebaccessBugtrackerBundle:Company:delete, company_id: company_id, _locale: "%locale%" }
+    pattern: /{_locale}/company_delete/{companyId}
+    defaults: { _controller: WebaccessBugtrackerBundle:Company:delete, companyId: companyId, _locale: "%locale%" }
 
 webaccess_bugtracker_project:
-    pattern: /{_locale}/project/{page_number}
-    defaults: { _controller: WebaccessBugtrackerBundle:Project:index, page_number: 1, _locale: "%locale%" }
+    pattern: /{_locale}/project/{pageNumber}
+    defaults: { _controller: WebaccessBugtrackerBundle:Project:index, pageNumber: 1, _locale: "%locale%" }
 
 webaccess_bugtracker_project_add:
     pattern: /{_locale}/project_add
     defaults: { _controller: WebaccessBugtrackerBundle:Project:add, _locale: "%locale%" }
 
 webaccess_bugtracker_project_edit:
-    pattern: /{_locale}/project_edit/{project_id}
-    defaults: { _controller: WebaccessBugtrackerBundle:Project:edit, project_id: project_id, _locale: "%locale%" }
+    pattern: /{_locale}/project_edit/{projectId}
+    defaults: { _controller: WebaccessBugtrackerBundle:Project:edit, projectId: projectId, _locale: "%locale%" }
 
 webaccess_bugtracker_project_delete:
-    pattern: /{_locale}/project_delete/{project_id}
-    defaults: { _controller: WebaccessBugtrackerBundle:Project:delete, project_id: project_id, _locale: "%locale%" }
+    pattern: /{_locale}/project_delete/{projectId}
+    defaults: { _controller: WebaccessBugtrackerBundle:Project:delete, projectId: projectId, _locale: "%locale%" }
 
 webaccess_bugtracker_user:
-    pattern: /{_locale}/user/{page_number}
-    defaults: { _controller: WebaccessBugtrackerBundle:User:index, page_number: 1, _locale: "%locale%" }
+    pattern: /{_locale}/user/{pageNumber}
+    defaults: { _controller: WebaccessBugtrackerBundle:User:index, pageNumber: 1, _locale: "%locale%" }
 
 webaccess_bugtracker_user_add:
     pattern: /{_locale}/user_add
     defaults: { _controller: WebaccessBugtrackerBundle:User:add, _locale: "%locale%" }
 
 webaccess_bugtracker_user_edit:
-    pattern: /{_locale}/user_edit/{user_id}
-    defaults: { _controller: WebaccessBugtrackerBundle:User:edit, user_id: user_id, _locale: "%locale%" }
+    pattern: /{_locale}/user_edit/{userId}
+    defaults: { _controller: WebaccessBugtrackerBundle:User:edit, userId: userId, _locale: "%locale%" }
 
 webaccess_bugtracker_user_delete:
-    pattern: /{_locale}/user_delete/{user_id}
-    defaults: { _controller: WebaccessBugtrackerBundle:User:delete, user_id: user_id, _locale: "%locale%" }
+    pattern: /{_locale}/user_delete/{userId}
+    defaults: { _controller: WebaccessBugtrackerBundle:User:delete, userId: userId, _locale: "%locale%" }
 
 webaccess_bugtracker_ticket:
-    pattern: /{_locale}/ticket/{page_number}
-    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:index, page_number: 1, _locale: "%locale%" }
+    pattern: /{_locale}/ticket/{pageNumber}
+    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:index, pageNumber: 1, _locale: "%locale%" }
 
 webaccess_bugtracker_ticket_add:
     pattern: /{_locale}/ticket_add
     defaults: { _controller: WebaccessBugtrackerBundle:Ticket:add, _locale: "%locale%" }
 
 webaccess_bugtracker_ticket_edit:
-    pattern: /{_locale}/ticket_edit/{ticket_id}
-    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:edit, ticket_id: ticket_id, _locale: "%locale%" }
+    pattern: /{_locale}/ticket_edit/{ticketId}
+    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:edit, ticketId: ticketId, _locale: "%locale%" }
 
 webaccess_bugtracker_ticket_delete:
-    pattern: /{_locale}/ticket_delete/{ticket_id}
-    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:delete, ticket_id: ticket_id, _locale: "%locale%" }
+    pattern: /{_locale}/ticket_delete/{ticketId}
+    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:delete, ticketId: ticketId, _locale: "%locale%" }
 
 webaccess_bugtracker_ticket_test_mail:
     pattern: /{_locale}/ticket_test_mail

@@ -16,7 +16,7 @@
 			<div class="clear"></div>
 		</div>
 
-		<form action="{{ path('webaccess_bugtracker_user_edit', {'user_id':user.id}) }}" method="post" {{ form_enctype(form) }}>
+		<form action="{{ path('webaccess_bugtracker_user_edit', {'userId':user.id}) }}" method="post" {{ form_enctype(form) }}>
 		    {{ form_row(form.username, { 'label' : 'user.username', 'attr': {'class': 'span6'} }) }}
 		    {{ form_row(form.password, { 'label' : 'user.password', 'attr': {'class': 'span6'} }) }}
 		    {{ form_row(form.firstName, { 'label' : 'user.first_name', 'attr': {'class': 'span6'} }) }}

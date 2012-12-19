@@ -92,11 +92,11 @@ ticket_state.type.3: Spelling
 ticket_state.type.4: Question
 
 ticket_state.status.1: To plan
-ticket_state.status.1: To evaluate
-ticket_state.status.2: To do
-ticket_state.status.3: In progress
-ticket_state.status.4: To validate
-ticket_state.status.5: To deliver
+ticket_state.status.2: To evaluate
+ticket_state.status.3: To do
+ticket_state.status.4: In progress
+ticket_state.status.5: To validate
+ticket_state.status.6: To deliver
 ticket_state.status.7: In production
 ticket_state.status.8: Archived
 

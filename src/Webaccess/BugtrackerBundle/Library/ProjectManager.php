@@ -1,50 +1,123 @@
 <?php
 
+/**
+ * ProjectManager class file
+ *
+ * PHP 5.3
+ *
+ * @category Library
+ * @package  WebaccessBugtrackerBundle
+ * @author   Louis Gandelin <lgandelin@web-access.fr>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.web-access.fr
+ *
+ */
 namespace Webaccess\BugtrackerBundle\Library;
 
 use Webaccess\BugtrackerBundle\Utility\Pagination;
 use Webaccess\BugtrackerBundle\Entity\Project;
 
-class ProjectManager {
-
+/**
+ * ProjectManager class file
+ *
+ * @category Library
+ * @package  WebaccessBugtrackerBundle
+ * @author   Louis Gandelin <lgandelin@web-access.fr>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.web-access.fr
+ *
+ */
+class ProjectManager
+{
     protected $em;
     protected $repository;
 
     /**
      * Constructor
      *
-     * @param Entity manager $em
+     * @param EntityManager $em EntityManager
+     *
+     * @return void
      */
-	public function __construct($em) {
+    public function __construct($em)
+    {
         $this->em = $em;
         $this->repository = $this->em->getRepository('WebaccessBugtrackerBundle:Project');
-	}
-
-    public function getProjectsPaginatedList($page_number) {
-        $pagination = $this->getProjectsPagination($page_number);
-        return $this->repository->findBy(array(), array(), $pagination->items_per_page_number, $pagination->items_offset);
     }
 
-    public function getProjectsPagination($page_number) {
-        return Pagination::getPagination($page_number, $this->repository->getTotalNumber(), 10);
+    /**
+     * Function which returns projects paginated list
+     *
+     * @param integer $pageNumber Page number
+     *
+     * @return Repository
+     */
+    public function getProjectsPaginatedList($pageNumber)
+    {
+        $pagination = $this->getProjectsPagination($pageNumber);
+
+        return $this->repository->findBy(array(), array(), $pagination->itemsPerPageNumber, $pagination->itemsOffset);
     }
 
-    public function createProject() {
+    /**
+     * Function which returns projects Pagination
+     *
+     * @param integer $pageNumber Page number
+     *
+     * @return Pagination
+     */
+    public function getProjectsPagination($pageNumber)
+    {
+        return Pagination::getPagination($pageNumber, $this->repository->getTotalNumber(), 10);
+    }
+
+    /**
+     * Function which creates a project
+     *
+     * @return Project
+     */
+    public function createProject()
+    {
         return new Project();
     }
 
-    public function saveProject($project) {
+    /**
+     * Function which saves a project in DB
+     *
+     * @param Project $project Project
+     *
+     * @return void
+     */
+    public function saveProject($project)
+    {
         $this->em->persist($project);
         $this->em->flush();
     }
 
-    public function getProject($project_id) {
-        $project = $this->repository->find($project_id);
+    /**
+     * Function which returns a project from DB
+     *
+     * @param integer $projectId Project ID
+     *
+     * @return Project
+     */
+    public function getProject($projectId)
+    {
+        $project = $this->repository->find($projectId);
+
         return ($project) ? $project : false;
     }
 
-    public function deleteProject($project_id) {
-        $project = $this->getProject($project_id);
+    /**
+     * Function which deletes a project in DB
+     *
+     * @param integer $projectId Project ID
+     *
+     * @return boolean
+     */
+    public function deleteProject($projectId)
+    {
+        $project = $this->getProject($projectId);
         try {
             $this->em->remove($project);
             $this->em->flush();

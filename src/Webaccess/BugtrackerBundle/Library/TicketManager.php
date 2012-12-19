@@ -1,47 +1,105 @@
 <?php
 
+/**
+ * TicketManager class file
+ *
+ * PHP 5.3
+ *
+ * @category Library
+ * @package  WebaccessBugtrackerBundle
+ * @author   Louis Gandelin <lgandelin@web-access.fr>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.web-access.fr
+ *
+ */
 namespace Webaccess\BugtrackerBundle\Library;
 
 use Webaccess\BugtrackerBundle\Utility\Pagination;
 use Webaccess\BugtrackerBundle\Entity\Ticket;
 use Webaccess\BugtrackerBundle\Entity\TicketState;
 
-class TicketManager {
-
+/**
+ * TicketManager class
+ *
+ * @category Library
+ * @package  WebaccessBugtrackerBundle
+ * @author   Louis Gandelin <lgandelin@web-access.fr>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.web-access.fr
+ *
+ */
+class TicketManager
+{
     protected $em;
     protected $repository;
 
     /**
      * Constructor
      *
-     * @param Entity manager $em
+     * @param EntityManager $em          EntityManager
+     * @param UserManager   $userManager UserManager
+     *
+     * @return void
      */
-	public function __construct($em, $userManager) {
+    public function __construct($em, $userManager)
+    {
         $this->em = $em;
         $this->repository = $this->em->getRepository('WebaccessBugtrackerBundle:Ticket');
         $this->repositoryState = $this->em->getRepository('WebaccessBugtrackerBundle:TicketState');
         $this->userManager = $userManager;
-	}
-
-    public function getTicketsPaginatedList($page_number) {
-        $pagination = $this->getTicketsPagination($page_number);
-        return $this->repository->getByUser($this->userManager->getUser()->getId(), ($this->userManager->getProjectInSession() ? $this->userManager->getProjectInSession()->getId() : NULL), ($this->userManager->getUserInSession() ? $this->userManager->getUserInSession()->getId() : NULL), ($this->userManager->getTypeInSession() ? $this->userManager->getTypeInSession() : NULL), ($this->userManager->getStatusInSession() ? $this->userManager->getStatusInSession() : NULL), ($this->userManager->getPriorityInSession() ? $this->userManager->getPriorityInSession() : NULL), $pagination->items_per_page_number, $pagination->items_offset);
     }
 
-    public function getTicketsPagination($page_number) {
-        return Pagination::getPagination($page_number, $this->repository->getTotalNumber(), 10);
+    /**
+     * Function which returns tickets paginated list
+     *
+     * @param integer $pageNumber Page number
+     *
+     * @return Repository
+     */
+    public function getTicketsPaginatedList($pageNumber)
+    {
+        $pagination = $this->getTicketsPagination($pageNumber);
+
+        return $this->repository->getByUser($this->userManager->getUser()->getId(), $pagination->itemsPerPageNumber, $pagination->itemsOffset, ($this->userManager->getProjectInSession() ? $this->userManager->getProjectInSession()->getId() : null), ($this->userManager->getUserInSession() ? $this->userManager->getUserInSession()->getId() : null), ($this->userManager->getTypeInSession() ? $this->userManager->getTypeInSession() : null), ($this->userManager->getStatusInSession() ? $this->userManager->getStatusInSession() : null), ($this->userManager->getPriorityInSession() ? $this->userManager->getPriorityInSession() : null));
     }
 
-    public function createTicket() {
+    /**
+     * Function which returns tickets Pagination
+     *
+     * @param integer $pageNumber Page number
+     *
+     * @return Pagination
+     */
+    public function getTicketsPagination($pageNumber)
+    {
+        return Pagination::getPagination($pageNumber, $this->repository->getTotalNumber(), 10);
+    }
+
+    /**
+     * Function which creates a ticket
+     *
+     * @return Ticket
+     */
+    public function createTicket()
+    {
         $ticket = new Ticket();
         $ticket_state = new TicketState();
         $ticket_state->setTicket($ticket);
         $ticket->addState($ticket_state);
         $ticket->setCurrentState($ticket_state);
+
         return $ticket;
     }
 
-    public function saveTicket($ticket) {
+    /**
+     * Function which saves a ticket in DB
+     *
+     * @param Ticket $ticket Ticket
+     *
+     * @return void
+     */
+    public function saveTicket($ticket)
+    {
         $aStates = $ticket->getStates();
         $ticket_state = $aStates[sizeof($aStates) - 1];
         $ticket->addState($ticket_state);
@@ -52,17 +110,33 @@ class TicketManager {
         $this->em->flush();
     }
 
-    public function getTicket($ticket_id) {
-        $ticket = $this->repository->find($ticket_id);
-        $ticket_state = $this->getLastTicketStateCopy($ticket_id);
+    /**
+     * Function which returns a ticket from DB
+     *
+     * @param integer $ticketId Ticket ID
+     *
+     * @return Ticket
+     */
+    public function getTicket($ticketId)
+    {
+        $ticket = $this->repository->find($ticketId);
+        $ticket_state = $this->getLastTicketStateCopy($ticketId);
         $ticket->addState($ticket_state);
         return ($ticket) ? $ticket : false;
     }
 
-    public function getLastTicketStateCopy($ticket_id) {
-        $ticket = $this->repository->find($ticket_id);
+    /**
+     * Function which returns a copy of the last state of a ticket
+     *
+     * @param integer $ticketId Ticket ID
+     *
+     * @return Ticket
+     */
+    public function getLastTicketStateCopy($ticketId)
+    {
+        $ticket = $this->repository->find($ticketId);
         $ticket_state = new TicketState();
-        if($ticket->getCurrentState()) {
+        if ($ticket->getCurrentState()) {
             $last_ticket_state = $this->repositoryState->find($ticket->getCurrentState()->getId());
             $ticket_state->setAuthorUser($this->userManager->getUser());
             $ticket_state->setAllocatedUser($last_ticket_state->getAllocatedUser());
@@ -71,11 +145,20 @@ class TicketManager {
             $ticket_state->setPriority($last_ticket_state->getPriority());
         }
         $ticket_state->setTicket($ticket);
+
         return ($ticket_state) ? $ticket_state : false;
     }
 
-    public function deleteTicket($ticket_id) {
-        $ticket = $this->getTicket($ticket_id);
+    /**
+     * Function which deletes a ticket in DB
+     *
+     * @param integer $ticketId Ticket ID
+     *
+     * @return boolean
+     */
+    public function deleteTicket($ticketId)
+    {
+        $ticket = $this->getTicket($ticketId);
         try {
             $this->em->remove($ticket);
             $this->em->flush();

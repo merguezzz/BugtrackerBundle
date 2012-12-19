@@ -1,95 +1,184 @@
 <?php
 
+/**
+ * TicketController class file
+ *
+ * PHP 5.3
+ *
+ * @category Controller
+ * @package  WebaccessBugtrackerBundle
+ * @author   Louis Gandelin <lgandelin@web-access.fr>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.web-access.fr
+ *
+ */
 namespace Webaccess\BugtrackerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * TicketController class
+ *
+ * @category Controller
+ * @package  WebaccessBugtrackerBundle
+ * @author   Louis Gandelin <lgandelin@web-access.fr>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.web-access.fr
+ *
+ */
 class TicketController extends Controller
 {
-	public function menuAction($route = '') {
-		$aParams['route'] = $route;
-		return $this->render('WebaccessBugtrackerBundle:Includes:menu.html.twig', $aParams);
-	}
+    /**
+     * Menu action
+     *
+     * @param string $route current route (for selecting menu item)
+     *
+     * @return Response
+     */
+    public function menuAction($route = '')
+    {
+        $aParams['route'] = $route;
 
-	public function switchLanguageAction($lang = null) {
-		if($lang != null) {
-		    $this->get('request')->setLocale($lang);
-		}
-	    return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket', array('_locale'=> $this->get('request')->getLocale())));
-	}
+        return $this->render('WebaccessBugtrackerBundle:Includes:menu.html.twig', $aParams);
+    }
 
-	public function indexAction($page_number) {
-		$form = $this->container->get('webaccess_bugtracker.ticket_filter.form');
-		$formHandler = $this->container->get('webaccess_bugtracker.ticket_filter.form_handler');
+    /**
+     * Switch language action
+     *
+     * @param string $lang User locale
+     *
+     * @return redirect
+     */
+    public function switchLanguageAction($lang = null)
+    {
+        if ($lang != null) {
+            $this->get('request')->setLocale($lang);
+        }
 
-		if ($formHandler->process()) {
-			return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket'));
-		}
+        return $this->redirect(
+            $this->generateUrl(
+                'webaccess_bugtracker_ticket',
+                array('_locale'=> $this->get('request')->getLocale())
+            )
+        );
+    }
 
-		$aParams['tickets'] = $this->container->get('webaccess_bugtracker.ticket_manager')->getTicketsPaginatedList($page_number);
-		$aParams['pagination'] = $this->container->get('webaccess_bugtracker.ticket_manager')->getTicketsPagination($page_number);
-		$aParams['form'] = $form->createView();
-		return $this->render('WebaccessBugtrackerBundle:Ticket:index.html.twig', $aParams);
-	}
+    /**
+     * Index action
+     *
+     * @param integer $pageNumber Page number
+     *
+     * @return Response
+     */
+    public function indexAction($pageNumber)
+    {
+        $form = $this->container->get('webaccess_bugtracker.ticket_filter.form');
+        $formHandler = $this->container->get('webaccess_bugtracker.ticket_filter.form_handler');
 
-	public function addAction() {
-		$ticket = $this->container->get('webaccess_bugtracker.ticket_manager')->createTicket();
-		$form = $this->container->get('webaccess_bugtracker.ticket.form');
-		$formHandler = $this->container->get('webaccess_bugtracker.ticket.form_handler');
+        if ($formHandler->process()) {
+            return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket'));
+        }
+
+        $aParams['tickets'] = $this->container->get('webaccess_bugtracker.ticket_manager')->getTicketsPaginatedList($pageNumber);
+        $aParams['pagination'] = $this->container->get('webaccess_bugtracker.ticket_manager')->getTicketsPagination($pageNumber);
+        $aParams['form'] = $form->createView();
+
+        return $this->render('WebaccessBugtrackerBundle:Ticket:index.html.twig', $aParams);
+    }
+
+    /**
+     * Add ticket action
+     *
+     * @return Response
+     */
+    public function addAction()
+    {
+        $ticket = $this->container->get('webaccess_bugtracker.ticket_manager')->createTicket();
+        $form = $this->container->get('webaccess_bugtracker.ticket.form');
+        $formHandler = $this->container->get('webaccess_bugtracker.ticket.form_handler');
 
         if ($formHandler->process($ticket)) {
-			$this->get('session')->setFlash('ticket_added', 1);
-			$this->get('session')->setFlash('last_ticket', $ticket->getId());
+            $this->get('session')->setFlash('ticket_added', 1);
+            $this->get('session')->setFlash('last_ticket', $ticket->getId());
 
-			/*$message = \Swift_Message::newInstance()
+            /*$message = \Swift_Message::newInstance()
                 ->setSubject('[Bugtracker - ' . $ticket->getProject()->getName(). '] Un nouveau ticket a été créé')
                 ->setFrom('bugtracker@web-access.fr')
                 ->setTo($ticket->getStates()->last()->getAllocatedUser()->getEmail())
                 ->setBody($this->renderView('WebaccessBugtrackerBundle:Mail:ticket_add.html.twig'), 'text/html');
             $this->get('mailer')->send($message);*/
 
-			return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket'));
+            return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket'));
         }
-		$aParams['form'] = $form->createView();
-		return $this->render('WebaccessBugtrackerBundle:Ticket:add.html.twig', $aParams);
-	}
 
-	public function editAction($ticket_id) {
-		$ticket = $this->container->get('webaccess_bugtracker.ticket_manager')->getTicket($ticket_id);
-		$form = $this->container->get('webaccess_bugtracker.ticket.form');
-		$formHandler = $this->container->get('webaccess_bugtracker.ticket.form_handler');
+        $aParams['form'] = $form->createView();
 
-		if ($formHandler->process($ticket)) {
-			$this->get('session')->setFlash('ticket_updated', 1);
-			$this->get('session')->setFlash('last_ticket', $ticket->getId());
+        return $this->render('WebaccessBugtrackerBundle:Ticket:add.html.twig', $aParams);
+    }
 
-			/*$message = \Swift_Message::newInstance();
-			$image_logo = $message->embed(\Swift_Image::fromPath(__DIR__ . '/../Resources/public/images/logo.png'));
+    /**
+     * Edit ticket action
+     *
+     * @param integer $ticketId Ticket ID
+     *
+     * @return Response
+     */
+    public function editAction($ticketId)
+    {
+        $ticket = $this->container->get('webaccess_bugtracker.ticket_manager')->getTicket($ticketId);
+        $form = $this->container->get('webaccess_bugtracker.ticket.form');
+        $formHandler = $this->container->get('webaccess_bugtracker.ticket.form_handler');
+
+        if ($formHandler->process($ticket)) {
+            $this->get('session')->setFlash('ticket_updated', 1);
+            $this->get('session')->setFlash('last_ticket', $ticket->getId());
+
+            /*$message = \Swift_Message::newInstance();
+            $image_logo = $message->embed(\Swift_Image::fromPath(__DIR__ . '/../Resources/public/images/logo.png'));
             $message->setSubject('[Bugtracker - ' . $ticket->getProject()->getName(). '] Un nouveau ticket a été édité')
                 ->setFrom('bugtracker@web-access.fr')
                 ->setTo($ticket->getStates()->last()->getAllocatedUser()->getEmail())
                 ->setBody($this->renderView('WebaccessBugtrackerBundle:Mail:ticket_edit.html.twig', array('image_logo' => $image_logo)), 'text/html');
             $this->get('mailer')->send($message);*/
 
-			return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket'));
-		}
-		$aParams['form'] = $form->createView();
-		$aParams['ticket'] = $ticket;
-		return $this->render('WebaccessBugtrackerBundle:Ticket:edit.html.twig', $aParams);
-	}
+            return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket'));
+        }
 
-	public function deleteAction($ticket_id) {
-		if($this->container->get('webaccess_bugtracker.ticket_manager')->deleteTicket($ticket_id)) {
+        $aParams['form'] = $form->createView();
+        $aParams['ticket'] = $ticket;
+
+        return $this->render('WebaccessBugtrackerBundle:Ticket:edit.html.twig', $aParams);
+    }
+
+    /**
+     * Delete ticket action
+     *
+     * @param integer $ticketId Ticket ID
+     *
+     * @return Response
+     */
+    public function deleteAction($ticketId)
+    {
+        if ($this->container->get('webaccess_bugtracker.ticket_manager')->deleteTicket($ticketId)) {
             $this->get('session')->setFlash('ticket_deleted', 1);
-		} else {
-			$this->get('session')->setFlash('ticket_error', 1);
-		}
-		return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket'));
-	}
+        } else {
+            $this->get('session')->setFlash('ticket_error', 1);
+        }
 
-	public function testMailAction() {
-		$message = \Swift_Message::newInstance();
-		$aParams['image_logo'] = '/bundles/webaccessbugtracker/images/logo.png';
-		return $this->render('WebaccessBugtrackerBundle:Mail:ticket_edit.html.twig', $aParams);
-	}
+        return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket'));
+    }
+
+    /**
+     * Test mail action
+     *
+     * @return Response
+     */
+    public function testMailAction()
+    {
+        $message = \Swift_Message::newInstance();
+
+        $aParams['image_logo'] = '/bundles/webaccessbugtracker/images/logo.png';
+
+        return $this->render('WebaccessBugtrackerBundle:Mail:ticket_edit.html.twig', $aParams);
+    }
 }

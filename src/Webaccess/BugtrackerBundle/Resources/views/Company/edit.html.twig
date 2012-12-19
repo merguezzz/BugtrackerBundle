@@ -16,7 +16,7 @@
 			<div class="clear"></div>
 		</div>
 
-		<form action="{{ path('webaccess_bugtracker_company_edit', {'company_id':company.id}) }}" method="post" {{ form_enctype(form) }}>
+		<form action="{{ path('webaccess_bugtracker_company_edit', {'companyId':company.id}) }}" method="post" {{ form_enctype(form) }}>
 			{{ form_row(form.name, { 'label' : 'company.name', 'attr': {'class': 'span6'} }) }}
 	        {{ form_rest(form) }}
 	        <a href="{{ path('webaccess_bugtracker_company') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>

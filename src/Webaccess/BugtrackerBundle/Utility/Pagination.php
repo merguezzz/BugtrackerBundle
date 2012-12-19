@@ -1,30 +1,66 @@
 <?php
 
+/**
+ * Pagination class file
+ *
+ * PHP 5.3
+ *
+ * @category Utility
+ * @package  WebaccessBugtrackerBundle
+ * @author   Louis Gandelin <lgandelin@web-access.fr>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.web-access.fr
+ *
+ */
 namespace Webaccess\BugtrackerBundle\Utility;
 
-class Pagination {
-
-	static public function getPagination($page_number, $total_number, $items_per_page_number)
+/**
+ * Pagination class
+ *
+ * @category Utility
+ * @package  WebaccessBugtrackerBundle
+ * @author   Louis Gandelin <lgandelin@web-access.fr>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://www.web-access.fr
+ *
+ */
+class Pagination
+{
+    /**
+     * Pagination function
+     *
+     * @param integer $pageNumber         Page number
+     * @param integer $totalNumber        Total number of items
+     * @param integer $itemsPerPageNumber Number of items to display per page
+     *
+     * @return StdClass Pagination
+     */
+    static public function getPagination($pageNumber, $totalNumber, $itemsPerPageNumber)
     {
-        $total_page_number = ceil($total_number / $items_per_page_number);
+        if ($itemsPerPageNumber > 0) {
+            $totalPageNumber = ceil($totalNumber / $itemsPerPageNumber);
+        }
 
-        if(is_numeric($page_number)) {
-            $current_page = intval($page_number);
-             
-            if($current_page > $total_page_number) {
-                $current_page = $total_page_number;
+        if (is_numeric($pageNumber)) {
+            $currentPage = intval($pageNumber);
+            if ($currentPage > $totalPageNumber) {
+                $currentPage = $totalPageNumber;
             }
         } else {
-            $current_page = 1;
+            $currentPage = 1;
+        }
+
+        $itemsOffset = ($currentPage - 1) * $itemsPerPageNumber;
+        if($itemsOffset < 0) {
+            $itemsOffset = 0;
         }
 
         $pagination = new \StdClass();
-        $pagination->current_page = $current_page;
-        $pagination->total_page_number = $total_page_number;
-        $pagination->items_per_page_number = $items_per_page_number;
-        $pagination->items_offset = ($pagination->current_page - 1) * $pagination->items_per_page_number;
-        if($pagination->items_offset < 0) $pagination->items_offset = 0;
-        
+        $pagination->currentPage = $currentPage;
+        $pagination->totalPageNumber = $totalPageNumber;
+        $pagination->itemsPerPageNumber = $itemsPerPageNumber;
+        $pagination->itemsOffset = $itemsOffset;
+
         return $pagination;
     }
 }
