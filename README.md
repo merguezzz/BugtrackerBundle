@@ -26,6 +26,6 @@ Update your database settings in these files
 Screenshots
 -----------
 
-![Dashboard](/screens/dashboard.jpg "Dashboard")
+![Dashboard](https://raw.github.com/lgandelin/BugtrackerBundle/master/screens/dashboard.jpg "Dashboard")
 
-![Database schema](/screens/database.jpg "Database schema")
+![Database schema](https://raw.github.com/lgandelin/BugtrackerBundle/master/screens/database.jpg "Database schema")
