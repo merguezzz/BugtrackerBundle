@@ -40,7 +40,7 @@ class Ticket
     /**
      * @var States
      *
-     * @ORM\OneToMany(targetEntity="Webaccess\BugtrackerBundle\Entity\TicketState", mappedBy="ticket", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="TicketState", mappedBy="ticket", cascade={"remove"})
      */
     protected $states;
 

@@ -19,14 +19,14 @@ class TicketState
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var text $content
      *
      * @ORM\Column(name="content", type="text", nullable=true)
      */
-    private $content;
+    protected $content;
 
     /**
      * @var \DateTime $createdAt
@@ -36,7 +36,7 @@ class TicketState
     protected $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Webaccess\BugtrackerBundle\Entity\Ticket"), inversedBy="states")
+     * @ORM\ManyToOne(targetEntity="Ticket", inversedBy="states")
      * @ORM\JoinColumn(name="ticket_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $ticket;

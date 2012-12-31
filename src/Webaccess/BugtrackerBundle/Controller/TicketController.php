@@ -82,6 +82,7 @@ class TicketController extends Controller
         $aParams['tickets'] = $this->container->get('webaccess_bugtracker.ticket_manager')->getTicketsPaginatedList($pageNumber);
         $aParams['pagination'] = $this->container->get('webaccess_bugtracker.ticket_manager')->getTicketsPagination($pageNumber);
         $aParams['form'] = $form->createView();
+        $aParams['formCopy'] = $form->createView();
 
         return $this->render('WebaccessBugtrackerBundle:Ticket:index.html.twig', $aParams);
     }

@@ -30,6 +30,14 @@ class Role implements RoleInterface
     protected $name;
 
     /**
+    * @ORM\ManyToMany(targetEntity="User", mappedBy="roles")
+    *
+    * @var ArrayCollection $users
+    */
+    protected $users;
+
+
+    /**
      * Get id
      *
      * @return integer

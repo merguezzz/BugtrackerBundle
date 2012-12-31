@@ -19,6 +19,7 @@ switch_project.label: Projet
 dashboard.title: Tickets
 dashboard.add: Ajouter un ticket
 dashboard.no_tickets: Aucun ticket trouvé
+dashboard.ticket_filter.display: Filtres
 
 generic.action: Action
 generic.edit: Edit.

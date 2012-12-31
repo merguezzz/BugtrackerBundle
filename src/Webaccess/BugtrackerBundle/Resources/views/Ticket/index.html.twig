@@ -14,6 +14,13 @@
 				<h1>{{ 'dashboard.title' | trans }}</h1>
 			</div>
 
+			<div class="button-add">
+				<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_ticket_add') }}">{{ 'dashboard.add' | trans }}</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div class="ticket-filter">
 			<div class="ticket-filter-selector">
 				<form id="ticket-filter" action="{{ path('webaccess_bugtracker_ticket') }}" method="post" {{ form_enctype(form) }}>
 					<div>
@@ -22,18 +29,11 @@
 						{{ form_widget(form.type) }}
 						{{ form_widget(form.status) }}
 						{{ form_widget(form.priority) }}
-					</div>
-					{{ form_rest(form) }}
-					<div>
 						<input type="submit" class="btn btn-warning" value="OK" />
 					</div>
+					{{ form_rest(form) }}
 				</form>
 			</div>
-
-			<div class="button-add">
-				<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_ticket_add') }}">{{ 'dashboard.add' | trans }}</a>
-			</div>
-			<div class="clear"></div>
 		</div>
 
 		<table class="table table-bordered">
@@ -56,8 +56,8 @@
 			{% if tickets | length > 0 %}
 				{% for ticket in tickets %}
 			        <tr class="status-{{ ticket.currentState.status }}">
-			        	<td width="10%">{{ ticket.states[0].createdAt | date('d/m/y H:i') }}</td>
-			        	<td width="10%">{{ ticket.currentState.createdAt | date('d/m/y H:i') }}</td>
+			        	<td>{{ ticket.states[0].createdAt | date('d/m/y H:i') }}</td>
+			        	<td>{{ ticket.currentState.createdAt | date('d/m/y H:i') }}</td>
 			        	<td>{{ ticket.title }}</td>
 			        	<td>{{ ticket.project.name }}</td>
 			        	<td>{{ ticket.currentState.authorUser.firstName }} {{ ticket.currentState.authorUser.lastName | truncate(1, false, '.') }}</td>
@@ -78,6 +78,22 @@
 			{% endif %}
 			</tbody>
 		</table>
+
+		<div class="ticket-filter">
+			<div class="ticket-filter-selector">
+				<form id="ticket-filter" action="{{ path('webaccess_bugtracker_ticket') }}" method="post" {{ form_enctype(formCopy) }}>
+					<div>
+						{{ form_widget(formCopy.project) }}
+						{{ form_widget(formCopy.user) }}
+						{{ form_widget(formCopy.type) }}
+						{{ form_widget(formCopy.status) }}
+						{{ form_widget(formCopy.priority) }}
+						<input type="submit" class="btn btn-warning" value="OK" />
+					</div>
+					{{ form_rest(form) }}
+				</form>
+			</div>
+		</div>
 	</div>
 
 {% endblock %}
@@ -86,6 +102,7 @@
     {{ parent() }}
 
     <script type="text/javascript">
+
 	    {% if(app.session.getFlash('ticket_added')) %}
 	    	notification("{{ 'ticket.added' | trans }}");
 	    {% elseif(app.session.getFlash('ticket_updated')) %}

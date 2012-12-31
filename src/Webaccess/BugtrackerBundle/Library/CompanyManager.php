@@ -18,7 +18,7 @@ use Webaccess\BugtrackerBundle\Utility\Pagination;
 use Webaccess\BugtrackerBundle\Entity\Company;
 
 /**
- * CompanyController class
+ * CompanyManager class
  *
  * @category Library
  * @package  WebaccessBugtrackerBundle

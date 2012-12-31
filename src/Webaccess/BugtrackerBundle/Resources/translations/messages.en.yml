@@ -16,9 +16,10 @@ menu.all_priorities: All priorities
 
 switch_project.label: Project
 
-ticket.title: Tickets
-ticket.add: Add a ticket
-ticket.no_tickets: No ticket found
+dashboard.title: Tickets
+dashboard.add: Add a ticket
+dashboard.no_tickets: No ticket found
+dashboard.ticket_filter.display: Filters
 
 generic.action: Action
 generic.edit: Edit
