@@ -43,10 +43,10 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
 
         //COMPANIES
     	$company1 = new Company();
-    	$company1->setName('Webaccess');
+    	$company1->setName('Company 1');
 
     	$company2 = new Company();
-    	$company2->setName('Lzaweb');
+    	$company2->setName('Company2');
 
         $manager->persist($company1);
         $manager->persist($company2);
@@ -55,15 +55,15 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         //PROJECTS
     	$project1 = new Project();
     	$project1->setCompany($company1);
-    	$project1->setName('First Project');
+    	$project1->setName('Project 1');
 
     	$project2 = new Project();
     	$project2->setCompany($company1);
-    	$project2->setName('Second Project');
+    	$project2->setName('Project 2');
 
     	$project3 = new Project();
     	$project3->setCompany($company2);
-    	$project3->setName('First Project');
+    	$project3->setName('Project 3');
 
         $manager->persist($project1);
         $manager->persist($project2);
@@ -72,26 +72,26 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
 
         //USERS
         $user1 = new User();
-        $user1->setUsername('lgandelin');
+        $user1->setUsername('john');
         $factory = $this->container->get('security.encoder_factory');
 		$encoder = $factory->getEncoder($user1);
-		$password = $encoder->encodePassword('GRVnfc38', $user1->getSalt());
+		$password = $encoder->encodePassword('111aaa', $user1->getSalt());
 		$user1->setPassword($password);
-		$user1->setFirstName('Louis');
-        $user1->setLastName('Gandelin');
-		$user1->setEmail('louis.gandelin@gmail.com');
+		$user1->setFirstName('John');
+        $user1->setLastName('');
+		$user1->setEmail('john@company1.com');
 		$user1->setCompany($company1);
 		$user1->addRole($role1);
 
 		$user2 = new User();
-        $user2->setUsername('dfontaine');
+        $user2->setUsername('jack');
         $factory = $this->container->get('security.encoder_factory');
 		$encoder = $factory->getEncoder($user2);
-		$password = $encoder->encodePassword('azeqsd123', $user2->getSalt());
+		$password = $encoder->encodePassword('222bbb', $user2->getSalt());
 		$user2->setPassword($password);
-		$user2->setFirstName('Damien');
-		$user2->setLastName('Fontaine');
-        $user2->setEmail('louis.gandelin@gmail.com');
+		$user2->setFirstName('Jack');
+		$user2->setLastName('');
+        $user2->setEmail('jack@company1.com');
 		$user2->setCompany($company1);
 		$user2->addRole($role2);
         $user1->addProject($project1);
@@ -106,7 +106,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         //TICKETS
         $ticket1 = new Ticket();
         $ticket1->setProject($project1);
-        $ticket1->setTitle('Bug found in contact page');
+        $ticket1->setTitle('Bug found in home page');
 
         $ticket2 = new Ticket();
         $ticket2->setProject($project2);

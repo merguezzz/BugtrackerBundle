@@ -6,6 +6,7 @@ Introduction
 
 BugtrackerBundle is a Symfony2 Bundle created for managing bugs in any web project.
 
+
 Installation
 ------------
 
@@ -22,6 +23,16 @@ Installation
 
         curl -s http://getcomposer.org/installer | php --
         php composer.phar install
+
+4. Create the database
+
+		php app/console doctrine:database:create
+		php app/console doctrine:schema:create
+
+5. Load fixtures to have test data
+
+		php app/console doctrine:fixtures:load
+
 
 Screenshots
 -----------
