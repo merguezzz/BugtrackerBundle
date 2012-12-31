@@ -26,6 +26,6 @@ Update your database settings in these files
 Screenshots
 -----------
 
-![Alt text](screens/dashboard.jpg "Dashboard")
+![Dashboard](/screens/dashboard.jpg "Dashboard")
 
-![Alt text](screens/database.jpg "Database schema")
+![Database schema](/screens/database.jpg "Database schema")
