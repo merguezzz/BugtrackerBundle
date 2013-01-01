@@ -33,6 +33,14 @@ Installation
 
 		php app/console doctrine:fixtures:load
 
+6. You can now log in :
+
+		username : john
+		password : 111aaa
+
+		username : jack
+		password : 222bbb
+
 
 Screenshots
 -----------
