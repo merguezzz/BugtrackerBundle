@@ -55,7 +55,7 @@ class UserFormType extends AbstractType
             'property'     => 'name',
             'multiple'     => true
         ));
-        $builder->add('roles', 'entity', array(
+        $builder->add('rolesAsCollection', 'entity', array(
             'class' => 'WebaccessBugtrackerBundle:Role',
             'property'     => 'name',
             'multiple'     => true

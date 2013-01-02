@@ -324,9 +324,19 @@ class User implements UserInterface
     /**
      * Gets the user roles.
      *
-     * @return ArrayCollection $roles
+     * @return Array $roles
      */
     public function getRoles()
+    {
+        return $this->roles->toArray();
+    }
+
+    /**
+     * Gets the user roles as an ArrayCollection.
+     *
+     * @return ArrayCollection $roles
+     */
+    public function getRolesAsCollection()
     {
         return $this->roles;
     }
