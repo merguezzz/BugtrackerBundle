@@ -50,6 +50,16 @@ class UserFormType extends AbstractType
                 'property' => 'name'
             )
         );
+        $builder->add('projects', 'entity', array(
+            'class' => 'WebaccessBugtrackerBundle:Project',
+            'property'     => 'name',
+            'multiple'     => true
+        ));
+        $builder->add('roles', 'entity', array(
+            'class' => 'WebaccessBugtrackerBundle:Role',
+            'property'     => 'name',
+            'multiple'     => true
+        ));
         $builder->add('email', 'text');
     }
 
