@@ -26,60 +26,64 @@ strong {
   clear: both; }
 
 /* line 30, ../sass/style.scss */
+.hidden {
+  display: none; }
+
+/* line 34, ../sass/style.scss */
 .table td, .table th {
   vertical-align: middle; }
 
-/* line 38, ../sass/style.scss */
+/* line 42, ../sass/style.scss */
 textarea {
   font-size: 13px;
   font-family: inherit; }
 
 /* TABLE */
-/* line 44, ../sass/style.scss */
+/* line 49, ../sass/style.scss */
 .table td.action {
   text-align: center; }
-  /* line 46, ../sass/style.scss */
+  /* line 51, ../sass/style.scss */
   .table td.action a {
     color: #333333;
     text-decoration: underline; }
 
 /* NAV BAR */
-/* line 57, ../sass/style.scss */
+/* line 62, ../sass/style.scss */
 .navbar .navbar-inner {
   margin: 0;
   padding: 0; }
-  /* line 61, ../sass/style.scss */
+  /* line 66, ../sass/style.scss */
   .navbar .navbar-inner .nav {
     width: 45%; }
-/* line 66, ../sass/style.scss */
+/* line 71, ../sass/style.scss */
 .navbar .welcome {
   float: right; }
-  /* line 69, ../sass/style.scss */
+  /* line 74, ../sass/style.scss */
   .navbar .welcome .greetings {
     float: none;
     padding: 10px 15px 10px;
     color: #777;
     text-decoration: none;
     text-shadow: 0 1px 0 white; }
-    /* line 76, ../sass/style.scss */
+    /* line 81, ../sass/style.scss */
     .navbar .welcome .greetings .user {
       font-weight: bold; }
-/* line 82, ../sass/style.scss */
+/* line 87, ../sass/style.scss */
 .navbar .language_selector {
   float: left;
   height: 40px;
   line-height: 40px;
   margin-left: 5%;
   vertical-align: middle; }
-  /* line 89, ../sass/style.scss */
+  /* line 94, ../sass/style.scss */
   .navbar .language_selector a {
     color: #777777; }
-  /* line 93, ../sass/style.scss */
+  /* line 98, ../sass/style.scss */
   .navbar .language_selector a.selected {
     color: #0088CC; }
 
 /* INTERFACES */
-/* line 103, ../sass/style.scss */
+/* line 108, ../sass/style.scss */
 .main-wrapper .header {
   margin-bottom: 20px;
   background-color: rgba(255, 235, 175, 0.5);
@@ -88,51 +92,51 @@ textarea {
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px; }
-  /* line 114, ../sass/style.scss */
+  /* line 119, ../sass/style.scss */
   .main-wrapper .header .title {
     float: left; }
-  /* line 118, ../sass/style.scss */
+  /* line 123, ../sass/style.scss */
   .main-wrapper .header .button-add {
     float: right;
     margin-top: 15px;
     margin-bottom: 15px; }
 
 /* LOGIN */
-/* line 128, ../sass/style.scss */
+/* line 133, ../sass/style.scss */
 #login {
   width: 245px;
   margin: 180px auto 0 auto; }
-  /* line 133, ../sass/style.scss */
+  /* line 138, ../sass/style.scss */
   #login input[type="submit"] {
     display: block;
     width: 100px;
     margin: 20px auto 0 auto; }
-  /* line 139, ../sass/style.scss */
+  /* line 144, ../sass/style.scss */
   #login .error {
     text-align: center; }
-  /* line 143, ../sass/style.scss */
+  /* line 148, ../sass/style.scss */
   #login .logo {
     margin-bottom: 20px; }
 
 /* DASHBOARD */
-/* line 150, ../sass/style.scss */
+/* line 155, ../sass/style.scss */
 .ticket-filter {
   cursor: pointer;
   margin-bottom: 10px; }
-  /* line 156, ../sass/style.scss */
+  /* line 161, ../sass/style.scss */
   .ticket-filter .ticket-filter-selector select {
     width: auto;
     color: #777;
     text-decoration: none;
     text-shadow: 0 1px 0 white;
     margin-right: 10px; }
-  /* line 164, ../sass/style.scss */
+  /* line 169, ../sass/style.scss */
   .ticket-filter .ticket-filter-selector label {
     display: inline; }
-  /* line 168, ../sass/style.scss */
+  /* line 173, ../sass/style.scss */
   .ticket-filter .ticket-filter-selector form {
     margin-bottom: 0; }
-    /* line 171, ../sass/style.scss */
+    /* line 176, ../sass/style.scss */
     .ticket-filter .ticket-filter-selector form input[type="submit"] {
       margin: 0;
       height: 30px;
@@ -142,52 +146,52 @@ textarea {
       padding-bottom: 0; }
 
 /* TABLES */
-/* line 185, ../sass/style.scss */
+/* line 190, ../sass/style.scss */
 .priority-1 {
   background: #468847; }
 
-/* line 189, ../sass/style.scss */
+/* line 194, ../sass/style.scss */
 .priority-2 {
   background: #F89406; }
 
-/* line 193, ../sass/style.scss */
+/* line 198, ../sass/style.scss */
 .priority-3 {
   background: #B94A48; }
 
-/* line 200, ../sass/style.scss */
+/* line 205, ../sass/style.scss */
 .status-2 {
   background: #f9f3c8; }
 
-/* line 204, ../sass/style.scss */
+/* line 209, ../sass/style.scss */
 .status-3 {
   background: #d9f4f7; }
 
-/* line 208, ../sass/style.scss */
+/* line 213, ../sass/style.scss */
 .status-4 {
   background: #D9EDF7; }
 
-/* line 212, ../sass/style.scss */
+/* line 217, ../sass/style.scss */
 .status-5 {
   background: #ffebaf; }
 
-/* line 216, ../sass/style.scss */
+/* line 221, ../sass/style.scss */
 .status-6 {
   background: #e6f9de; }
 
-/* line 220, ../sass/style.scss */
+/* line 225, ../sass/style.scss */
 .status-7 {
   background: #DFF0D8; }
 
-/* line 224, ../sass/style.scss */
+/* line 229, ../sass/style.scss */
 .status-8 {
   background: #e5e5e5; }
 
-/* line 228, ../sass/style.scss */
+/* line 233, ../sass/style.scss */
 td.center {
   text-align: center; }
 
 /* FOOTER */
-/* line 234, ../sass/style.scss */
+/* line 239, ../sass/style.scss */
 .footer {
   width: 230px;
   height: 53px;
@@ -195,29 +199,29 @@ td.center {
 
 /* RESONSIVE */
 @media (max-width: 480px) {
-  /* line 254, ../sass/style.scss */
+  /* line 259, ../sass/style.scss */
   .ticket-filter .ticket-filter-selector select {
     display: block; } }
 @media (max-width: 480px), (max-width: 768px) {
   /* Force table to not be like tables anymore */
-  /* line 264, ../sass/style.scss */
+  /* line 269, ../sass/style.scss */
   table, thead, tbody, th, td, tr {
     display: block; }
 
   /* Hide table headers (but not display: none;, for accessibility) */
-  /* line 269, ../sass/style.scss */
+  /* line 274, ../sass/style.scss */
   thead tr {
     position: absolute;
     top: -9999px;
     left: -9999px; }
 
-  /* line 275, ../sass/style.scss */
+  /* line 280, ../sass/style.scss */
   td {
     /* Behave  like a "row" */
     position: relative;
     padding-left: 50%; }
 
-  /* line 281, ../sass/style.scss */
+  /* line 286, ../sass/style.scss */
   td:before {
     /* Now like a table header */
     position: absolute;

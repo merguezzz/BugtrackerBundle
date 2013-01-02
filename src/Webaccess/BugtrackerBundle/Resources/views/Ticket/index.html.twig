@@ -6,95 +6,110 @@
 
 {% block bugtracker_body %}
 
-	{% render "WebaccessBugtrackerBundle:Ticket:menu" with {'route' : 'ticket'} %}
+   {% render "WebaccessBugtrackerBundle:Ticket:menu" with {'route' : 'ticket'} %}
 
-	<div id="dashboard" class="main-wrapper">
-		<div class="header">
-			<div class="title">
-				<h1>{{ 'dashboard.title' | trans }}</h1>
-			</div>
+   <div id="dashboard" class="main-wrapper">
+      <div class="header">
+         <div class="title">
+            <h1>{{ 'dashboard.title' | trans }}</h1>
+         </div>
 
-			<div class="button-add">
-				<a class="btn btn-warning" href="{{ path('webaccess_bugtracker_ticket_add') }}">{{ 'dashboard.add' | trans }}</a>
-			</div>
-			<div class="clear"></div>
+         <div class="button-add">
+            <a class="btn btn-warning" href="{{ path('webaccess_bugtracker_ticket_add') }}">{{ 'dashboard.add' | trans }}</a>
+         </div>
+         <div class="clear"></div>
+      </div>
+
+      <div class="ticket-filter">
+         <div class="ticket-filter-selector">
+            <form id="ticket-filter" action="{{ path('webaccess_bugtracker_ticket') }}" method="post" {{ form_enctype(form) }}>
+               <div>
+                  {{ form_widget(form.project) }}
+                  {{ form_widget(form.user) }}
+                  {{ form_widget(form.type) }}
+                  {{ form_widget(form.status) }}
+                  {{ form_widget(form.priority) }}
+                  <input type="submit" class="btn btn-warning" value="OK" />
+               </div>
+               {{ form_rest(form) }}
+            </form>
+         </div>
+      </div>
+
+      <table class="table table-bordered">
+         <thead>
+            <tr>
+               <th>{{ 'generic.creation_date' | trans }}</th>
+               <th>{{ 'generic.update_date' | trans }}</th>
+               <th>{{ 'ticket.title' | trans }}</th>
+               <th>{{ 'ticket.project' | trans }}</th>
+               <th>{{ 'ticket.author' | trans }}</th>
+               <th>{{ 'ticket.allocated_to' | trans }}</th>
+               <th>{{ 'ticket.type' | trans }}</th>
+               <th>{{ 'ticket.status' | trans }}</th>
+               <th>{{ 'ticket.priority' | trans }}</th>
+               <th>{{ 'generic.action' | trans }}</th>
+            </tr>
+         </thead>
+         <tbody>
+
+         {% if tickets | length > 0 %}
+            {% for ticket in tickets %}
+                 <tr class="status-{{ ticket.currentState.status }}">
+                    <td>{{ ticket.states[0].createdAt | date('d/m/y H:i') }}</td>
+                    <td>{{ ticket.currentState.createdAt | date('d/m/y H:i') }}</td>
+                    <td>{{ ticket.title }}</td>
+                    <td>{{ ticket.project.name }}</td>
+                    <td>{{ ticket.currentState.authorUser.firstName }} {{ ticket.currentState.authorUser.lastName | truncate(1, false, '.') }}</td>
+                    <td>{{ ticket.currentState.allocatedUser.firstName }} {{ ticket.currentState.allocatedUser.lastName | truncate(1, false, '.') }}</td>
+                    <td>{{ ('ticket_state.type.' ~ ticket.currentState.type) | trans }}</td>
+                    <td>{{ ('ticket_state.status.' ~ ticket.currentState.status) | trans }}</td>
+                    <td class="center" width="6%"><span class="label priority-{{ ticket.currentState.priority }}">{{ ('ticket_state.priority.' ~ ticket.currentState.priority) | trans }}</span></td>
+                    <td class="action" width="4%">
+                     <a class="icon-pencil" href="{{ path('webaccess_bugtracker_ticket_edit', {'ticketId':ticket.id}) }}" title="{{ 'generic.edit' | trans }}"></a>
+                     <a class="icon-remove confirm-delete" data-id="{{ ticket.id }}" href="{{ path('webaccess_bugtracker_ticket_delete', {'ticketId':ticket.id}) }}" title="{{ 'generic.delete' | trans }}"></a>
+                  </td>
+                 </tr>
+             {% endfor %}
+         {% else %}
+            <tr>
+               <td colspan="10">{{ 'dashboard.no_tickets' | trans }}</td>
+            </tr>
+         {% endif %}
+         </tbody>
+      </table>
+
+      <div class="ticket-filter">
+         <div class="ticket-filter-selector">
+            <form id="ticket-filter" action="{{ path('webaccess_bugtracker_ticket') }}" method="post" {{ form_enctype(formCopy) }}>
+               <div>
+                  {{ form_widget(formCopy.project) }}
+                  {{ form_widget(formCopy.user) }}
+                  {{ form_widget(formCopy.type) }}
+                  {{ form_widget(formCopy.status) }}
+                  {{ form_widget(formCopy.priority) }}
+                  <input type="submit" class="btn btn-warning" value="OK" />
+               </div>
+               {{ form_rest(form) }}
+            </form>
+         </div>
+      </div>
+   </div>
+
+   <div id="modal-confirm-delete" role="dialog" class="modal hide fade">
+		<div class="modal-header">
+			<a href="#" class="close">&times;</a>
+			<h3>{{ 'ticket.delete_ticket' | trans }}</h3>
 		</div>
-
-		<div class="ticket-filter">
-			<div class="ticket-filter-selector">
-				<form id="ticket-filter" action="{{ path('webaccess_bugtracker_ticket') }}" method="post" {{ form_enctype(form) }}>
-					<div>
-						{{ form_widget(form.project) }}
-						{{ form_widget(form.user) }}
-						{{ form_widget(form.type) }}
-						{{ form_widget(form.status) }}
-						{{ form_widget(form.priority) }}
-						<input type="submit" class="btn btn-warning" value="OK" />
-					</div>
-					{{ form_rest(form) }}
-				</form>
-			</div>
+		<div class="modal-body">
+			<p>{{ 'ticket.delete_ticket.warning' | trans }}</p>
+			<p>{{ 'ticket.delete_ticket.proceed' | trans }}</p>
 		</div>
-
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>{{ 'generic.creation_date' | trans }}</th>
-					<th>{{ 'generic.update_date' | trans }}</th>
-					<th>{{ 'ticket.title' | trans }}</th>
-					<th>{{ 'ticket.project' | trans }}</th>
-					<th>{{ 'ticket.author' | trans }}</th>
-					<th>{{ 'ticket.allocated_to' | trans }}</th>
-					<th>{{ 'ticket.type' | trans }}</th>
-					<th>{{ 'ticket.status' | trans }}</th>
-					<th>{{ 'ticket.priority' | trans }}</th>
-					<th>{{ 'generic.action' | trans }}</th>
-				</tr>
-			</thead>
-			<tbody>
-
-			{% if tickets | length > 0 %}
-				{% for ticket in tickets %}
-			        <tr class="status-{{ ticket.currentState.status }}">
-			        	<td>{{ ticket.states[0].createdAt | date('d/m/y H:i') }}</td>
-			        	<td>{{ ticket.currentState.createdAt | date('d/m/y H:i') }}</td>
-			        	<td>{{ ticket.title }}</td>
-			        	<td>{{ ticket.project.name }}</td>
-			        	<td>{{ ticket.currentState.authorUser.firstName }} {{ ticket.currentState.authorUser.lastName | truncate(1, false, '.') }}</td>
-			        	<td>{{ ticket.currentState.allocatedUser.firstName }} {{ ticket.currentState.allocatedUser.lastName | truncate(1, false, '.') }}</td>
-			        	<td>{{ ('ticket_state.type.' ~ ticket.currentState.type) | trans }}</td>
-			        	<td>{{ ('ticket_state.status.' ~ ticket.currentState.status) | trans }}</td>
-			        	<td class="center" width="6%"><span class="label priority-{{ ticket.currentState.priority }}">{{ ('ticket_state.priority.' ~ ticket.currentState.priority) | trans }}</span></td>
-			        	<td class="action" width="4%">
-							<a class="icon-pencil" href="{{ path('webaccess_bugtracker_ticket_edit', {'ticketId':ticket.id}) }}" title="{{ 'generic.edit' | trans }}"></a>
-							<a class="icon-remove" href="{{ path('webaccess_bugtracker_ticket_delete', {'ticketId':ticket.id}) }}" title="{{ 'generic.delete' | trans }}"></a>
-						</td>
-			        </tr>
-			    {% endfor %}
-			{% else %}
-				<tr>
-					<td colspan="10">{{ 'dashboard.no_tickets' | trans }}</td>
-				</tr>
-			{% endif %}
-			</tbody>
-		</table>
-
-		<div class="ticket-filter">
-			<div class="ticket-filter-selector">
-				<form id="ticket-filter" action="{{ path('webaccess_bugtracker_ticket') }}" method="post" {{ form_enctype(formCopy) }}>
-					<div>
-						{{ form_widget(formCopy.project) }}
-						{{ form_widget(formCopy.user) }}
-						{{ form_widget(formCopy.type) }}
-						{{ form_widget(formCopy.status) }}
-						{{ form_widget(formCopy.priority) }}
-						<input type="submit" class="btn btn-warning" value="OK" />
-					</div>
-					{{ form_rest(form) }}
-				</form>
-			</div>
+		<div class="modal-footer">
+			<a href="{{ path('webaccess_bugtracker_ticket_delete') }}" class="btn btn-danger danger">{{ 'ticket.delete_ticket.confirm' | trans }}</a>
+			<a href="javascript:void(0)" class="btn secondary cancel-delete">{{ 'ticket.delete_ticket.cancel' | trans }}</a>
 		</div>
-	</div>
+   </div>
 
 {% endblock %}
 
@@ -103,12 +118,26 @@
 
     <script type="text/javascript">
 
-	    {% if(app.session.getFlash('ticket_added')) %}
-	    	notification("{{ 'ticket.added' | trans }}");
-	    {% elseif(app.session.getFlash('ticket_updated')) %}
-	    	notification("{{ 'ticket.updated' | trans }}");
-	    {% elseif(app.session.getFlash('ticket_deleted')) %}
-	    	notification("{{ 'ticket.deleted' | trans }}");
-	    {% endif %}
+        {% if(app.session.getFlash('ticket_added')) %}
+		    notification("{{ 'ticket.added' | trans }}");
+        {% elseif(app.session.getFlash('ticket_updated')) %}
+		    notification("{{ 'ticket.updated' | trans }}");
+        {% elseif(app.session.getFlash('ticket_deleted')) %}
+		    notification("{{ 'ticket.deleted' | trans }}");
+		{% endif %}
+
+       $(document).ready(function() {
+
+			$('.confirm-delete').click(function(e) {
+				e.preventDefault();
+                $('.danger').attr('href', $(this).attr('href'));
+         		$('#modal-confirm-delete').modal({ backdrop: true });
+			});
+
+			$('.cancel-delete').click(function(e) {
+				$('#modal-confirm-delete').modal('hide');
+			});
+     	});
+
     </script>
 {% endblock %}

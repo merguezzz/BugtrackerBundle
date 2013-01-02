@@ -43,6 +43,13 @@ ticket.content: Contenu
 ticket.edit.title: Editer un ticket
 ticket.edit.history: Historique
 
+ticket.delete_ticket: Supprimer un ticket
+ticket.delete_ticket.warning: Vous êtes sur le point de supprimer un ticket. Cette procédure est irréversible.
+ticket.delete_ticket.proceed: Voulez-vous continuer ?
+ticket.delete_ticket.confirm: Supprimer
+ticket.delete_ticket.cancel: Annuler
+
+
 ticket.added: Ticket ajouté
 ticket.updated: Ticket mis à jour
 ticket.deleted: Ticket supprimé

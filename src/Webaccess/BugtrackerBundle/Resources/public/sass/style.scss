@@ -27,6 +27,10 @@ strong {
     clear: both;
 }
 
+.hidden {
+    display: none;
+}
+
 .table td, .table th {
     vertical-align: middle;
 }
@@ -41,6 +45,7 @@ textarea {
 }
 
 /* TABLE */
+
 .table td.action {
 
     a {
