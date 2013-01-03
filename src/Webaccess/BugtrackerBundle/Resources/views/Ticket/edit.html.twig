@@ -16,61 +16,67 @@
 			<div class="clear"></div>
 		</div>
 
-		<form action="{{ path('webaccess_bugtracker_ticket_edit', {'ticketId':ticket.id}) }}" method="post" {{ form_enctype(form) }}>
-		    {{ form_row(form.title, { 'label' : 'ticket.title', 'attr': {'class': 'span6'} }) }}
-		    {{ form_row(form.project, { 'label' : 'ticket.project', 'attr': {'class': 'span6'} }) }}
+		<div class="row-fluid">
+			<div class="span6">
+				<form action="{{ path('webaccess_bugtracker_ticket_edit', {'ticketId':ticket.id}) }}" method="post" {{ form_enctype(form) }}>
+				    {{ form_row(form.title, { 'label' : 'ticket.title', 'attr': {'class': 'span12'} }) }}
+				    {{ form_row(form.project, { 'label' : 'ticket.project', 'attr': {'class': 'span12'} }) }}
 
-		    {% for state in form.states %}
-		    	{% if not loop.last %}<div style="display:none">{% endif %}
-				    {{ form_row(state.content, { 'label' : 'ticket.content', 'attr': {'class': 'span6'} }) }}
-				    <div style="display:none">{{ form_row(state.authorUser) }}</div>
-				    {{ form_row(state.allocatedUser, { 'label' : 'ticket.allocated_to', 'attr': {'class': 'span6'} }) }}
-				    {{ form_row(state.type, { 'label' : 'ticket.type', 'attr': {'class': 'span6'} }) }}
-				    {{ form_row(state.status, { 'label' : 'ticket.status', 'attr': {'class': 'span6'} }) }}
-				    {{ form_row(state.priority, { 'label' : 'ticket.priority', 'attr': {'class': 'span6'} }) }}
-				{% if not loop.last %}</div>{% endif %}
-			{% endfor %}
+				    {% for state in form.states %}
+				    	{% if not loop.last %}<div style="display:none">{% endif %}
+						    {{ form_row(state.content, { 'label' : 'ticket.content', 'attr': {'class': 'span12'} }) }}
+						    <div style="display:none">{{ form_row(state.authorUser) }}</div>
+						    {{ form_row(state.allocatedUser, { 'label' : 'ticket.allocated_to', 'attr': {'class': 'span12'} }) }}
+						    {{ form_row(state.type, { 'label' : 'ticket.type', 'attr': {'class': 'span12'} }) }}
+						    {{ form_row(state.status, { 'label' : 'ticket.status', 'attr': {'class': 'span12'} }) }}
+						    {{ form_row(state.priority, { 'label' : 'ticket.priority', 'attr': {'class': 'span12'} }) }}
+						{% if not loop.last %}</div>{% endif %}
+					{% endfor %}
 
-			{{ form_rest(form) }}
-	        <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
-	        <input type="submit" class="btn btn-warning" value="{{ 'generic.save' | trans }}" />
-		</form>
+					{{ form_rest(form) }}
+			        <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
+			        <input type="submit" class="btn btn-warning" value="{{ 'generic.save' | trans }}" />
+				</form>
+			</div>
 
-		<h2>{{ 'ticket.edit.history' | trans }}</h2>
+			<div class="span6">
+				<h2>{{ 'ticket.edit.history' | trans }}</h2>
 
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>{{ 'generic.creation_date' | trans }}</th>
-					<th>{{ 'ticket.comments' | trans }}</th>
-					<th>{{ 'ticket.author' | trans }}</th>
-					<th>{{ 'ticket.allocated_to' | trans }}</th>
-					<th>{{ 'ticket.type' | trans }}</th>
-					<th>{{ 'ticket.status' | trans }}</th>
-					<th>{{ 'ticket.priority' | trans }}</th>
-				</tr>
-			</thead>
-			<tbody>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>{{ 'generic.creation_date' | trans }}</th>
+							<th>{{ 'ticket.comments' | trans }}</th>
+							<th>{{ 'ticket.author' | trans }}</th>
+							<th>{{ 'ticket.allocated_to' | trans }}</th>
+							<th>{{ 'ticket.type' | trans }}</th>
+							<th>{{ 'ticket.status' | trans }}</th>
+							<th>{{ 'ticket.priority' | trans }}</th>
+						</tr>
+					</thead>
+					<tbody>
 
-			{% for i in ticket.states | length - 1 .. 0 %}
-				{% if not loop.first %}
-					{% set state = ticket.states[i] %}
-					<tr class="status-{{ state.status }}">
-						<td width="11%">{{ state.createdAt | date('d/m/y H:i') }}</td>
-						<td>{{ state.content }}</td>
-						<td>{{ state.authorUser.completeName }}</td>
-						<td>{{ state.allocatedUser.completeName }}</td>
-						<td>{{ ('ticket_state.type.' ~ state.type) | trans }}</td>
-						<td>{{ ('ticket_state.status.' ~ state.status) | trans }}</td>
-						<td width="6%" class="center"><span class="label priority-{{ state.priority }}">{{ ('ticket_state.priority.' ~ state.priority) | trans }}</span></td>
-					</tr>
-				{% endif %}
-			{% endfor %}
+					{% for i in ticket.states | length - 1 .. 0 %}
+						{% if not loop.first %}
+							{% set state = ticket.states[i] %}
+							<tr class="status-{{ state.status }}">
+								<td width="11%">{{ state.createdAt | date('d/m/y H:i') }}</td>
+								<td>{{ state.content }}</td>
+								<td>{{ state.authorUser.firstName }} {{ state.authorUser.lastName | truncate(1, false, '.') }}</td>
+								<td>{{ state.allocatedUser.firstName }} {{ state.allocatedUser.lastName | truncate(1, false, '.') }}</td>
+								<td>{{ ('ticket_state.type.' ~ state.type) | trans }}</td>
+								<td>{{ ('ticket_state.status.' ~ state.status) | trans }}</td>
+								<td width="6%" class="center"><span class="label priority-{{ state.priority }}">{{ ('ticket_state.priority.' ~ state.priority) | trans }}</span></td>
+							</tr>
+						{% endif %}
+					{% endfor %}
 
-			</tbody>
-		</table>
+					</tbody>
+				</table>
 
-	    <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
+			    <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
+			</div>
+		</div>
 	</div>
 
 {% endblock %}

@@ -199,29 +199,29 @@ td.center {
 
 /* RESONSIVE */
 @media (max-width: 480px) {
-  /* line 259, ../sass/style.scss */
+  /* line 251, ../sass/style.scss */
   .ticket-filter .ticket-filter-selector select {
     display: block; } }
-@media (max-width: 480px), (max-width: 768px) {
+@media (max-width: 480px), (max-width: 768px), (max-width: 979px) {
   /* Force table to not be like tables anymore */
-  /* line 269, ../sass/style.scss */
+  /* line 261, ../sass/style.scss */
   table, thead, tbody, th, td, tr {
     display: block; }
 
   /* Hide table headers (but not display: none;, for accessibility) */
-  /* line 274, ../sass/style.scss */
+  /* line 266, ../sass/style.scss */
   thead tr {
     position: absolute;
     top: -9999px;
     left: -9999px; }
 
-  /* line 280, ../sass/style.scss */
+  /* line 272, ../sass/style.scss */
   td {
     /* Behave  like a "row" */
     position: relative;
     padding-left: 50%; }
 
-  /* line 286, ../sass/style.scss */
+  /* line 278, ../sass/style.scss */
   td:before {
     /* Now like a table header */
     position: absolute;
@@ -230,4 +230,8 @@ td.center {
     left: 6px;
     width: 45%;
     padding-right: 10px;
-    white-space: nowrap; } }
+    white-space: nowrap; }
+
+  /* line 289, ../sass/style.scss */
+  [class*="span"], .uneditable-input[class*="span"], .row-fluid [class*="span"] {
+    width: 100%; } }
