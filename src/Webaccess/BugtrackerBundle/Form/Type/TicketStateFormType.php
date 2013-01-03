@@ -33,15 +33,17 @@ class TicketStateFormType extends AbstractType
     /**
      * Constructor
      *
-     * @param integer            $projectId         Project ID (used to display user projects)
+     * @param integer            $projectId          Project ID (used to display user projects)
      * @param TranslationManager $translationManager TranslationManager
+     * @param UserManager $userManager        UserManager
      *
      * @return void
      */
-    public function __construct($projectId, $translationManager)
+    public function __construct($projectId, $translationManager, $userManager)
     {
         $this->projectId = $projectId;
         $this->translationManager = $translationManager;
+        $this->userManager = $userManager;
     }
 
     /**
@@ -55,6 +57,7 @@ class TicketStateFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $projectId = $this->projectId;
+        $userManager = $this->userManager;
 
         $builder->add(
             'content', 'textarea', array(
@@ -74,8 +77,8 @@ class TicketStateFormType extends AbstractType
             'allocatedUser', 'entity', array(
                 'class' => 'WebaccessBugtrackerBundle:User',
                 'property' => 'completeName',
-                'query_builder' => function ($er) use ($projectId) {
-                    return $er->findByProject($projectId);
+                'query_builder' => function ($er) use ($projectId, $userManager) {
+                    return $er->findByProject($projectId, $userManager->getUser()->getId(), $userManager->isAdmin());
                 }
             )
         );

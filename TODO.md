@@ -6,7 +6,6 @@ Todo List
 
 ### High priority
 
-- When choosing an allocated user, display the users of the project only
 - Send mails after ticket creation / modification / deletion to author & allocated user
 
 ### Medium priority

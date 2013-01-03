@@ -58,6 +58,7 @@ class TicketFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $translationManager = $this->translationManager;
         $userManager = $this->userManager;
 
         $builder->add('title', 'text');
@@ -75,7 +76,7 @@ class TicketFormType extends AbstractType
         $builder->add(
             'states', 'collection', array(
                 'type' => new TicketStateFormType(
-                    ($userManager->getProjectInSession()) ? $userManager->getProjectInSession()->getId() : null, $this->translationManager
+                    ($userManager->getProjectInSession()) ? $userManager->getProjectInSession()->getId() : null, $translationManager, $userManager
                 )
             )
         );

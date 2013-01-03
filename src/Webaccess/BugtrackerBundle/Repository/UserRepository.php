@@ -48,7 +48,7 @@ class UserRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function findByProject($projectId)
+    public function findByProject($projectId, $userId, $isAdmin)
     {
         $qb = $this->createQueryBuilder('u')
             ->addSelect('c')
@@ -59,6 +59,11 @@ class UserRepository extends EntityRepository
 
         if ($projectId) {
             $qb->andWhere($this->createQueryBuilder('u')->expr()->eq('p.id', $projectId));
+        } elseif($userId) {
+            if (!$isAdmin) {
+                $qb->leftJoin('p.users', 'user')
+                    ->where($qb->expr()->eq('user.id', $userId));
+            }
         }
 
         return $qb;
