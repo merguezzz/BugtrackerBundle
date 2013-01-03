@@ -79,21 +79,18 @@
          </tbody>
       </table>
 
-      <div class="ticket-filter">
-         <div class="ticket-filter-selector">
-            <form id="ticket-filter" action="{{ path('webaccess_bugtracker_ticket') }}" method="post" {{ form_enctype(formCopy) }}>
-               <div>
-                  {{ form_widget(formCopy.project) }}
-                  {{ form_widget(formCopy.user) }}
-                  {{ form_widget(formCopy.type) }}
-                  {{ form_widget(formCopy.status) }}
-                  {{ form_widget(formCopy.priority) }}
-                  <input type="submit" class="btn btn-warning" value="OK" />
-               </div>
-               {{ form_rest(form) }}
-            </form>
-         </div>
-      </div>
+      {% if pagination.totalPageNumber > 1 %}
+        <div class="pagination pagination-centered">
+            <ul>
+                <li {% if pagination.currentPage <= 1 %}class="disabled"{% endif %}><a href="{{ path('webaccess_bugtracker_ticket', {'pageNumber':pagination.currentPage-1}) }}">«</a></li>
+                {% for i in 1..pagination.totalPageNumber %}
+                    <li {% if pagination.currentPage == i %}class="active"{% endif %}><a href="{{ path('webaccess_bugtracker_ticket', {'pageNumber':i}) }}">{{ i }}</a></li>
+                {% endfor %}
+                <li {% if pagination.currentPage >= pagination.totalPageNumber %}class="disabled"{% endif %}><a href="{{ path('webaccess_bugtracker_ticket', {'pageNumber':pagination.currentPage+1}) }}">»</a></li>
+            </ul>
+        </div>
+      {% endif %}
+
    </div>
 
    <div id="modal-confirm-delete" role="dialog" class="modal hide fade">
