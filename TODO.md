@@ -11,7 +11,6 @@ Todo List
 
 ### Medium priority
 
-- Add a placeholder for the files associated
 - Add screenshot(s) to tickets
 
 ### Low priority

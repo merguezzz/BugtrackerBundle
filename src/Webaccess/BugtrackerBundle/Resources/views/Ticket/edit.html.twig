@@ -32,6 +32,7 @@
 						    {{ form_row(state.priority, { 'label' : 'ticket.priority', 'attr': {'class': 'span12'} }) }}
 						{% if not loop.last %}</div>{% endif %}
 					{% endfor %}
+					{{ form_row(form.files, { 'label' : 'ticket.files', 'attr': {'class': 'span12'} }) }}
 
 					{{ form_rest(form) }}
 			        <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>

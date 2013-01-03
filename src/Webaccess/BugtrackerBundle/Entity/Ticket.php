@@ -53,6 +53,14 @@ class Ticket
     protected $currentState;
 
     /**
+     * @var text $files
+     *
+     * @ORM\Column(name="files", type="text", nullable=true)
+     */
+    protected $files;
+
+
+    /**
      * Constructor
      *
      * @return NULL
@@ -185,5 +193,27 @@ class Ticket
     {
         $this->currentState = $currentState;
         return $this;
+    }
+
+    /**
+     * Set files
+     *
+     * @param text $files
+     * @return Ticket
+     */
+    public function setFiles($files)
+    {
+        $this->files = $files;
+        return $this;
+    }
+
+    /**
+     * Get files
+     *
+     * @return text
+     */
+    public function getFiles()
+    {
+        return $this->files;
     }
 }

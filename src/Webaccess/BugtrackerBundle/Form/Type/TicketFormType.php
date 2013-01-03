@@ -80,6 +80,13 @@ class TicketFormType extends AbstractType
                 )
             )
         );
+
+        $builder->add(
+            'files', 'textarea', array(
+                'required' => false,
+                'attr' => array('rows' => 5)
+            )
+        );
     }
 
     /**

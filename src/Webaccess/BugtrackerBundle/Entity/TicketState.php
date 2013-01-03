@@ -78,6 +78,7 @@ class TicketState
      */
     protected $priority;
 
+
     /**
      * Constructor
      *

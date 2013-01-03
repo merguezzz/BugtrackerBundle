@@ -39,6 +39,7 @@ ticket.status: Status
 ticket.priority: Priority
 ticket.comments: Comments
 ticket.content: Content
+ticket.files: Files
 
 ticket.edit.title: Edit a ticket
 ticket.edit.history: History
