@@ -38,7 +38,7 @@ class Ticket
     protected $project;
 
     /**
-     * @var States
+     * @var ArrayCokkection $states
      *
      * @ORM\OneToMany(targetEntity="TicketState", mappedBy="ticket", cascade={"remove"})
      */
