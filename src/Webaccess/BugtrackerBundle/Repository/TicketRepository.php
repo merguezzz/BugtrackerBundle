@@ -45,13 +45,13 @@ class TicketRepository extends EntityRepository
      * Function which returns tickets by project / allocatedUser / type / status / priority
      *
      * @param integer $userId          User ID
+     * @param integer $limit           Query limit
+     * @param integer $offset          Query offset
      * @param integer $projectId       Project ID
      * @param integer $allocatedUserId Allocated user ID
      * @param integer $typeId          Type ID
      * @param integer $statusId        Status ID
      * @param integer $priorityId      Priority ID
-     * @param integer $limit           Limit
-     * @param integer $offset          Offset
      *
      * @return QueryBuilder
      */

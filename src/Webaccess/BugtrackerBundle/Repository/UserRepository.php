@@ -45,6 +45,8 @@ class UserRepository extends EntityRepository
      * Function which returns users by project
      *
      * @param integer $projectId Project ID
+     * @param integer $userId    User ID
+     * @param integer $isAdmin   True if the user is admin
      *
      * @return QueryBuilder
      */
@@ -59,7 +61,7 @@ class UserRepository extends EntityRepository
 
         if ($projectId) {
             $qb->andWhere($this->createQueryBuilder('u')->expr()->eq('p.id', $projectId));
-        } elseif($userId) {
+        } elseif ($userId) {
             if (!$isAdmin) {
                 $qb->leftJoin('p.users', 'user')
                     ->where($qb->expr()->eq('user.id', $userId));

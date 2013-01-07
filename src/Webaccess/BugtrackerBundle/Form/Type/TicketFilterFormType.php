@@ -82,7 +82,7 @@ class TicketFilterFormType extends AbstractType
                 'property' => 'completename',
                 'required' => false,
                 'query_builder' => function ($er) use ($userManager) {
-                    return $er->findByProject(NULL, $userManager->getUser()->getId(), $userManager->isAdmin());
+                    return $er->findByProject(null, $userManager->getUser()->getId(), $userManager->isAdmin());
                 }
             )
         );
