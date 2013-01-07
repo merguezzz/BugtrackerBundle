@@ -13,3 +13,5 @@ Todo List
 - Add screenshot(s) to tickets
 
 ### Low priority
+
+- Add a recap in dashboard : Tickets in progress (3) Tickets to do (4) ...

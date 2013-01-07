@@ -84,6 +84,8 @@ class TicketManager
     {
         $ticket = new Ticket();
         $ticket_state = new TicketState();
+        $ticket_state->setStatus(3);
+        $ticket_state->setPriority(2);
         $ticket_state->setTicket($ticket);
         $ticket->addState($ticket_state);
         $ticket->setCurrentState($ticket_state);

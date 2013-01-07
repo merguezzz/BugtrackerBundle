@@ -35,7 +35,7 @@ class TicketStateFormType extends AbstractType
      *
      * @param integer            $projectId          Project ID (used to display user projects)
      * @param TranslationManager $translationManager TranslationManager
-     * @param UserManager $userManager        UserManager
+     * @param UserManager        $userManager        UserManager
      *
      * @return void
      */
@@ -96,7 +96,6 @@ class TicketStateFormType extends AbstractType
 
         $builder->add(
             'status', 'choice', array(
-                'data' => 3,
                 'choices' => array(
                     1 => $this->translationManager->trans('ticket_state.status.1'),
                     2 => $this->translationManager->trans('ticket_state.status.2'),
@@ -112,7 +111,6 @@ class TicketStateFormType extends AbstractType
 
         $builder->add(
             'priority', 'choice', array(
-                'data' => 2,
                 'choices' => array(
                     1 => $this->translationManager->trans('ticket_state.priority.1'),
                     2 => $this->translationManager->trans('ticket_state.priority.2'),
