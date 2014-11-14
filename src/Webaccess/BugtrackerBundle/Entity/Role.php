@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
  * @ORM\Entity
  * @ORM\Table(name="role")
  */
-class Role implements RoleInterface
+class Role implements RoleInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -76,5 +76,19 @@ class Role implements RoleInterface
     public function getRole()
     {
         return $this->getName();
+    }
+
+    public function serialize()
+    {
+        //return serialize($this->username);
+        return \json_encode(
+        array($this->id, $this->name));
+    }
+
+    public function unserialize($data)
+    {   
+
+        //$this->username = unserialize($data);
+        list($this->id, $this->name) = \json_decode($data);
     }
 }

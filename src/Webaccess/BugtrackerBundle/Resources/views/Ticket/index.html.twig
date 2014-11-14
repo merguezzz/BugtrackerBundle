@@ -6,7 +6,7 @@
 
 {% block bugtracker_body %}
 
-   {% render "WebaccessBugtrackerBundle:Ticket:menu" with {'route' : 'ticket'} %}
+   {{ render(controller( 'WebaccessBugtrackerBundle:Ticket:menu', { 'route': 'ticket' } )) }}
 
    <div id="dashboard" class="main-wrapper">
       <div class="header">
@@ -115,13 +115,16 @@
 
     <script type="text/javascript">
 
-        {% if(app.session.getFlash('ticket_added')) %}
-		    notification("{{ 'ticket.added' | trans }}");
-        {% elseif(app.session.getFlash('ticket_updated')) %}
-		    notification("{{ 'ticket.updated' | trans }}");
-        {% elseif(app.session.getFlash('ticket_deleted')) %}
-		    notification("{{ 'ticket.deleted' | trans }}");
-		{% endif %}
+        {% if(app.session.flashbag.get('ticket_added')) %}
+          notification("{{ 'ticket.added' | trans }}");
+        {% elseif(app.session.flashbag.get('ticket_updated')) %}
+          notification("{{ 'ticket.updated' | trans }}");
+        {% elseif(app.session.flashbag.get('ticket_deleted')) %}
+           notification("{{ 'ticket.deleted' | trans }}");
+        {% endif %}
+
+
+
 
        $(document).ready(function() {
 

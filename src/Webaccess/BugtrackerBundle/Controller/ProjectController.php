@@ -55,7 +55,7 @@ class ProjectController extends Controller
         $formHandler = $this->container->get('webaccess_bugtracker.project.form_handler');
 
         if ($formHandler->process($project)) {
-            $this->get('session')->setFlash('project_added', 1);
+            $this->get('session')->getFlashBag()->set('project_added', 1);
             return $this->redirect($this->generateUrl('webaccess_bugtracker_project'));
         }
 
@@ -78,7 +78,7 @@ class ProjectController extends Controller
         $formHandler = $this->container->get('webaccess_bugtracker.project.form_handler');
 
         if ($formHandler->process($project)) {
-            $this->get('session')->setFlash('project_updated', 1);
+            $this->get('session')->getFlashBag()->set('project_updated', 1);
             return $this->redirect($this->generateUrl('webaccess_bugtracker_project'));
         }
 
@@ -98,9 +98,9 @@ class ProjectController extends Controller
     public function deleteAction($projectId)
     {
         if ($this->container->get('webaccess_bugtracker.project_manager')->deleteProject($projectId)) {
-            $this->get('session')->setFlash('project_deleted', 1);
+            $this->get('session')->getFlashBag()->set('project_deleted', 1);
         } else {
-            $this->get('session')->setFlash('project_error', 1);
+            $this->get('session')->getFlashBag()->set('project_error', 1);
         }
 
         return $this->redirect($this->generateUrl('webaccess_bugtracker_project'));

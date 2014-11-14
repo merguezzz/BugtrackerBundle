@@ -6,8 +6,9 @@
 
 {% block bugtracker_body %}
 
-	{% render "WebaccessBugtrackerBundle:Ticket:menu" with { 'route' : 'company' } %}
-
+	{# {% render "WebaccessBugtrackerBundle:Ticket:menu" with { 'route' : 'company' } %} #}
+	{{ render(controller( 'WebaccessBugtrackerBundle:Ticket:menu', { 'route': 'company' } )) }}
+	
 	<div id="dashboard" class="main-wrapper">
 		<div class="header">
 			<div class="title">
@@ -56,11 +57,11 @@
     {{ parent() }}
 
     <script type="text/javascript">
-	    {% if(app.session.getFlash('company_added')) %}
+	    {% if(app.session.flashbag.get('company_added')) %}
 	    	notification("{{ 'company.added' | trans }}");
-	    {% elseif(app.session.getFlash('company_updated')) %}
+	    {% elseif(app.session.flashbag.get('company_updated')) %}
 	    	notification("{{ 'company.updated' | trans }}");
-	    {% elseif(app.session.getFlash('company_deleted')) %}
+	    {% elseif(app.session.flashbag.get('company_deleted')) %}
 	    	notification("{{ 'company.deleted' | trans }}");
 	    {% endif %}
     </script>

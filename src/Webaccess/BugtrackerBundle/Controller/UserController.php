@@ -55,7 +55,7 @@ class UserController extends Controller
         $formHandler = $this->container->get('webaccess_bugtracker.user.form_handler');
 
         if ($formHandler->process($user)) {
-            $this->get('session')->setFlash('user_added', 1);
+            $this->get('session')->getFlashBag()->set('user_added', 1);
             return $this->redirect($this->generateUrl('webaccess_bugtracker_user'));
         }
 
@@ -78,7 +78,7 @@ class UserController extends Controller
         $formHandler = $this->container->get('webaccess_bugtracker.user.form_handler');
 
         if ($formHandler->process($user)) {
-            $this->get('session')->setFlash('user_updated', 1);
+            $this->get('session')->getFlashBag()->set('user_updated', 1);
             return $this->redirect($this->generateUrl('webaccess_bugtracker_user'));
         }
 
@@ -98,9 +98,9 @@ class UserController extends Controller
     public function deleteAction($userId)
     {
         if ($this->container->get('webaccess_bugtracker.user_manager')->deleteUser($userId)) {
-            $this->get('session')->setFlash('user_deleted', 1);
+            $this->get('session')->getFlashBag()->set('user_deleted', 1);
         } else {
-            $this->get('session')->setFlash('user_error', 1);
+            $this->get('session')->getFlashBag()->set('user_error', 1);
         }
 
         return $this->redirect($this->generateUrl('webaccess_bugtracker_user'));

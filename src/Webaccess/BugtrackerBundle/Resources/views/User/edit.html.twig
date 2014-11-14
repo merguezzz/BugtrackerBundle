@@ -6,7 +6,8 @@
 
 {% block bugtracker_body %}
 
-	{% render "WebaccessBugtrackerBundle:Ticket:menu" with {'route' : 'user'} %}
+	{# {% render "WebaccessBugtrackerBundle:Ticket:menu" with {'route' : 'user'} %} #}
+	{{ render(controller( 'WebaccessBugtrackerBundle:Ticket:menu', { 'route': 'user' } )) }}
 
 	<div id="dashboard" class="main-wrapper">
 		<div class="header">

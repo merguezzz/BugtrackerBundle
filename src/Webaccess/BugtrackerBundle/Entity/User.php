@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Webaccess\BugtrackerBundle\Repository\UserRepository")
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable 
 {
     /**
      * @var integer $id
@@ -451,11 +451,15 @@ class User implements UserInterface
 
     public function serialize()
     {
-        return serialize($this->username);
+        //return serialize($this->username);
+        return \json_encode(
+        array($this->id, $this->username));
     }
 
     public function unserialize($data)
-    {
-        $this->username = unserialize($data);
+    {   
+
+        //$this->username = unserialize($data);
+        list($this->id, $this->username) = \json_decode($data);
     }
 }

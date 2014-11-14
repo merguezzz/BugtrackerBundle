@@ -6,8 +6,9 @@
 
 {% block bugtracker_body %}
 
-	{% render "WebaccessBugtrackerBundle:Ticket:menu" with {'route' : 'project'} %}
-
+	{# {% render "WebaccessBugtrackerBundle:Ticket:menu" with {'route' : 'project'} %} #}
+	{{ render(controller( 'WebaccessBugtrackerBundle:Ticket:menu', { 'route': 'project' } )) }}
+	
 	<div id="dashboard" class="main-wrapper">
 		<div class="header">
 			<div class="title">
@@ -59,11 +60,11 @@
     {{ parent() }}
 
     <script type="text/javascript">
-	    {% if(app.session.getFlash('project_added')) %}
+	    {% if(app.session.flashbag.get('project_added')) %}
 	    	notification("{{ 'project.added' | trans }}");
-	    {% elseif(app.session.getFlash('project_updated')) %}
+	    {% elseif(app.session.flashbag.get('project_updated')) %}
 	    	notification("{{ 'project.updated' | trans }}");
-	    {% elseif(app.session.getFlash('project_deleted')) %}
+	    {% elseif(app.session.flashbag.get('project_deleted')) %}
 	    	notification("{{ 'project.deleted' | trans }}");
 	    {% endif %}
     </script>

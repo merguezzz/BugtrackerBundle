@@ -6,7 +6,8 @@
 
 {% block bugtracker_body %}
 
-	{% render "WebaccessBugtrackerBundle:Ticket:menu" with {'route' : 'user'} %}
+	{# {% render "WebaccessBugtrackerBundle:Ticket:menu" with {'route' : 'user'} %} #}
+	{{ render(controller( 'WebaccessBugtrackerBundle:Ticket:menu', { 'route': 'user' } )) }}
 
 	<div id="dashboard" class="main-wrapper">
 		<div class="header">
@@ -63,11 +64,11 @@
     {{ parent() }}
 
     <script type="text/javascript">
-	    {% if(app.session.getFlash('user_added')) %}
+	    {% if(app.session.flashbag.get('user_added')) %}
 	    	notification("{{ 'user.added' | trans }}");
-	    {% elseif(app.session.getFlash('user_updated')) %}
+	    {% elseif(app.session.flashbag.get('user_updated')) %}
 	    	notification("{{ 'user.updated' | trans }}");
-	    {% elseif(app.session.getFlash('user_deleted')) %}
+	    {% elseif(app.session.flashbag.get('user_deleted')) %}
 	    	notification("{{ 'user.deleted' | trans }}");
 	    {% endif %}
     </script>

@@ -55,7 +55,7 @@ class CompanyController extends Controller
         $formHandler = $this->container->get('webaccess_bugtracker.company.form_handler');
 
         if ($formHandler->process($company)) {
-            $this->get('session')->setFlash('company_added', 1);
+            $this->get('session')->getFlashBag()->set('company_added', 1);
             return $this->redirect($this->generateUrl('webaccess_bugtracker_company'));
         }
 
@@ -78,7 +78,7 @@ class CompanyController extends Controller
         $formHandler = $this->container->get('webaccess_bugtracker.company.form_handler');
 
         if ($formHandler->process($company)) {
-            $this->get('session')->setFlash('company_updated', 1);
+            $this->get('session')->getFlashBag()->set('company_updated', 1);
             return $this->redirect($this->generateUrl('webaccess_bugtracker_company'));
         }
 
@@ -98,9 +98,9 @@ class CompanyController extends Controller
     public function deleteAction($companyId)
     {
         if ($this->container->get('webaccess_bugtracker.company_manager')->deleteCompany($companyId)) {
-            $this->get('session')->setFlash('company_deleted', 1);
+            $this->get('session')->getFlashBag()->set('company_deleted', 1);
         } else {
-            $this->get('session')->setFlash('company_error', 1);
+            $this->get('session')->getFlashBag()->set('company_error', 1);
         }
 
         return $this->redirect($this->generateUrl('webaccess_bugtracker_company'));

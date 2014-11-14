@@ -98,8 +98,8 @@ class TicketController extends Controller
         $formHandler = $this->container->get('webaccess_bugtracker.ticket.form_handler');
 
         if ($formHandler->process($ticket)) {
-            $this->get('session')->setFlash('ticket_added', 1);
-            $this->get('session')->setFlash('last_ticket', $ticket->getId());
+            $this->get('session')->getFlashBag()->set('ticket_added', 1);
+            $this->get('session')->getFlashBag()->set('last_ticket', $ticket->getId());
 
             /*$message = \Swift_Message::newInstance()
                 ->setSubject('[Bugtracker - ' . $ticket->getProject()->getName(). '] Un nouveau ticket a été créé')
@@ -130,8 +130,8 @@ class TicketController extends Controller
         $formHandler = $this->container->get('webaccess_bugtracker.ticket.form_handler');
 
         if ($formHandler->process($ticket)) {
-            $this->get('session')->setFlash('ticket_updated', 1);
-            $this->get('session')->setFlash('last_ticket', $ticket->getId());
+            $this->get('session')->getFlashBag()->set('ticket_updated', 1);
+            $this->get('session')->getFlashBag()->set('last_ticket', $ticket->getId());
 
             /*$message = \Swift_Message::newInstance();
             $image_logo = $message->embed(\Swift_Image::fromPath(__DIR__ . '/../Resources/public/images/logo.png'));
@@ -160,9 +160,9 @@ class TicketController extends Controller
     public function deleteAction($ticketId)
     {
         if ($this->container->get('webaccess_bugtracker.ticket_manager')->deleteTicket($ticketId)) {
-            $this->get('session')->setFlash('ticket_deleted', 1);
+            $this->get('session')->getFlashBag()->set('ticket_deleted', 1);
         } else {
-            $this->get('session')->setFlash('ticket_error', 1);
+            $this->get('session')->getFlashBag()->set('ticket_error', 1);
         }
 
         return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket'));
