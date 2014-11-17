@@ -131,6 +131,18 @@ class TicketFilterFormType extends AbstractType
                 'required' => false
             )
         );
+
+        $builder->add(
+            'closed', 'choice', array(
+                'choices' => array(
+                    0 => $this->translationManager->trans('ticket_state.closed.0'),
+                    1 => $this->translationManager->trans('ticket_state.closed.1'),
+                ),
+                'empty_value' => false,
+                'data' => $userManager->getClosedInSession(),
+                'required' => false
+            )
+        );
     }
 
     /**

@@ -29,6 +29,7 @@
                   {{ form_widget(form.type) }}
                   {{ form_widget(form.status) }}
                   {{ form_widget(form.priority) }}
+                  {{ form_widget(form.closed) }}
                   <input type="submit" class="btn btn-warning" value="OK" />
                </div>
                {{ form_rest(form) }}
@@ -48,6 +49,7 @@
                <th>{{ 'ticket.type' | trans }}</th>
                <th>{{ 'ticket.status' | trans }}</th>
                <th>{{ 'ticket.priority' | trans }}</th>
+               <th>{{ 'ticket.closed' | trans }}</th>
                <th>{{ 'generic.action' | trans }}</th>
             </tr>
          </thead>
@@ -65,6 +67,7 @@
                     <td>{{ ('ticket_state.type.' ~ ticket.currentState.type) | trans }}</td>
                     <td>{{ ('ticket_state.status.' ~ ticket.currentState.status) | trans }}</td>
                     <td class="center" width="6%"><span class="label priority-{{ ticket.currentState.priority }}">{{ ('ticket_state.priority.' ~ ticket.currentState.priority) | trans }}</span></td>
+                    <td class="center" width="6%"><span class="label closed-{{ ticket.currentState.closed }}">{{ ('ticket_state.closed.' ~ ticket.currentState.closed) | trans }}</span></td>
                     <td class="action" width="4%">
                      <a class="icon-pencil" href="{{ path('webaccess_bugtracker_ticket_edit', {'ticketId':ticket.id}) }}" title="{{ 'generic.edit' | trans }}"></a>
                      <a class="icon-remove confirm-delete" data-id="{{ ticket.id }}" href="{{ path('webaccess_bugtracker_ticket_delete', {'ticketId':ticket.id}) }}" title="{{ 'generic.delete' | trans }}"></a>

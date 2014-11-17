@@ -24,4 +24,4 @@ assetic:
     use_controller: true
 
 swiftmailer:
-    delivery_address: lgandelin@web-access.fr
+    delivery_address:  bugtracker@webcraft-studio.com

@@ -89,6 +89,7 @@ class TicketFormType extends AbstractType
                 'attr' => array('rows' => 5)
             )
         );
+
     }
 
     /**

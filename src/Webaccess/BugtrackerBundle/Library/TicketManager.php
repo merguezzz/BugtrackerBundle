@@ -60,7 +60,15 @@ class TicketManager
     {
         $pagination = $this->getTicketsPagination($pageNumber);
 
-        return $this->repository->getByUser($this->userManager->getUser()->getId(), $pagination->itemsPerPageNumber, $pagination->itemsOffset, ($this->userManager->getProjectInSession() ? $this->userManager->getProjectInSession()->getId() : null), ($this->userManager->getUserInSession() ? $this->userManager->getUserInSession()->getId() : null), ($this->userManager->getTypeInSession() ? $this->userManager->getTypeInSession() : null), ($this->userManager->getStatusInSession() ? $this->userManager->getStatusInSession() : null), ($this->userManager->getPriorityInSession() ? $this->userManager->getPriorityInSession() : null));
+        return $this->repository->getByUser($this->userManager->getUser()->getId(), 
+                                            $pagination->itemsPerPageNumber, $pagination->itemsOffset, 
+                                            ($this->userManager->getProjectInSession() ? $this->userManager->getProjectInSession()->getId() : null), 
+                                            ($this->userManager->getUserInSession() ? $this->userManager->getUserInSession()->getId() : null), 
+                                            ($this->userManager->getTypeInSession() ? $this->userManager->getTypeInSession() : null), 
+                                            ($this->userManager->getStatusInSession() ? $this->userManager->getStatusInSession() : null), 
+                                            ($this->userManager->getPriorityInSession() ? $this->userManager->getPriorityInSession() : null),
+                                            ($this->userManager->getClosedInSession() ? $this->userManager->getClosedInSession() : null)
+                                            );
     }
 
     /**
@@ -145,6 +153,7 @@ class TicketManager
             $ticket_state->setType($last_ticket_state->getType());
             $ticket_state->setStatus($last_ticket_state->getStatus());
             $ticket_state->setPriority($last_ticket_state->getPriority());
+            $ticket_state->setClosed($last_ticket_state->getClosed());
         }
         $ticket_state->setTicket($ticket);
 

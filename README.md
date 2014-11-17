@@ -35,11 +35,11 @@ Installation
 
 6. You can now log in :
 
-		username : john
-		password : 111aaa
+		username : user
+		password : user
 
-		username : jack
-		password : 222bbb
+		username : admin
+		password : admin
 
 
 Screenshots

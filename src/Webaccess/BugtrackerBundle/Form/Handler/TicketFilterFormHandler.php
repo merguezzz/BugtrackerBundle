@@ -66,6 +66,7 @@ class TicketFilterFormHandler
                 $this->session->set('current_type', $aTicketFilter['type']);
                 $this->session->set('current_status', $aTicketFilter['status']);
                 $this->session->set('current_priority', $aTicketFilter['priority']);
+                $this->session->set('current_closed', $aTicketFilter['closed']);
 
                 return true;
             }

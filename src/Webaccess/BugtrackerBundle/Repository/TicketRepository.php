@@ -52,10 +52,11 @@ class TicketRepository extends EntityRepository
      * @param integer $typeId          Type ID
      * @param integer $statusId        Status ID
      * @param integer $priorityId      Priority ID
+     * @param integer $closed          Closed state
      *
      * @return QueryBuilder
      */
-    public function getByUser($userId, $limit, $offset, $projectId = null, $allocatedUserId = null, $typeId = null, $statusId = null, $priorityId = null)
+    public function getByUser($userId, $limit, $offset, $projectId = null, $allocatedUserId = null, $typeId = null, $statusId = null, $priorityId = null, $closed = null)
     {
         $qb = $this->createQueryBuilder('t');
 
@@ -91,10 +92,21 @@ class TicketRepository extends EntityRepository
                 ->andWhere('ts.id = t.currentState');
         }
 
+        //Default : don't show closed tickets
+        if ($closed) {
+            $qb->andWhere($this->createQueryBuilder('t')->expr()->eq('ts.closed', $closed))
+                ->andWhere('ts.id = t.currentState');
+        }else{
+            $qb->andWhere($this->createQueryBuilder('t')->expr()->eq('ts.closed', 0))
+                ->andWhere('ts.id = t.currentState');        
+        }
+
         $qb->groupBy('t.id')
-            ->orderBy('ts.createdAt', 'desc')
+            ->orderBy('ts.priority', 'desc', 'ts.createdAt', 'desc')
             ->setFirstResult($offset)
             ->setMaxResults($limit);
+
+        // die($qb->getQuery()->getSql());
 
         return $qb->getQuery()->getResult();
     }

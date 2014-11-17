@@ -13,6 +13,7 @@ menu.all_users: Tous les utilisateurs
 menu.all_statuses: Tous les statuts
 menu.all_types: Tous les types
 menu.all_priorities: Toutes les priorités
+menu.all_closed: Tous les états
 
 switch_project.label: Projet
 
@@ -40,6 +41,7 @@ ticket.priority: Priorité
 ticket.comments: Commentaires
 ticket.content: Contenu
 ticket.files: Fichiers
+ticket.closed: Fermé
 
 ticket.edit.title: Editer un ticket
 ticket.edit.history: Historique
@@ -114,3 +116,10 @@ ticket_state.status.8: Archivé
 ticket_state.priority.1: Basse
 ticket_state.priority.2: Moyenne
 ticket_state.priority.3: Haute
+
+ticket_state.closed.0: Ouvert
+ticket_state.closed.1: Fermé
+
+generic.modification_date: Modification
+
+ticket_array.closed: Etat

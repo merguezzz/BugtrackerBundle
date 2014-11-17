@@ -78,6 +78,12 @@ class TicketState
      */
     protected $priority;
 
+    /**
+     * @var integer $closed
+     *
+     * @ORM\Column(name="closed", type="integer")
+     */
+    protected $closed;
 
     /**
      * Constructor
@@ -90,9 +96,10 @@ class TicketState
         $this->content = '';
         $this->authorUser = NULL;
         $this->allocatedUser = NULL;
+        $this->type = 1;
         $this->status = 1;
         $this->priority = 1;
-        $this->type = 1;
+        $this->closed = 0;
     }
 
     /**
@@ -279,5 +286,27 @@ class TicketState
     public function getAllocatedUser()
     {
         return $this->allocatedUser;
+    }
+
+        /**
+     * Set closed
+     *
+     * @param integer $closed
+     * @return Ticket
+     */
+    public function setClosed($closed)
+    {
+        $this->closed = $closed;
+        return $this;
+    }
+
+    /**
+     * Get closed
+     *
+     * @return integer
+     */
+    public function getClosed()
+    {
+        return $this->closed;
     }
 }

@@ -31,6 +31,7 @@
 						    {{ form_row(state.type, { 'label' : 'ticket.type', 'attr': {'class': 'span12'} }) }}
 						    {{ form_row(state.status, { 'label' : 'ticket.status', 'attr': {'class': 'span12'} }) }}
 						    {{ form_row(state.priority, { 'label' : 'ticket.priority', 'attr': {'class': 'span12'} }) }}
+						    {{ form_row(state.closed, { 'label' : 'ticket.closed', 'attr': {'class': 'span2'} }) }}
 						{% if not loop.last %}</div>{% endif %}
 					{% endfor %}
 					{{ form_row(form.files, { 'label' : 'ticket.files', 'attr': {'class': 'span12'} }) }}
@@ -47,13 +48,14 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<th>{{ 'generic.creation_date' | trans }}</th>
+							<th>{{ 'generic.modification_date' | trans }}</th>
 							<th>{{ 'ticket.comments' | trans }}</th>
 							<th>{{ 'ticket.author' | trans }}</th>
 							<th>{{ 'ticket.allocated_to' | trans }}</th>
 							<th>{{ 'ticket.type' | trans }}</th>
 							<th>{{ 'ticket.status' | trans }}</th>
 							<th>{{ 'ticket.priority' | trans }}</th>
+							<th>{{ 'ticket.closed' | trans }}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -69,6 +71,7 @@
 								<td>{{ ('ticket_state.type.' ~ state.type) | trans }}</td>
 								<td>{{ ('ticket_state.status.' ~ state.status) | trans }}</td>
 								<td width="6%" class="center"><span class="label priority-{{ state.priority }}">{{ ('ticket_state.priority.' ~ state.priority) | trans }}</span></td>
+								<td width="6%" class="center"><span class="label closed-{{ state.closed }}">{{ ('ticket_state.closed.' ~ state.closed) | trans }}</span></td>
 							</tr>
 						{% endif %}
 					{% endfor %}

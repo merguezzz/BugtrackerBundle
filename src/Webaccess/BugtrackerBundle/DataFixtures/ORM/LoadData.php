@@ -72,25 +72,25 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
 
         //USERS
         $user1 = new User();
-        $user1->setUsername('john');
+        $user1->setUsername('admin');
         $factory = $this->container->get('security.encoder_factory');
 		$encoder = $factory->getEncoder($user1);
-		$password = $encoder->encodePassword('111aaa', $user1->getSalt());
+		$password = $encoder->encodePassword('admin', $user1->getSalt());
 		$user1->setPassword($password);
 		$user1->setFirstName('John');
-        $user1->setLastName('');
+        $user1->setLastName('Doe');
 		$user1->setEmail('john@company1.com');
 		$user1->setCompany($company1);
 		$user1->addRole($role1);
 
 		$user2 = new User();
-        $user2->setUsername('jack');
+        $user2->setUsername('user');
         $factory = $this->container->get('security.encoder_factory');
 		$encoder = $factory->getEncoder($user2);
-		$password = $encoder->encodePassword('222bbb', $user2->getSalt());
+		$password = $encoder->encodePassword('user', $user2->getSalt());
 		$user2->setPassword($password);
-		$user2->setFirstName('Jack');
-		$user2->setLastName('');
+		$user2->setFirstName('Johnny');
+		$user2->setLastName('Cash');
         $user2->setEmail('jack@company1.com');
 		$user2->setCompany($company1);
 		$user2->addRole($role2);

@@ -59,7 +59,6 @@ class Ticket
      */
     protected $files;
 
-
     /**
      * Constructor
      *
@@ -216,4 +215,5 @@ class Ticket
     {
         return $this->files;
     }
+
 }

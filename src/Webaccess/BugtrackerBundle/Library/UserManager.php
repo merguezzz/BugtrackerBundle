@@ -193,6 +193,18 @@ class UserManager
     }
 
     /**
+     * Function which returns the closed in session
+     *
+     * @return integer
+     */
+    public function getClosedInSession()
+    {
+        $closed = $this->session->get('current_closed');
+
+        return ($closed) ? $closed : null;
+    }
+
+    /**
      * Function which deletes a user in DB
      *
      * @param integer $userId User ID

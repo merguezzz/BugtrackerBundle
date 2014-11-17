@@ -118,6 +118,15 @@ class TicketStateFormType extends AbstractType
                 )
             )
         );
+
+        $builder->add(
+            'closed', 'choice', array(
+                'choices' => array(
+                    0 => $this->translationManager->trans('ticket_state.closed.0'),
+                    1 => $this->translationManager->trans('ticket_state.closed.1'),
+                )
+            )
+        );
     }
 
     /**

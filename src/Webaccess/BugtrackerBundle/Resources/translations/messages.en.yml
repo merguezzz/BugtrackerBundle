@@ -113,3 +113,6 @@ ticket_state.status.8: Archived
 ticket_state.priority.1: Low
 ticket_state.priority.2: Average
 ticket_state.priority.3: High
+
+ticket_state.closed.0: Open
+ticket_state.closed.1: Closed
