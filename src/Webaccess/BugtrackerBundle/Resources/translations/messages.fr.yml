@@ -92,6 +92,8 @@ user.company: Entreprise
 user.email: Email
 user.projects: Projets
 user.roles: Rôles
+user.password.label: Mot de passe (laissez blanc si non changé)
+
 
 user_edit.title: Editer un utilisateur
 
@@ -123,3 +125,6 @@ ticket_state.closed.1: Fermé
 generic.modification_date: Modification
 
 ticket_array.closed: Etat
+
+ROLE_ADMIN: Administrateur
+ROLE_USER: Utilisateur

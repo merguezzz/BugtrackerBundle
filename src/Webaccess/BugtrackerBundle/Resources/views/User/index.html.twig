@@ -25,8 +25,8 @@
 				<tr>
 					<th>{{ 'generic.creation_date' | trans }}</th>
 					<th>{{ 'user.username' | trans }}</th>
-					<th>{{ 'user.first_name' | trans }}</th>
-					<th>{{ 'user.last_name' | trans }}</th>
+					<th>{{ 'user.first_name' | trans }} {{ 'user.last_name' | trans }}</th>
+					<th>{{ 'user.roles' | trans }}</th>
 					<th>{{ 'user.company' | trans }}</th>
 					<th>{{ 'generic.action' | trans }}</th>
 				</tr>
@@ -38,8 +38,8 @@
 			        <tr>
 			        	<td width="10%">{{ user.createdAt | date('d/m/y H:i') }}</td>
 			        	<td>{{ user.username }}</td>
-			        	<td>{{ user.firstName }}</td>
-			        	<td>{{ user.lastName }}</td>
+			        	<td>{{ user.firstName }} {{ user.lastName }}</td>
+			        	<td>{% for role in user.getRoles() %} {% if not loop.first %}, {%endif%}{{ role.name | trans }} {% endfor %}</td>
 			        	<td>{% if user.company %}{{ user.company.name }}{% endif %}</td>
 			        	<td class="action" width="4%">
 							<a class="icon-pencil" href="{{ path('webaccess_bugtracker_user_edit', {'userId':user.id}) }}" title="{{ 'generic.edit' | trans }}"></a>

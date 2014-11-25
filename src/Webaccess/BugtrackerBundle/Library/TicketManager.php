@@ -17,6 +17,7 @@ namespace Webaccess\BugtrackerBundle\Library;
 use Webaccess\BugtrackerBundle\Utility\Pagination;
 use Webaccess\BugtrackerBundle\Entity\Ticket;
 use Webaccess\BugtrackerBundle\Entity\TicketState;
+use Symfony\Component\Security\Core\SecurityContext;
 
 /**
  * TicketManager class
@@ -90,10 +91,12 @@ class TicketManager
      */
     public function createTicket()
     {
+
         $ticket = new Ticket();
         $ticket_state = new TicketState();
         $ticket_state->setStatus(3);
         $ticket_state->setPriority(2);
+        $ticket_state->setAuthorUser($this->userManager->getUser());
         $ticket_state->setTicket($ticket);
         $ticket->addState($ticket_state);
         $ticket->setCurrentState($ticket_state);
@@ -112,6 +115,9 @@ class TicketManager
     {
         $aStates = $ticket->getStates();
         $ticket_state = $aStates[sizeof($aStates) - 1];
+        if(!$this->userManager->getUser()->isRole('ROLE_ADMIN')){
+            $ticket_state->setAuthorUser($this->userManager->getUser());
+        }
         $ticket->addState($ticket_state);
         $ticket->setCurrentState($ticket_state);
         $ticket_state->setTicket($ticket);

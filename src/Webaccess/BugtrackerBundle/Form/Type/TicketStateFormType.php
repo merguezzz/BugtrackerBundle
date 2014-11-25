@@ -143,6 +143,7 @@ class TicketStateFormType extends AbstractType
                 'data_class' => 'Webaccess\BugtrackerBundle\Entity\TicketState'
             )
         );
+
     }
 
     /**

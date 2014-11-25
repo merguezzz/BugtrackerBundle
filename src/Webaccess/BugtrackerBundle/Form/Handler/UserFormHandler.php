@@ -17,6 +17,7 @@ namespace Webaccess\BugtrackerBundle\Form\Handler;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Webaccess\BugtrackerBundle\Library\UserManager;
+use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 /**
  * UserFormHandler class
@@ -30,6 +31,7 @@ use Webaccess\BugtrackerBundle\Library\UserManager;
  */
 class UserFormHandler
 {
+
     protected $form;
     protected $request;
     protected $userManager;
@@ -57,14 +59,32 @@ class UserFormHandler
      *
      * @return boolean
      */
-    public function process($user)
+    public function process($user, $encoderFactory)
     {
+
         $this->form->setData($user);
 
         if ('POST' === $this->request->getMethod()) {
+
+            $originalPassword = $user->getPassword(); 
+
             $this->form->bind($this->request);
 
             if ($this->form->isValid()) {
+
+                $form_password = $this->form->get('password')->getData();
+
+                echo "Form password :".$form_password."<br/>";
+
+                if (!empty($form_password))  {  
+                    $encoder = $encoderFactory->getEncoder($user);
+                    $password = $encoder->encodePassword($form_password, $user->getSalt());
+                }else {
+                    $password = $originalPassword;
+                }
+
+                $user->setPassword($password);
+
                 $this->userManager->saveUser($user);
 
                 return true;

@@ -160,3 +160,8 @@ services:
        class: Twig_Extensions_Extension_Text
        tags:
            - { name: twig.extension }
+
+    webaccess_bugtracker.user_password_change:
+        class: Webaccess\BugtrackerBundle\EventListener\UserPasswordChange
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate }

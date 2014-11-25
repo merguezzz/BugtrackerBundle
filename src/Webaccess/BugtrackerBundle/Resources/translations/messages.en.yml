@@ -89,6 +89,7 @@ user.company: Company
 user.email: Email
 user.projects: Projects
 user.roles: Roles
+user.password.label: Password (leave blank for unchanged)
 
 user_edit.title: Editer a user
 
@@ -116,3 +117,6 @@ ticket_state.priority.3: High
 
 ticket_state.closed.0: Open
 ticket_state.closed.1: Closed
+
+ROLE_ADMIN: Administrator
+ROLE_USER: User

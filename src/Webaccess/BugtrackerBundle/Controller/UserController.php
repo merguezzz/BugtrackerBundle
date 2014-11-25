@@ -76,8 +76,9 @@ class UserController extends Controller
         $user = $this->container->get('webaccess_bugtracker.user_manager')->getUserById($userId);
         $form = $this->container->get('webaccess_bugtracker.user.form');
         $formHandler = $this->container->get('webaccess_bugtracker.user.form_handler');
+        $encoderFactory = $this->get('security.encoder_factory');
 
-        if ($formHandler->process($user)) {
+        if ($formHandler->process($user, $encoderFactory)) {
             $this->get('session')->getFlashBag()->set('user_updated', 1);
             return $this->redirect($this->generateUrl('webaccess_bugtracker_user'));
         }

@@ -15,6 +15,7 @@
 namespace Webaccess\BugtrackerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\SecurityContext;
 
 /**
  * TicketController class
@@ -96,6 +97,9 @@ class TicketController extends Controller
         $ticket = $this->container->get('webaccess_bugtracker.ticket_manager')->createTicket();
         $form = $this->container->get('webaccess_bugtracker.ticket.form');
         $formHandler = $this->container->get('webaccess_bugtracker.ticket.form_handler');
+
+        // Make current user the ticket author
+        $ticket->getCurrentState()->setAuthorUser($this->get('security.context')->getToken()->getUser());
 
         if ($formHandler->process($ticket)) {
             $this->get('session')->getFlashBag()->set('ticket_added', 1);

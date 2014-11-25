@@ -99,10 +99,6 @@ class UserManager
      */
     public function saveUser($user)
     {
-        //Password management
-        $encoder = $this->encoderFactory->getEncoder($user);
-        $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-        $user->setPassword($password);
 
         $this->em->persist($user);
         $this->em->flush();

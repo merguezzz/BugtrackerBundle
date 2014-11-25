@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Webaccess\BugtrackerBundle\Repository\UserRepository")
  */
+
 class User implements UserInterface, \Serializable 
 {
     /**
@@ -177,6 +178,7 @@ class User implements UserInterface, \Serializable
      */
     public function setPassword($password)
     {
+
         $this->password = $password;
         return $this;
     }
@@ -462,4 +464,20 @@ class User implements UserInterface, \Serializable
         //$this->username = unserialize($data);
         list($this->id, $this->username) = \json_decode($data);
     }
+
+
+    public function isRole($roleString)
+    {
+        $is = false;
+
+        foreach($this->getRoles() as $role){
+            if($role->getName() === $roleString){
+                $is = true;
+            }
+        }
+
+        return $is;
+    }
+
+    
 }
