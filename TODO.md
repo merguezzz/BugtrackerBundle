@@ -5,14 +5,16 @@ Todo List
 ---------
 
 ### High priority
+- Add Ticket state assignement possible for many users
+- Add email notification for ticket state added with direct link (with anchor)
+
 - Add ticket text content and leaver states only for comments and dicsussion (and Add WYSIWYG for texareas) and Redesign ticket Edit page and list (add content and comments)
    ---- Hide project input and lock authorUser when not admin
    ---- Make Table header follow scroll
    ---- Put anchor links on redirect
    ---- DEBUG : redirect => refresh cache ORM or something like (DONT DO TI BUT ASK NICO)
 
-- Add email notification for ticket state added with direct link (with anchor)
-- Add Ticket many user assignement
+
 - Add upload files interface for tickets (check file managment methods) and add remote document links (Like google drive or other)
 - Add Ticket state files
 - Allow user to edit their profiles
