@@ -121,6 +121,67 @@ class TicketController extends Controller
     }
 
     /**
+     * View ticket action
+     *
+     * @param integer $ticketId Ticket ID
+     *
+     * @return Response
+     */
+    public function viewAction($ticketId)
+    {
+        $ticket = $this->container->get('webaccess_bugtracker.ticket_manager')->getTicket($ticketId);
+        $form = $this->container->get('webaccess_bugtracker.ticketstate.form');
+        // $formHandler = $this->container->get('webaccess_bugtracker.ticketstate.form_handler');
+
+        // if ($formHandler->process($ticket)) {
+
+        //     $this->get('session')->getFlashBag()->set('comment_added', 1);
+        //     $this->get('session')->getFlashBag()->set('last_ticket', $ticket->getId());
+
+
+        //     return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket'));
+
+        // }
+
+        $aParams['form'] = $form->createView();
+        $aParams['ticket'] = $ticket;
+
+        return $this->render('WebaccessBugtrackerBundle:Ticket:view.html.twig', $aParams);
+    }
+
+    /**
+     * Add ticket state action
+     *
+     * @param integer $ticketId Ticket ID
+     *
+     * @return Response
+     */
+    public function addStateAction($ticketId)
+    {
+
+
+        $ticket = $this->container->get('webaccess_bugtracker.ticket_manager')->getTicket($ticketId);
+        $ticketState = $this->container->get('webaccess_bugtracker.ticket_manager')->getLastTicketStateCopy($ticketId);
+        $form = $this->container->get('webaccess_bugtracker.ticketstate.form');
+        $formHandler = $this->container->get('webaccess_bugtracker.ticketstate.form_handler');
+
+        if ($formHandler->process($ticketState)) {
+
+            $this->get('session')->getFlashBag()->set('state_added', 1);
+            $this->get('session')->getFlashBag()->set('last_ticket', $ticket->getId());
+
+            // return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket'));
+
+        }
+
+        $aParams['form'] = $form->createView();
+        $aParams['ticket'] = $ticket;
+        $aParams['ticketState'] = $ticketState;
+
+        return $this->render('WebaccessBugtrackerBundle:Ticket:view.html.twig', $aParams);
+    }
+
+    /**
      * Edit ticket action
      *
      * @param integer $ticketId Ticket ID
@@ -134,6 +195,7 @@ class TicketController extends Controller
         $formHandler = $this->container->get('webaccess_bugtracker.ticket.form_handler');
 
         if ($formHandler->process($ticket)) {
+
             $this->get('session')->getFlashBag()->set('ticket_updated', 1);
             $this->get('session')->getFlashBag()->set('last_ticket', $ticket->getId());
 
@@ -146,6 +208,8 @@ class TicketController extends Controller
             $this->get('mailer')->send($message);*/
 
             return $this->redirect($this->generateUrl('webaccess_bugtracker_ticket'));
+
+
         }
 
         $aParams['form'] = $form->createView();

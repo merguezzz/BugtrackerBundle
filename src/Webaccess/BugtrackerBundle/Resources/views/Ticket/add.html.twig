@@ -18,15 +18,21 @@
 		</div>
 
 		<form action="{{ path('webaccess_bugtracker_ticket_add') }}" method="post" {{ form_enctype(form) }}>
-			{{ form_row(form.title, { 'label' : 'ticket.title', 'attr': {'class': 'span6'} }) }}
-		    {{ form_row(form.project, { 'label' : 'ticket.project', 'attr': {'class': 'span6'} }) }}
-		    {{ form_row(form.states.0.content, { 'label' : 'ticket.content', 'attr': {'class': 'span6'} }) }}
-		    <div {# style="display:none" #}>{{ form_row(form.states.0.authorUser) }}</div>
-		    {{ form_row(form.states.0.allocatedUser, { 'label' : 'ticket.allocated_to', 'attr': {'class': 'span6'} }) }}
+			{{ form_row(form.title, { 'label' : 'ticket.title', 'attr': {'class': 'span12'} }) }}
+		    {{ form_row(form.project, { 'label' : 'ticket.project', 'attr': {'class': 'span12'} }) }}
+		    {{ form_row(form.content, { 'label' : 'ticket.content', 'attr': {'class': 'span12'} }) }}
+		    {{ form_row(form.files, { 'label' : 'ticket.files', 'attr': {'class': 'span12'} }) }}
+
+
+	    	{{ form_row(form.states.0.content, { 'label' : 'ticket.content', 'attr': {'class': 'span12'}, 'read_only' : true }) }}
+	    	{{ form_row(form.states.0.authorUser, {'label' : 'ticket.author', 'attr' : {'class' : 'span12'}, 'read_only' : true  }) }}	
+
+		    
+		    {{ form_row(form.states.0.allocatedUser, { 'label' : 'ticket.allocated_to', 'attr': {'class': 'span12'} }) }}
 		    {{ form_row(form.states.0.type, { 'label' : 'ticket.type', 'attr': {'class': 'span6'} }) }}
 		    {{ form_row(form.states.0.status, { 'label' : 'ticket.status', 'attr': {'class': 'span6'} }) }}
 		    {{ form_row(form.states.0.priority, { 'label' : 'ticket.priority', 'attr': {'class': 'span6'} }) }}
-		    <div style="display:none">{{ form_row(form.files, { 'label' : 'ticket.files', 'attr': {'class': 'span12'} }) }}</div>
+
 		    {{ form_rest(form) }}
 	        <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
 	        <input type="submit" class="btn btn-warning" value="{{ 'generic.save' | trans }}" />

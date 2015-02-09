@@ -30,22 +30,30 @@ class Ticket
     protected $title;
 
     /**
+     * @var text $content
+     *
+     * @ORM\Column(name="content", type="text", nullable=true)
+     */
+    protected $content;
+
+    /**
      * @var Project $project
      *
      * @ORM\ManyToOne(targetEntity="Project")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
-     */
+     */    
     protected $project;
 
     /**
-     * @var ArrayCokkection $states
+     * @var ArrayCollection $states
      *
-     * @ORM\OneToMany(targetEntity="TicketState", mappedBy="ticket", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="TicketState", mappedBy="ticket", cascade={"remove", "persist"})
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     protected $states;
 
     /**
-     * @var Project $project
+     * @var TicketState $currentState
      *
      * @ORM\ManyToOne(targetEntity="TicketState", cascade={"remove"})
      * @ORM\JoinColumn(name="current_state_id", referencedColumnName="id", onDelete="SET NULL")
@@ -101,15 +109,26 @@ class Ticket
         return $this->title;
     }
 
+
     /**
-     * Set project
+     * Get content
      *
-     * @param project $project
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set content
+     *
+     * @param text $content
      * @return Ticket
      */
-    public function setProject(\Webaccess\BugtrackerBundle\Entity\Project $project)
+    public function setContent($content)
     {
-        $this->project = $project;
+        $this->content = $content;
         return $this;
     }
 
@@ -121,6 +140,18 @@ class Ticket
     public function getProject()
     {
         return $this->project;
+    }
+
+    /**
+     * Set project
+     *
+     * @param project $project
+     * @return Ticket
+     */
+    public function setProject(\Webaccess\BugtrackerBundle\Entity\Project $project)
+    {
+        $this->project = $project;
+        return $this;
     }
 
     /**

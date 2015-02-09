@@ -74,6 +74,14 @@ webaccess_bugtracker_ticket_add:
     pattern: /{_locale}/ticket_add
     defaults: { _controller: WebaccessBugtrackerBundle:Ticket:add, _locale: "%locale%" }
 
+webaccess_bugtracker_ticket_view:
+    pattern: /{_locale}/ticket_view/{ticketId}
+    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:view, ticketId: ticketId, _locale: "%locale%" }
+
+webaccess_bugtracker_ticket_addstate:
+    pattern: /{_locale}/ticket_addstate/{ticketId}
+    defaults: { _controller: WebaccessBugtrackerBundle:Ticket:addState, ticketId: ticketId, _locale: "%locale%" }
+
 webaccess_bugtracker_ticket_edit:
     pattern: /{_locale}/ticket_edit/{ticketId}
     defaults: { _controller: WebaccessBugtrackerBundle:Ticket:edit, ticketId: ticketId, _locale: "%locale%" }

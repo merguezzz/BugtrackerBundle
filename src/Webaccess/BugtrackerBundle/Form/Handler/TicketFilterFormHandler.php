@@ -60,6 +60,7 @@ class TicketFilterFormHandler
             $this->form->bind($this->request);
 
             if ($this->form->isValid()) {
+                
                 $aTicketFilter = $this->request->request->get('webaccess_bugtracker_ticket_filter');
                 $this->session->set('current_project', $aTicketFilter['project']);
                 $this->session->set('current_user', $aTicketFilter['user']);

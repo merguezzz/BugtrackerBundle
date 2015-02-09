@@ -137,7 +137,7 @@ class TicketManager
     {
         $ticket = $this->repository->find($ticketId);
         $ticket_state = $this->getLastTicketStateCopy($ticketId);
-        $ticket->addState($ticket_state);
+        //$ticket->addState($ticket_state);
         return ($ticket) ? $ticket : false;
     }
 

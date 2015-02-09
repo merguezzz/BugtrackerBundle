@@ -108,10 +108,12 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $ticket1 = new Ticket();
         $ticket1->setProject($project1);
         $ticket1->setTitle('Bug found in home page');
+        $ticket1->setContent('Explanation of the bug');
 
         $ticket2 = new Ticket();
         $ticket2->setProject($project2);
         $ticket2->setTitle('Another bug found in home page');
+        $ticket2->setContent('Explanation of the other bug');
 
         $manager->persist($ticket1);
         $manager->persist($ticket2);

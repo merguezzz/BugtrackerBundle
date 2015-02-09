@@ -272,9 +272,11 @@ class TicketState
      * @param User $allocatedUser
      * @return TicketState
      */
-    public function setAllocatedUser(\Webaccess\BugtrackerBundle\Entity\User $allocatedUser)
+    public function setAllocatedUser(\Webaccess\BugtrackerBundle\Entity\User $allocatedUser = null)
     {
-        $this->allocatedUser = $allocatedUser;
+        if($allocatedUser){
+            $this->allocatedUser = $allocatedUser; 
+        }
         return $this;
     }
 

@@ -62,6 +62,20 @@ class TicketFormType extends AbstractType
         $userManager = $this->userManager;
 
         $builder->add('title', 'text');
+        
+        $builder->add(
+            'content', 'textarea', array(
+                'required' => false,
+                'attr' => array('rows' => 5)
+            )
+        );
+
+        $builder->add(
+            'files', 'textarea', array(
+                'required' => false,
+                'attr' => array('rows' => 2)
+            )
+        );
 
         $builder->add(
             'project', 'entity', array(
@@ -76,19 +90,13 @@ class TicketFormType extends AbstractType
         $builder->add(
             'states', 'collection', array(
                 'type' => new TicketStateFormType(
-                    ($userManager->getProjectInSession()) ? $userManager->getProjectInSession()->getId() : null,
                     $translationManager,
                     $userManager
                 )
             )
         );
 
-        $builder->add(
-            'files', 'textarea', array(
-                'required' => false,
-                'attr' => array('rows' => 5)
-            )
-        );
+
 
     }
 

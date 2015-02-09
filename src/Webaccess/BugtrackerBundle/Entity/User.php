@@ -479,5 +479,11 @@ class User implements UserInterface, \Serializable
         return $is;
     }
 
+
+    public function __toString()
+    {
+        return $this->getFirstname()." ".$this->getLastname();
+    }
+
     
 }

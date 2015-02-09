@@ -60,10 +60,18 @@
                  <tr class="status-{{ ticket.currentState.status }}">
                     <td>{{ ticket.states[0].createdAt | date('d/m/y H:i') }}</td>
                     <td>{{ ticket.currentState.createdAt | date('d/m/y H:i') }}</td>
-                    <td>{{ ticket.title }}</td>
+                    </a>
+                    <td>
+                        <a href="{{ path('webaccess_bugtracker_ticket_view', {'ticketId':ticket.id}) }}" title="{{ 'generic.view' | trans }}">
+                          {{ ticket.title }}</td>
+                        </a>
                     <td>{{ ticket.project.name }}</td>
                     <td>{{ ticket.currentState.authorUser.firstName }} {{ ticket.currentState.authorUser.lastName | truncate(1, false, '.') }}</td>
-                    <td>{{ ticket.currentState.allocatedUser.firstName }} {{ ticket.currentState.allocatedUser.lastName | truncate(1, false, '.') }}</td>
+                    <td>
+                      {% if ticket.currentState.allocatedUser %}
+                        {{ ticket.currentState.allocatedUser.firstName }} {{ ticket.currentState.allocatedUser.lastName | truncate(1, false, '.') }}
+                      {% endif %}
+                    </td>
                     <td>{{ ('ticket_state.type.' ~ ticket.currentState.type) | trans }}</td>
                     <td>{{ ('ticket_state.status.' ~ ticket.currentState.status) | trans }}</td>
                     <td class="center" width="6%"><span class="label priority-{{ ticket.currentState.priority }}">{{ ('ticket_state.priority.' ~ ticket.currentState.priority) | trans }}</span></td>

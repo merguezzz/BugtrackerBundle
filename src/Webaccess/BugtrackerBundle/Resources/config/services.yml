@@ -17,6 +17,10 @@ parameters:
     webaccess_bugtracker.ticket.form.class: Webaccess\BugtrackerBundle\Form\Type\TicketFormType
     webaccess_bugtracker.ticket.form_handler.class: Webaccess\BugtrackerBundle\Form\Handler\TicketFormHandler
 
+    webaccess_bugtracker.ticketstate_manager.class: Webaccess\BugtrackerBundle\Library\TicketStateManager
+    webaccess_bugtracker.ticketstate.form.class: Webaccess\BugtrackerBundle\Form\Type\TicketStateFormType
+    webaccess_bugtracker.ticketstate.form_handler.class: Webaccess\BugtrackerBundle\Form\Handler\TicketStateFormHandler
+
     webaccess_bugtracker.ticket_filter.form.class: Webaccess\BugtrackerBundle\Form\Type\TicketFilterFormType
     webaccess_bugtracker.ticket_filter.form_handler.class: Webaccess\BugtrackerBundle\Form\Handler\TicketFilterFormHandler
 
@@ -131,6 +135,37 @@ services:
             form: "@webaccess_bugtracker.ticket.form"
             request: "@request"
             ticketManager: "@webaccess_bugtracker.ticket_manager"
+
+    webaccess_bugtracker.ticketstate_manager:
+        class: %webaccess_bugtracker.ticketstate_manager.class%
+        arguments:
+            em: "@doctrine.orm.entity_manager"
+            userManager: "@webaccess_bugtracker.user_manager"
+
+    webaccess_bugtracker.ticketstate.form:
+        class: %symfony.form.class%
+        factory_service: form.factory
+        factory_method: createNamed
+        arguments:
+            - webaccess_bugtracker_ticketstate
+            - webaccess_bugtracker_ticketstate
+
+    webaccess_bugtracker.ticketstate.form.type:
+        class: %webaccess_bugtracker.ticketstate.form.class%
+        arguments:
+            translationManager: "@translator"
+            userManager: "@webaccess_bugtracker.user_manager"
+        tags:
+            - { name: form.type, alias: webaccess_bugtracker_ticketstate }
+
+    webaccess_bugtracker.ticketstate.form_handler:
+        class: %webaccess_bugtracker.ticketstate.form_handler.class%
+        scope: request
+        arguments:
+            form: "@webaccess_bugtracker.ticketstate.form"
+            request: "@request"
+            ticketStateManager: "@webaccess_bugtracker.ticketstate_manager"
+
 
     webaccess_bugtracker.ticket_filter.form:
         class: %symfony.form.class%

@@ -17,71 +17,106 @@
 			<div class="clear"></div>
 		</div>
 
-		<div class="row-fluid">
-			<div class="span6">
-				<form action="{{ path('webaccess_bugtracker_ticket_edit', {'ticketId':ticket.id}) }}" method="post" {{ form_enctype(form) }}>
+		<form action="{{ path('webaccess_bugtracker_ticket_edit', {'ticketId':ticket.id}) }}" method="post" {{ form_enctype(form) }}>
+
+			<div class="row-fluid">
+				<div class="span2">
+					<ul>
+
+						<li>{{ 'ticket.project' | trans }} : {{ticket.project.name}}</li>
+						<li>{{ 'ticket.type' | trans }} : {{('ticket_state.type.' ~ ticket.currentState.type) | trans}}</li>
+						<li>{{ 'ticket.status' | trans }} : {{('ticket_state.status.' ~ ticket.currentState.status) | trans}}</li>
+						<li>{{ 'ticket_array.closed' | trans }} : {{('ticket_state.closed.' ~ ticket.currentState.closed) | trans}}</li>
+						<li>{{ 'ticket.allocated_to' | trans }} : {{ ticket.currentState.allocatedUser }}</li>
+						<li>{{ 'ticket.author' | trans }} : {{ ticket.currentState.authorUser }}</li>
+
+					</ul>
+
+					<input type="submit" class="btn btn-warning" value="{{ 'generic.save' | trans }}" />
+				    <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
+
+				</div>
+
+				<div class="span10">
+					{{ form_row(form.project, { 'label' : 'ticket.project', 'attr': {'class': 'span12'} }) }}
 				    {{ form_row(form.title, { 'label' : 'ticket.title', 'attr': {'class': 'span12'} }) }}
-				    {{ form_row(form.project, { 'label' : 'ticket.project', 'attr': {'class': 'span12'} }) }}
+				    {{ form_row(form.content, { 'label' : 'ticket.content', 'attr': {'class': 'span12'} }) }}
+				    {{ form_row(form.files, { 'label' : 'ticket.files', 'attr': {'class': 'span12'} }) }}
 
-				    {% for state in form.states %}
-				    	{% if not loop.last %}<div style="display:none">{% endif %}
-						    {{ form_row(state.content, { 'label' : 'ticket.content', 'attr': {'class': 'span12'} }) }}
-						    <div style="display:none">{{ form_row(state.authorUser) }}</div>
-						    {{ form_row(state.allocatedUser, { 'label' : 'ticket.allocated_to', 'attr': {'class': 'span12'} }) }}
-						    {{ form_row(state.type, { 'label' : 'ticket.type', 'attr': {'class': 'span12'} }) }}
-						    {{ form_row(state.status, { 'label' : 'ticket.status', 'attr': {'class': 'span12'} }) }}
-						    {{ form_row(state.priority, { 'label' : 'ticket.priority', 'attr': {'class': 'span12'} }) }}
-						    {{ form_row(state.closed, { 'label' : 'ticket.closed', 'attr': {'class': 'span2'} }) }}
-						{% if not loop.last %}</div>{% endif %}
-					{% endfor %}
-					{{ form_row(form.files, { 'label' : 'ticket.files', 'attr': {'class': 'span12'} }) }}
+					<h2>{{ 'ticket.edit.history' | trans }}</h2>
 
-					{{ form_rest(form) }}
-			        <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
-			        <input type="submit" class="btn btn-warning" value="{{ 'generic.save' | trans }}" />
-				</form>
-			</div>
-
-			<div class="span6">
-				<h2>{{ 'ticket.edit.history' | trans }}</h2>
-
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<th>{{ 'generic.modification_date' | trans }}</th>
-							<th>{{ 'ticket.comments' | trans }}</th>
-							<th>{{ 'ticket.author' | trans }}</th>
-							<th>{{ 'ticket.allocated_to' | trans }}</th>
-							<th>{{ 'ticket.type' | trans }}</th>
-							<th>{{ 'ticket.status' | trans }}</th>
-							<th>{{ 'ticket.priority' | trans }}</th>
-							<th>{{ 'ticket.closed' | trans }}</th>
-						</tr>
-					</thead>
-					<tbody>
-
-					{% for i in ticket.states | length - 1 .. 0 %}
-						{% if not loop.first %}
-							{% set state = ticket.states[i] %}
-							<tr class="status-{{ state.status }}">
-								<td width="11%">{{ state.createdAt | date('d/m/y H:i') }}</td>
-								<td>{{ state.content }}</td>
-								<td>{{ state.authorUser.firstName }} {{ state.authorUser.lastName | truncate(1, false, '.') }}</td>
-								<td>{{ state.allocatedUser.firstName }} {{ state.allocatedUser.lastName | truncate(1, false, '.') }}</td>
-								<td>{{ ('ticket_state.type.' ~ state.type) | trans }}</td>
-								<td>{{ ('ticket_state.status.' ~ state.status) | trans }}</td>
-								<td width="6%" class="center"><span class="label priority-{{ state.priority }}">{{ ('ticket_state.priority.' ~ state.priority) | trans }}</span></td>
-								<td width="6%" class="center"><span class="label closed-{{ state.closed }}">{{ ('ticket_state.closed.' ~ state.closed) | trans }}</span></td>
+					<table class="table table-bordered" style="border-collapse: collapse;">
+						<thead>
+							<tr>
+								<th>{{ 'generic.modification_date' | trans }}</th>
+								<th>{{ 'ticket.author' | trans }}</th>
+								<th>{{ 'ticket.allocated_to' | trans }}</th>
+								<th>{{ 'ticket.type' | trans }}</th>
+								<th>{{ 'ticket.status' | trans }}</th>
+								<th>{{ 'ticket.priority' | trans }}</th>
+								<th>{{ 'ticket.closed' | trans }}</th>
 							</tr>
-						{% endif %}
-					{% endfor %}
+						</thead>
+						<tbody>
 
-					</tbody>
-				</table>
+						{% for i in ticket.states | length - 1 .. 0 %}
+{# 							{% if not loop.first %}
+ #}								{% set state = ticket.states[i] %}
+								<tr class="status-{{ state.status }}">
+									<td width="11%">{{ state.createdAt | date('d/m/y H:i') }}</td>
+									<td>{{ state.authorUser }}</td>
+									<td>{{ state.allocatedUser }}</td>
+									<td>{{ ('ticket_state.type.' ~ state.type) | trans }}</td>
+									<td>{{ ('ticket_state.status.' ~ state.status) | trans }}</td>
+									<td width="6%" class="center"><span class="label priority-{{ state.priority }}">{{ ('ticket_state.priority.' ~ state.priority) | trans }}</span></td>
+									<td width="6%" class="center"><span class="label closed-{{ state.closed }}">{{ ('ticket_state.closed.' ~ state.closed) | trans }}</span></td>
+								</tr>
+{# 							{% endif %}
+ #}						
+ 								{% if state.content %}
+								<tr>
+							    	<td></td>
+							    	<td colspan="6">
+										{{ state.content }}
+									</td>
+								</tr>
+								{% endif %}
+ 						{% endfor %}
 
-			    <a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>
+
+ 							
+{# 					    {% for state in form.states %}
+
+							    <tr style="{% if not loop.last %}display:none; border-collapse:collpase; {% endif %}">
+								    <td>{{ "now" | date('d/m/y H:i') }}</td>
+								    <td>{{ form_row(state.authorUser) }}</td>
+								    <td>{{ form_row(state.allocatedUser, { 'label' : 'ticket.allocated_to', 'attr': {'class': 'span12'} }) }}</td>
+								    <td>{{ form_row(state.type, { 'label' : 'ticket.type', 'attr': {'class': 'span12'} }) }}</td>
+								    <td>{{ form_row(state.status, { 'label' : 'ticket.status', 'attr': {'class': 'span12'} }) }}</td>
+								    <td>{{ form_row(state.priority, { 'label' : 'ticket.priority', 'attr': {'class': 'span12'} }) }}</td>
+								    <td>{{ form_row(state.closed, { 'label' : 'ticket.closed', 'attr': {'class': 'span12'} }) }}</td>
+							    </tr>
+							    <tr style="{% if not loop.last %}display:none; border-collapse:collpase; {% endif %}">
+							    	<td></td>
+							    	<td colspan="6">
+							    		{{ form_row(state.content, { 'label' : 'ticket.content', 'attr': {'class': 'span12'} }) }}
+							    		<input type="submit" class="btn btn-warning" value="{{ 'generic.save' | trans }}" />
+				    					<a href="{{ path('webaccess_bugtracker_ticket') }}" class="btn btn-warning">{{ 'generic.cancel' | trans }}</a>	
+							    	</td>
+							    </tr>
+							
+						{% endfor %}
+ #}
+						</tbody>
+					</table>
+
+
+
+				</div>
 			</div>
-		</div>
+			{{ form_rest(form) }}
+		</form>
+
 	</div>
 
 {% endblock %}

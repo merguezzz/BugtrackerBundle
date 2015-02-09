@@ -39,11 +39,12 @@ class TicketStateFormType extends AbstractType
      *
      * @return void
      */
-    public function __construct($projectId, $translationManager, $userManager)
+    public function __construct($translationManager, $userManager)
     {
-        $this->projectId = $projectId;
+
         $this->translationManager = $translationManager;
         $this->userManager = $userManager;
+
     }
 
     /**
@@ -56,9 +57,17 @@ class TicketStateFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $projectId = $this->projectId;
+        // $projectId = $this->projectId;
         $userManager = $this->userManager;
 
+        // TODO : Fix project filter on user list
+        if($userManager->getProjectInSession()){
+            $projectId = $userManager->getProjectInSession()->getId();
+        }else{
+            $projectId = null;
+        }
+
+        
         $builder->add(
             'content', 'textarea', array(
                 'required' => false,
@@ -69,7 +78,8 @@ class TicketStateFormType extends AbstractType
         $builder->add(
             'authorUser', 'entity', array(
                 'class' => 'WebaccessBugtrackerBundle:User',
-                'property' => 'completeName'
+                'property' => 'completeName',
+                'required' => true
             )
         );
 
@@ -79,7 +89,9 @@ class TicketStateFormType extends AbstractType
                 'property' => 'completeName',
                 'query_builder' => function ($er) use ($projectId, $userManager) {
                     return $er->findByProject($projectId, $userManager->getUser()->getId(), $userManager->isAdmin());
-                }
+                },
+                'empty_value' => ' ',
+                'required' => false
             )
         );
 
@@ -127,6 +139,18 @@ class TicketStateFormType extends AbstractType
                 )
             )
         );
+
+
+        // $builder->add(
+        //     'ticket', 'entity', array(
+        //         'class' => 'WebaccessBugtrackerBundle:User',
+        //         'property' => 'completeName',
+        //         'query_builder' => function ($er) use ($userManager) {
+        //             return $er->findByProject($projectId, $userManager->getUser()->getId(), $userManager->isAdmin());
+        //         }
+        //     )
+        // );
+
     }
 
     /**
@@ -153,6 +177,6 @@ class TicketStateFormType extends AbstractType
      */
     public function getName()
     {
-        return 'webaccess_bugtracker_ticket_state';
+        return 'webaccess_bugtracker_ticketstate';
     }
 }

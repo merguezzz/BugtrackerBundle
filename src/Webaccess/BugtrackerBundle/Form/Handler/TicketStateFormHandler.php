@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TicketFormHandler class file
+ * TicketStateFormHandler class file
  *
  * PHP 5.3
  *
@@ -16,61 +16,65 @@ namespace Webaccess\BugtrackerBundle\Form\Handler;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Webaccess\BugtrackerBundle\Library\TicketManager;
+use Webaccess\BugtrackerBundle\Library\TicketStateManager;
 
 /**
- * TicketFormHandler class
+ * TicketStateFormHandler class
  *
  * @category FormHandler
  * @package  WebaccessBugtrackerBundle
- * @author   Louis Gandelin <lgandelin@web-access.fr>
+ * @author   Antonin Jourdan <antonin.jourdan@webcraft-studio.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://www.web-access.fr
+ * @link     http://www.webcraft-studio.com
  *
  */
-class TicketFormHandler
+class TicketStateFormHandler
 {
     protected $form;
     protected $request;
-    protected $ticketManager;
+    protected $ticketStateManager;
 
     /**
      * Constructor
      *
      * @param FormInterface $form          FormInterface
      * @param Request       $request       Request
-     * @param TicketManager $ticketManager TicketManager
+     * @param TicketStateManager $ticketStateManager TicketStateManager
      *
      * @return void
      */
-    public function __construct(FormInterface $form, Request $request, TicketManager $ticketManager)
+    public function __construct(FormInterface $form, Request $request, TicketStateManager $ticketStateManager)
     {
         $this->form = $form;
         $this->request = $request;
-        $this->ticketManager = $ticketManager;
+        $this->ticketStateManager = $ticketStateManager;
     }
 
     /**
-     * Function that handle the Ticket form submission
+     * Function that handle the Ticket State form submission
      *
-     * @param Ticket $ticket Ticket to be processed
+     * @param TicketState $ticketState Ticket State to be processed
      *
      * @return boolean
      */
-    public function process($ticket)
+    public function process($ticketState)
     {
-        $this->form->setData($ticket);
+
+        $this->form->setData($ticketState);
 
         if ('POST' === $this->request->getMethod()) {
 
             $this->form->bind($this->request);
 
-            if ($this->form->isValid()) {
-                
-                $this->ticketManager->saveTicket($ticket);
+            // var_dump($this->form->isValid());
+            // die();
+
+            // if ($this->form->isValid()) {
+
+                $this->ticketStateManager->saveTicketState($ticketState);
 
                 return true;
-            }
+            // }
         }
 
         return false;
